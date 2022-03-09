@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/calculate"
+    app:startDestination="@id/calculateExpenseFragment">
+
+    <fragment
+        android:id="@+id/calculateExpenseFragment"
+        android:name="com.iamdsr.travel.CalculateExpenses.CalculateExpenseFragment"
+        android:label="fragment_calculate_expense"
+        tools:layout="@layout/fragment_calculate_expense" />
+</navigation>
