@@ -30,6 +30,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
 public class AddTripFragment extends Fragment {
@@ -118,8 +119,13 @@ public class AddTripFragment extends Fragment {
             progressDialog.show();
             progressDialog.setCancelable(false);
             progressDialog.setCanceledOnTouchOutside(false);
-            TripModel tripModel = new TripModel(newTripID,title,desc,jDate,rDate,from,to,currUserID,getDateDiff(jDate,rDate),Long.parseLong(totalPerson));
-            firebaseFirestore.collection("trips").document(newTripID).set(tripModel).addOnSuccessListener(new OnSuccessListener<Void>() {
+            TripModel tripModel = new TripModel(newTripID,title,desc,jDate,rDate,from,to,currUserID,getDateDiff(jDate,rDate),Long.parseLong(totalPerson),getTimestamp());
+            firebaseFirestore.collection("users")
+                    .document(currUserID)
+                    .collection("trips")
+                    .document(newTripID)
+                    .set(tripModel)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void unused) {
                     progressDialog.dismiss();
@@ -167,6 +173,12 @@ public class AddTripFragment extends Fragment {
             Log.d(TAG, "getDateDiff: "+e.getMessage());
             return 0;
         }
+    }
+
+    private String getTimestamp(){
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US);
+        format.setTimeZone(TimeZone.getDefault());
+        return format.format(new Date());
     }
 
     private void setupFirebase(){

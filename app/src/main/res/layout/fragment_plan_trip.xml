@@ -39,5 +39,6 @@
         android:layout_gravity="bottom|end"
         app:icon="@drawable/ic_add_trip"
         android:layout_margin="32dp"
+        app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"
         android:text="@string/add_trip"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
