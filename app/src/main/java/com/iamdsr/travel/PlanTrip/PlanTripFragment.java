@@ -2,35 +2,41 @@ package com.iamdsr.travel.PlanTrip;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.android.material.bottomappbar.BottomAppBar;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.iamdsr.travel.CustomRecyclerViewAdapters.PlannedTripsRecyclerAdapter;
 import com.iamdsr.travel.Interfaces.RecyclerViewActionsInterface;
-import com.iamdsr.travel.Models.MainModel;
 import com.iamdsr.travel.Models.TripModel;
 import com.iamdsr.travel.R;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 
 
 public class PlanTripFragment extends Fragment implements RecyclerViewActionsInterface {
@@ -41,6 +47,7 @@ public class PlanTripFragment extends Fragment implements RecyclerViewActionsInt
     private PlannedTripsRecyclerAdapter plannedTripsRecyclerAdapter;
 
     //Utils
+    private static final String TAG = "PlanTripFragment";
     private List<TripModel> tripModelList = new ArrayList<TripModel>();
 
     //Firebase
@@ -65,13 +72,14 @@ public class PlanTripFragment extends Fragment implements RecyclerViewActionsInt
     }
 
     private void displayPlannedTrips() {
+        Log.d(TAG, "displayPlannedTrips: Displaying");
         if (mAuth.getCurrentUser()!=null){
-            Query query = firebaseFirestore
+            Query queryToGetAllTrips = firebaseFirestore
                     .collection("users")
                     .document(mAuth.getCurrentUser().getUid())
                     .collection("trips")
                     .orderBy("date_created", Query.Direction.DESCENDING);
-            query.addSnapshotListener(new EventListener<QuerySnapshot>() {
+            queryToGetAllTrips.addSnapshotListener(new EventListener<QuerySnapshot>() {
                 @Override
                 public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException error) {
                     if (queryDocumentSnapshots!=null){
@@ -87,6 +95,11 @@ public class PlanTripFragment extends Fragment implements RecyclerViewActionsInt
             });
         }
     }
+    private String getTimestamp(){
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US);
+        format.setTimeZone(TimeZone.getDefault());
+        return format.format(new Date());
+    }
 
     private void setUpFirebase() {
         mAuth = FirebaseAuth.getInstance();
@@ -99,6 +112,7 @@ public class PlanTripFragment extends Fragment implements RecyclerViewActionsInt
         mPlannedTripRecyclerView.setHasFixedSize(true);
         plannedTripsRecyclerAdapter = new PlannedTripsRecyclerAdapter(TripModel.tripModelItemCallback,this);
         mPlannedTripRecyclerView.setAdapter(plannedTripsRecyclerAdapter);
+        plannedTripsRecyclerAdapter.setStateRestorationPolicy(RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY);
     }
 
     @Override

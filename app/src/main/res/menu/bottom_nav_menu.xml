@@ -3,19 +3,19 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/stories"
-        android:icon="@drawable/ic_stories_filled"
+        android:icon="@drawable/selector_stories"
         android:title="@string/action_stories"/>
     <item
         android:id="@+id/plan"
-        android:icon="@drawable/ic_calendar_filled"
+        android:icon="@drawable/selector_plan_trip"
         android:title="@string/action_plan"/>
 
     <item
         android:id="@+id/calculate"
-        android:icon="@drawable/ic_calculate_filled"
+        android:icon="@drawable/selector_calculate_expenses"
         android:title="@string/action_calculate"/>
     <item
         android:id="@+id/profile"
-        android:icon="@drawable/ic_person_filled"
+        android:icon="@drawable/selector_profile"
         android:title="@string/profile" />
 </menu>

@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.iamdsr.travel.Interfaces.RecyclerViewActionsInterface;
-import com.iamdsr.travel.Models.MainModel;
 import com.iamdsr.travel.Models.TripModel;
 import com.iamdsr.travel.R;
 
