@@ -1,4 +1,4 @@
-package com.iamdsr.travel.Models;
+package com.iamdsr.travel.models;
 
 public class UserModel {
     private String id, full_name, username, email;

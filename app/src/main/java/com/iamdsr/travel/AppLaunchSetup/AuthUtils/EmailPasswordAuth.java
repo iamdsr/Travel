@@ -19,7 +19,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.iamdsr.travel.ActivityUtils.MainActivity;
 import com.iamdsr.travel.AppLaunchSetup.LoginActivity;
-import com.iamdsr.travel.Models.UserModel;
+import com.iamdsr.travel.models.UserModel;
 import com.iamdsr.travel.R;
 
 public class EmailPasswordAuth {

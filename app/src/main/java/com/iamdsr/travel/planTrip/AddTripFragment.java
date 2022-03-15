@@ -1,12 +1,10 @@
-package com.iamdsr.travel.PlanTrip;
+package com.iamdsr.travel.planTrip;
 
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
 
 import android.text.TextUtils;
 import android.util.Log;
@@ -17,13 +15,9 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.iamdsr.travel.AppLaunchSetup.LoginActivity;
-import com.iamdsr.travel.Models.TripModel;
 import com.iamdsr.travel.R;
 
 import java.text.SimpleDateFormat;
@@ -31,7 +25,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
-import java.util.concurrent.TimeUnit;
 
 public class AddTripFragment extends Fragment {
 
@@ -119,31 +112,31 @@ public class AddTripFragment extends Fragment {
             progressDialog.show();
             progressDialog.setCancelable(false);
             progressDialog.setCanceledOnTouchOutside(false);
-            TripModel tripModel = new TripModel(newTripID,title,desc,jDate,rDate,from,to,currUserID,getDateDiff(jDate,rDate),Long.parseLong(totalPerson),getTimestamp());
-            firebaseFirestore.collection("users")
-                    .document(currUserID)
-                    .collection("trips")
-                    .document(newTripID)
-                    .set(tripModel)
-                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(Void unused) {
-                    progressDialog.dismiss();
-                    mAddTitle.setText(null);
-                    mAddDesc.setText(null);
-                    mWhereFrom.setText(null);
-                    mWhereTo.setText(null);
-                    mJourneyDate.setText(null);
-                    mReturnDate.setText(null);
-                    mNumberOfPerson.setText(null);
-                    Navigation.findNavController(view).navigate(R.id.action_addTripFragment_to_planTripFragment);
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-
-                }
-            });
+            //TripModel tripModel = new TripModel(newTripID,title,desc,jDate,rDate,from,to,currUserID,getDateDiff(jDate,rDate),Long.parseLong(totalPerson),getTimestamp());
+//            firebaseFirestore.collection("users")
+//                    .document(currUserID)
+//                    .collection("trips")
+//                    .document(newTripID)
+//                    .set(tripModel)
+//                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                @Override
+//                public void onSuccess(Void unused) {
+//                    progressDialog.dismiss();
+//                    mAddTitle.setText(null);
+//                    mAddDesc.setText(null);
+//                    mWhereFrom.setText(null);
+//                    mWhereTo.setText(null);
+//                    mJourneyDate.setText(null);
+//                    mReturnDate.setText(null);
+//                    mNumberOfPerson.setText(null);
+//                    Navigation.findNavController(view).navigate(R.id.action_addTripFragment_to_planTripFragment);
+//                }
+//            }).addOnFailureListener(new OnFailureListener() {
+//                @Override
+//                public void onFailure(@NonNull Exception e) {
+//
+//                }
+//            });
         }
         else{
 

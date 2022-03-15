@@ -1,4 +1,4 @@
-package com.iamdsr.travel.PlanTrip;
+package com.iamdsr.travel.planTrip;
 
 import android.text.Editable;
 import android.text.TextWatcher;

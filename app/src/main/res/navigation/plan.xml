@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/planTripFragment"
-        android:name="com.iamdsr.travel.PlanTrip.PlanTripFragment"
+        android:name="com.iamdsr.travel.planTrip.PlanTripFragment"
         android:label="fragment_plan_trip"
         tools:layout="@layout/fragment_plan_trip" >
         <action
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/addTripFragment"
-        android:name="com.iamdsr.travel.PlanTrip.AddTripFragment"
+        android:name="com.iamdsr.travel.planTrip.AddTripFragment"
         android:label="fragment_add_trip"
         tools:layout="@layout/fragment_add_trip" >
         <action
@@ -31,7 +31,7 @@
     </fragment>
     <fragment
         android:id="@+id/updateTripFragment"
-        android:name="com.iamdsr.travel.PlanTrip.UpdateTripFragment"
+        android:name="com.iamdsr.travel.planTrip.UpdateTripFragment"
         android:label="UpdateTripFragment" >
         <action
             android:id="@+id/action_updateTripFragment_to_planTripFragment"

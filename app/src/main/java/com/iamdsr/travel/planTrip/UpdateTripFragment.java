@@ -1,4 +1,4 @@
-package com.iamdsr.travel.PlanTrip;
+package com.iamdsr.travel.planTrip;
 
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
@@ -16,22 +16,18 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.iamdsr.travel.Models.TripModel;
 import com.iamdsr.travel.R;
-import com.iamdsr.travel.ViewModels.PlanTripFragmentViewModel;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
@@ -54,7 +50,7 @@ public class UpdateTripFragment extends Fragment {
     private static final String TAG = "AddTripFragment";
     final Calendar myCalendar= Calendar.getInstance();
     private String receivedDocID="";
-    private PlanTripFragmentViewModel planTripFragmentViewModel;
+    //private PlanTripFragmentViewModel planTripFragmentViewModel;
 
     public UpdateTripFragment() {
     }
@@ -143,27 +139,27 @@ public class UpdateTripFragment extends Fragment {
                         @Override
                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                             if (task.getResult() != null){
-                                TripModel model = task.getResult().toObject(TripModel.class);
-                                if (model!=null){
-                                    if (!model.getTrip_title().equals(title)){
-                                        updateTrip(title,null,null,null,null,null,-1);
-                                    }
-                                    if (!model.getTrip_desc().equals(desc)){
-                                        updateTrip(null,desc,null,null,null,null,-1);
-                                    }
-                                    if (!model.getPlace_from().equals(from)){
-                                        updateTrip(null,null,null,null,from,null,-1);
-                                    }
-                                    if (!model.getPlace_to().equals(to)){
-                                        updateTrip(null,null,null,null,null,to,-1);
-                                    }
-                                    if (!model.getJourney_date().equals(jDate) || !model.getReturn_date().equals(rDate)){
-                                        updateTrip(null,null,jDate,rDate,null,null,-1);
-                                    }
-                                    if (model.getTotal_heads() != Long.parseLong(totalPerson)){
-                                        updateTrip(null,null,null,null,null,null,Long.parseLong(totalPerson));
-                                    }
-                                }
+//                                TripModel model = task.getResult().toObject(TripModel.class);
+//                                if (model!=null){
+//                                    if (!model.getTrip_title().equals(title)){
+//                                        updateTrip(title,null,null,null,null,null,-1);
+//                                    }
+//                                    if (!model.getTrip_desc().equals(desc)){
+//                                        updateTrip(null,desc,null,null,null,null,-1);
+//                                    }
+//                                    if (!model.getPlace_from().equals(from)){
+//                                        updateTrip(null,null,null,null,from,null,-1);
+//                                    }
+//                                    if (!model.getPlace_to().equals(to)){
+//                                        updateTrip(null,null,null,null,null,to,-1);
+//                                    }
+//                                    if (!model.getJourney_date().equals(jDate) || !model.getReturn_date().equals(rDate)){
+//                                        updateTrip(null,null,jDate,rDate,null,null,-1);
+//                                    }
+//                                    if (model.getTotal_heads() != Long.parseLong(totalPerson)){
+//                                        updateTrip(null,null,null,null,null,null,Long.parseLong(totalPerson));
+//                                    }
+//                                }
                             }
                         }
                     });
@@ -239,8 +235,8 @@ public class UpdateTripFragment extends Fragment {
                     .document(receivedDocID)
                     .update(tripMap);
         }
-        planTripFragmentViewModel = new ViewModelProvider(getActivity()).get(PlanTripFragmentViewModel.class);
-        planTripFragmentViewModel.updateTrips((List<TripModel>) planTripFragmentViewModel.getPlannedTripListMutableLiveData());
+//        planTripFragmentViewModel = new ViewModelProvider(getActivity()).get(PlanTripFragmentViewModel.class);
+//        planTripFragmentViewModel.updateTrips((List<TripModel>) planTripFragmentViewModel.getPlannedTripListMutableLiveData());
         progressDialog.dismiss();
         Toast.makeText(getContext(),"Congrats! Trip Update Successfully.",Toast.LENGTH_SHORT).show();
     }
