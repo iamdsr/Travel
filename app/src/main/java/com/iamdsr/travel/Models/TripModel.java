@@ -3,10 +3,13 @@ package com.iamdsr.travel.Models;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 
+import com.google.firebase.firestore.DocumentId;
+
 import java.util.Objects;
 
 public class TripModel {
-    private String trip_id, trip_title, trip_desc, journey_date, return_date, place_from, place_to, user_id, date_created;
+    private String trip_id;
+    private String trip_title, trip_desc, journey_date, return_date, place_from, place_to, user_id, date_created;
     private long duration_in_days, total_heads;
 
     public TripModel(){
@@ -133,7 +136,7 @@ public class TripModel {
         this.total_heads = total_heads;
     }
 
-    @Override
+    /*@Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -149,12 +152,12 @@ public class TripModel {
     public static DiffUtil.ItemCallback<TripModel> tripModelItemCallback = new DiffUtil.ItemCallback<TripModel>() {
         @Override
         public boolean areItemsTheSame(@NonNull TripModel oldItem, @NonNull TripModel newItem) {
-            return oldItem.getUser_id().equals(newItem.getUser_id());
+            return oldItem.getTrip_id().equals(newItem.getTrip_id());
         }
 
         @Override
         public boolean areContentsTheSame(@NonNull TripModel oldItem, @NonNull TripModel newItem) {
             return oldItem.equals(newItem);
         }
-    };
+    };*/
 }

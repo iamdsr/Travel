@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_planTripFragment_to_addTripFragment"
             app:destination="@id/addTripFragment" />
+        <action
+            android:id="@+id/action_planTripFragment_to_updateTripFragment"
+            app:destination="@id/updateTripFragment" />
     </fragment>
     <fragment
         android:id="@+id/addTripFragment"
@@ -21,6 +24,17 @@
         tools:layout="@layout/fragment_add_trip" >
         <action
             android:id="@+id/action_addTripFragment_to_planTripFragment"
+            app:destination="@id/planTripFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/planTripFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
+    <fragment
+        android:id="@+id/updateTripFragment"
+        android:name="com.iamdsr.travel.PlanTrip.UpdateTripFragment"
+        android:label="UpdateTripFragment" >
+        <action
+            android:id="@+id/action_updateTripFragment_to_planTripFragment"
             app:destination="@id/planTripFragment"
             app:launchSingleTop="true"
             app:popUpTo="@+id/planTripFragment"

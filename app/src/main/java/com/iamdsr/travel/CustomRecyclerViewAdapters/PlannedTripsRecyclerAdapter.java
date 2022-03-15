@@ -19,10 +19,32 @@ public class PlannedTripsRecyclerAdapter extends ListAdapter<TripModel, PlannedT
 
     private final RecyclerViewActionsInterface recyclerViewActionsInterface;
     private Context context;
-    public PlannedTripsRecyclerAdapter(@NonNull DiffUtil.ItemCallback<TripModel> diffCallback, RecyclerViewActionsInterface recyclerViewActionsInterface) {
-        super(diffCallback);
+    public PlannedTripsRecyclerAdapter(RecyclerViewActionsInterface recyclerViewActionsInterface) {
+        super(DIFF_CALLBACK);
         this.recyclerViewActionsInterface = recyclerViewActionsInterface;
     }
+
+    private static final DiffUtil.ItemCallback<TripModel> DIFF_CALLBACK = new DiffUtil.ItemCallback<TripModel>() {
+        @Override
+        public boolean areItemsTheSame(@NonNull TripModel oldItem, @NonNull TripModel newItem) {
+            return oldItem.getTrip_id().equals(newItem.getTrip_id());
+        }
+
+        @Override
+        public boolean areContentsTheSame(@NonNull TripModel oldItem, @NonNull TripModel newItem) {
+            return oldItem.getTrip_id().equals(newItem.getTrip_id()) &&
+                    oldItem.getTrip_title().equals(newItem.getTrip_title()) &&
+                    oldItem.getTrip_desc().equals(newItem.getTrip_desc()) &&
+                    oldItem.getPlace_from().equals(newItem.getPlace_from()) &&
+                    oldItem.getPlace_to().equals(newItem.getPlace_to()) &&
+                    oldItem.getJourney_date().equals(newItem.getJourney_date()) &&
+                    oldItem.getReturn_date().equals(newItem.getReturn_date()) &&
+                    oldItem.getUser_id().equals(newItem.getUser_id()) &&
+                    oldItem.getDate_created().equals(newItem.getDate_created()) &&
+                    oldItem.getDuration_in_days() == newItem.getDuration_in_days() &&
+                    oldItem.getTotal_heads() == newItem.getTotal_heads();
+        }
+    };
 
     @NonNull
     @Override
@@ -39,7 +61,7 @@ public class PlannedTripsRecyclerAdapter extends ListAdapter<TripModel, PlannedT
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView mTitle, mDesc, mJDate, mRDate, mFrom, mTo, mTotalPax, mDuration;
+        private TextView mTitle, mDesc, mJDate, mRDate, mFrom, mTo, mTotalPax, mDuration, mUpdate, mDelete;
         public ViewHolder(@NonNull View itemView, RecyclerViewActionsInterface recyclerViewActionsInterface) {
             super(itemView);
             mTitle = itemView.findViewById(R.id.trip_title);
@@ -50,14 +72,15 @@ public class PlannedTripsRecyclerAdapter extends ListAdapter<TripModel, PlannedT
             mRDate = itemView.findViewById(R.id.return_date);
             mTo = itemView.findViewById(R.id.place_to);
             mDuration = itemView.findViewById(R.id.total_duration);
+            mUpdate = itemView.findViewById(R.id.update);
+            mDelete = itemView.findViewById(R.id.delete);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
+            mUpdate.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    // TODO: 28-01-2022 handle click events
                     if (recyclerViewActionsInterface != null){
-                        int position = getAdapterPosition();
-                        if (position!=RecyclerView.NO_POSITION){
+                        int position = getAbsoluteAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION){
                             recyclerViewActionsInterface.onItemClick(position);
                         }
                     }

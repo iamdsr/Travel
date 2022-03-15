@@ -99,14 +99,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:layout_marginBottom="8dp"
                 android:orientation="horizontal"
                 android:weightSum="3"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linLay1"
-                app:layout_constraintVertical_bias="0.511">
+                app:layout_constraintTop_toBottomOf="@+id/linLay1">
 
                 <LinearLayout
                     android:id="@+id/part1"
@@ -173,6 +170,56 @@
                 </LinearLayout>
 
             </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linLay2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/container">
+
+                <TextView
+                    android:id="@+id/update"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_margin="4dp"
+                    android:drawablePadding="8dp"
+                    android:background="@drawable/round_corner_gray_border_bg"
+                    android:fontFamily="@font/roboto_bold"
+                    android:gravity="center_vertical"
+                    android:padding="8dp"
+                    android:text="Update Plan"
+                    android:textSize="16sp"
+                    app:drawableStartCompat="@drawable/ic_update"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="94dp" />
+
+                <TextView
+                    android:id="@+id/delete"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_corner_gray_border_bg"
+                    android:drawablePadding="8dp"
+                    android:fontFamily="@font/roboto_bold"
+                    android:gravity="center_vertical"
+                    android:layout_margin="4dp"
+                    android:padding="8dp"
+                    android:text="Delete Plan"
+                    android:textSize="16sp"
+                    app:drawableStartCompat="@drawable/ic_delete"
+                    app:drawableTint="@color/error"
+                    tools:layout_editor_absoluteX="313dp"
+                    tools:layout_editor_absoluteY="94dp" />
+
+            </LinearLayout>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 
