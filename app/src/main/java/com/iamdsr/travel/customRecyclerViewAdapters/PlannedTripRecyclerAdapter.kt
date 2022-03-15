@@ -8,14 +8,13 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.iamdsr.travel.Interfaces.RecyclerViewActionsInterface
+import com.iamdsr.travel.interfaces.RecyclerViewActionsInterface
 import com.iamdsr.travel.R
 import com.iamdsr.travel.models.TripModel
 
-class PlannedTripRecyclerAdapter : ListAdapter<TripModel, PlannedTripRecyclerAdapter.TripsViewHolder>(TripsDiffUtilCallback()){
+class PlannedTripRecyclerAdapter(val itemClickListener: RecyclerViewActionsInterface) : ListAdapter<TripModel, PlannedTripRecyclerAdapter.TripsViewHolder>(TripsDiffUtilCallback()){
 
     var context: Context?= null
-    val recyclerViewActionsInterface: RecyclerViewActionsInterface?= null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TripsViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -25,7 +24,7 @@ class PlannedTripRecyclerAdapter : ListAdapter<TripModel, PlannedTripRecyclerAda
 
     override fun onBindViewHolder(holder: TripsViewHolder, position: Int) {
         val tripModel: TripModel = getItem(position)
-        holder.bindView(tripModel, context)
+        holder.bindView(tripModel, context, itemClickListener)
     }
 
     class TripsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -40,7 +39,7 @@ class PlannedTripRecyclerAdapter : ListAdapter<TripModel, PlannedTripRecyclerAda
         private val mUpdate: TextView = itemView.findViewById(R.id.update)
         private val mDelete: TextView = itemView.findViewById(R.id.delete)
 
-        fun bindView(tripModel: TripModel, context: Context?) {
+        fun bindView(tripModel: TripModel, context: Context?, clickListener: RecyclerViewActionsInterface) {
             mTitle.text = tripModel.trip_title
             mDesc.text = tripModel.trip_desc
             mJDate.text = tripModel.journey_date
@@ -49,6 +48,10 @@ class PlannedTripRecyclerAdapter : ListAdapter<TripModel, PlannedTripRecyclerAda
             mTo.text = tripModel.place_to
             mTotalPax.text = tripModel.total_heads.toString()
             mDuration.text = tripModel.duration_in_days.toString()
+
+            mUpdate.setOnClickListener {
+                clickListener.onItemClick(absoluteAdapterPosition)
+            }
         }
     }
 

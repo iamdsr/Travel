@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.firestore.EventListener
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
 import com.iamdsr.travel.models.TripModel
 import com.iamdsr.travel.repositories.FirestoreRepository
@@ -22,7 +23,7 @@ class PlanTripFragmentViewModel : ViewModel() {
 
     // get realtime updates from firebase regarding saved addresses
     fun getSavedTrips(): LiveData<List<TripModel>> {
-        firebaseRepository.getSavedTrips().addSnapshotListener(EventListener<QuerySnapshot> { value, e ->
+        firebaseRepository.getSavedTrips().orderBy("date_created", Query.Direction.DESCENDING).addSnapshotListener(EventListener<QuerySnapshot> { value, e ->
             if (e != null) {
                 //Log.w(TAG, "Listen failed.", e)
                 //savedTrips.value = null

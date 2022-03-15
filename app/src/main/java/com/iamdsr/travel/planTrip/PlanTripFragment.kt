@@ -5,25 +5,26 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.iamdsr.travel.R
 import com.iamdsr.travel.customRecyclerViewAdapters.PlannedTripRecyclerAdapter
+import com.iamdsr.travel.interfaces.RecyclerViewActionsInterface
 import com.iamdsr.travel.models.TripModel
 import com.iamdsr.travel.viewModels.PlanTripFragmentViewModel
 
-class PlanTripFragment : Fragment() {
+class PlanTripFragment : Fragment(), RecyclerViewActionsInterface {
 
     // Widgets
     private var myView: View?= null
     private var mAddTrip: ExtendedFloatingActionButton?= null
     private var mPlannedTripRecyclerView: RecyclerView? = null
+    private lateinit var tripList: List<TripModel>
 
     // Utils
     private lateinit var plannedTripsRecyclerAdapter: PlannedTripRecyclerAdapter
@@ -41,6 +42,7 @@ class PlanTripFragment : Fragment() {
         //createDummyData()
         val planTripFragmentViewModel = ViewModelProvider(this)[PlanTripFragmentViewModel::class.java]
         planTripFragmentViewModel.getSavedTrips().observe(this, Observer { it->
+            tripList = it
             plannedTripsRecyclerAdapter.submitList(it)
         })
         mAddTrip?.setOnClickListener(View.OnClickListener {
@@ -58,12 +60,16 @@ class PlanTripFragment : Fragment() {
     private fun initRecyclerView() {
         mPlannedTripRecyclerView?.layoutManager = LinearLayoutManager(context)
         mPlannedTripRecyclerView?.setHasFixedSize(true)
-        plannedTripsRecyclerAdapter = PlannedTripRecyclerAdapter()
+        plannedTripsRecyclerAdapter = PlannedTripRecyclerAdapter(this)
         mPlannedTripRecyclerView?.adapter = plannedTripsRecyclerAdapter
     }
 
     private fun setUpWidgets() {
         mAddTrip = myView?.findViewById(R.id.add_new_trip)
         mPlannedTripRecyclerView = myView?.findViewById(R.id.trip_recycler_view)
+    }
+
+    override fun onItemClick(position: Int) {
+        Toast.makeText(context, tripList[position].trip_title, Toast.LENGTH_LONG).show()
     }
 }

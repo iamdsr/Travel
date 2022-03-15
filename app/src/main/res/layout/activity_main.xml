@@ -12,7 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:defaultNavHost="true"
-        android:layout_marginBottom="?attr/actionBarSize"
         app:navGraph="@navigation/bottom_nav_graph" />
 
 
@@ -48,6 +47,26 @@
         android:layout_height="wrap_content"
         app:layout_anchor="@id/bottomBar" />
 
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/add_post"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        app:icon="@drawable/ic_add_trip"
+        android:text="@string/add_trip"
+        android:layout_gravity="end|bottom"
+        android:layout_marginBottom="100dp"
+        android:layout_marginEnd="32dp"/>
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/add_new_trip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        app:icon="@drawable/ic_stories_filled"
+        android:text="@string/fab_add_stories"
+        android:layout_gravity="end|bottom"
+        android:layout_marginBottom="180dp"
+        android:layout_marginEnd="32dp"/>
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

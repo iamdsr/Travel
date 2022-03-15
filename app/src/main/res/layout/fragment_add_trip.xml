@@ -1,148 +1,158 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/root_layout"
     tools:context=".planTrip.AddTripFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ProgressBar
+        android:id="@+id/progress_horizontal"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:id="@+id/add_Trip_label"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/primary_day_night"
+        android:visibility="invisible"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/add_Trip_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:fontFamily="@font/roboto_bold"
+        android:padding="8dp"
+        android:text="@string/start_planning_add_trip"
+        android:textSize="32sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/progress_horizontal" />
+
+    <LinearLayout
+        android:id="@+id/details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_Trip_label">
+
+        <EditText
+            android:id="@+id/trip_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:hint="@string/add_title"
+            android:maxLines="1"
             android:fontFamily="@font/roboto_bold"
-            android:padding="8dp"
-            android:text="@string/start_planning_add_trip"
-            android:textSize="40sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:padding="16dp"/>
+        <EditText
+            android:id="@+id/trip_desc"
+            android:layout_width="match_parent"
+            android:layout_height="128dp"
+            android:hint="@string/provide_a_short_description_here"
+            android:gravity="start"
+            android:maxHeight="256dp"
+            android:fontFamily="@font/roboto_regular"
+            android:padding="16dp"/>
 
         <LinearLayout
-            android:id="@+id/details"
+            android:id="@+id/dates"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_margin="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/add_Trip_label">
-
+            android:orientation="horizontal"
+            android:weightSum="2">
             <EditText
-                android:id="@+id/trip_title"
-                android:layout_width="match_parent"
+                android:id="@+id/journey_date"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:hint="@string/add_title"
+                android:layout_weight="1"
+                android:hint="@string/journey_date"
                 android:maxLines="1"
-                android:fontFamily="@font/roboto_bold"
-                android:padding="16dp"/>
-            <EditText
-                android:id="@+id/trip_desc"
-                android:layout_width="match_parent"
-                android:layout_height="256dp"
-                android:hint="@string/provide_a_short_description_here"
-                android:gravity="start"
-                android:maxHeight="256dp"
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:layout_margin="8dp"
                 android:fontFamily="@font/roboto_regular"
                 android:padding="16dp"/>
-
-            <LinearLayout
-                android:id="@+id/dates"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="2">
-                <EditText
-                    android:id="@+id/journey_date"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:hint="@string/journey_date"
-                    android:maxLines="1"
-                    android:clickable="false"
-                    android:cursorVisible="false"
-                    android:focusable="false"
-                    android:focusableInTouchMode="false"
-                    android:layout_margin="8dp"
-                    android:fontFamily="@font/roboto_regular"
-                    android:padding="16dp"/>
-                <EditText
-                    android:id="@+id/return_date"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:hint="@string/return_date"
-                    android:maxLines="1"
-                    android:clickable="false"
-                    android:cursorVisible="false"
-                    android:focusable="false"
-                    android:focusableInTouchMode="false"
-                    android:layout_margin="8dp"
-                    android:fontFamily="@font/roboto_regular"
-                    android:padding="16dp"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/place"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="2">
-                <EditText
-                    android:id="@+id/place_from"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:hint="@string/where_from"
-                    android:maxLines="2"
-                    android:layout_margin="8dp"
-                    android:fontFamily="@font/roboto_regular"
-                    android:padding="16dp"/>
-                <EditText
-                    android:id="@+id/place_to"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:hint="@string/where_to"
-                    android:maxLines="2"
-                    android:layout_margin="8dp"
-                    android:fontFamily="@font/roboto_regular"
-                    android:padding="16dp"/>
-            </LinearLayout>
             <EditText
-                android:id="@+id/total_person"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
+                android:id="@+id/return_date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:hint="@string/number_of_person"
+                android:hint="@string/return_date"
                 android:maxLines="1"
-                android:layout_gravity="center_horizontal"
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
                 android:layout_margin="8dp"
-                android:inputType="number"
                 android:fontFamily="@font/roboto_regular"
                 android:padding="16dp"/>
         </LinearLayout>
 
-        <Button
-            android:id="@+id/add_trip_btn"
+        <LinearLayout
+            android:id="@+id/place"
             android:layout_width="match_parent"
-            android:layout_height="64dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginEnd="32dp"
-            android:fontFamily="@font/roboto_bold"
-            android:text="@string/add_trip"
-            android:textAllCaps="false"
-            app:cornerRadius="12dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/details" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+            <EditText
+                android:id="@+id/place_from"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/where_from"
+                android:maxLines="2"
+                android:layout_margin="8dp"
+                android:fontFamily="@font/roboto_regular"
+                android:padding="16dp"/>
+            <EditText
+                android:id="@+id/place_to"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/where_to"
+                android:maxLines="2"
+                android:layout_margin="8dp"
+                android:fontFamily="@font/roboto_regular"
+                android:padding="16dp"/>
+        </LinearLayout>
+        <EditText
+            android:id="@+id/total_person"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:hint="@string/number_of_person"
+            android:maxLines="1"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="8dp"
+            android:inputType="number"
+            android:fontFamily="@font/roboto_regular"
+            android:padding="16dp"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/add_trip_btn"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:fontFamily="@font/roboto_bold"
+        android:text="@string/add_trip"
+        android:textAllCaps="false"
+        app:cornerRadius="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/details"
+        app:layout_constraintVertical_bias="0.115" />
 
 
-</ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

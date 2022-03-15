@@ -38,7 +38,7 @@
     <string name="error_text_empty_fields">Please provide all necessary details.</string>
     <string name="auth_failed">Authentication failed. Please try again after sometime</string>
     <string name="search_your_trips">Search your trips</string>
-    <string name="start_planning_add_trip">Start planning : \nAdd Trip</string>
+    <string name="start_planning_add_trip">Start planning: Add Trip</string>
     <string name="start_planning_update_trip">Start planning : \nUpdate Trip</string>
     <string name="add_title">Add Title</string>
     <string name="provide_a_short_description_here">Provide a short description here...</string>
@@ -49,4 +49,5 @@
     <string name="number_of_person">Number of person</string>
     <string name="add_trip">Add Trip</string>
     <string name="update_trip">Update</string>
+    <string name="fab_add_stories">Add Stories</string>
 </resources>

@@ -24,6 +24,16 @@ class FirestoreRepository {
         return documentReference!!.set(tripModel)
     }
 
+    fun getNewTripID(): String{
+        val documentReference = user?.let {
+            firebaseFirestore.collection("users")
+                .document(it.uid)
+                .collection("trips")
+                .document()
+        }
+        return documentReference!!.id
+    }
+
     // get saved addresses from firebase
     fun getSavedTrips(): CollectionReference {
         return firebaseFirestore.collection("users/${user!!.uid}/trips")
