@@ -1,5 +1,7 @@
 package com.iamdsr.travel.viewModels
 
+import android.content.ContentValues.TAG
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -17,7 +19,14 @@ class PlanTripFragmentViewModel : ViewModel() {
     // save address to firebase
     fun saveNewTripToFirebase(tripModel: TripModel){
         firebaseRepository.addNewPlannedTripToDB(tripModel).addOnFailureListener {
-            //Log.e(TAG,"Failed to save Address!")
+            Log.e(TAG,"Failed to save Trip!")
+        }
+    }
+
+    // Update trip
+    fun updateTripToFirebase(tripMap: MutableMap<String, Any>, tripID: String){
+        firebaseRepository.updateExistingTripToDB(tripMap, tripID).addOnFailureListener {
+            Log.e(TAG,"Failed to update Trip!")
         }
     }
 

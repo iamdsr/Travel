@@ -24,6 +24,14 @@ class FirestoreRepository {
         return documentReference!!.set(tripModel)
     }
 
+    // Update trip to DB
+    fun updateExistingTripToDB(tripMap: MutableMap<String, Any>, tripID: String) : Task<Void>{
+        Log.d(TAG, "updateExistingTripToDB: Trip ID : $tripID")
+        Log.d(TAG, "updateExistingTripToDB: Trip ID : $tripMap")
+        val documentRef = firebaseFirestore.collection("users").document(user!!.uid).collection("trips").document(tripID)
+        return documentRef.update(tripMap)
+    }
+
     fun getNewTripID(): String{
         val documentReference = user?.let {
             firebaseFirestore.collection("users")
@@ -36,6 +44,6 @@ class FirestoreRepository {
 
     // get saved addresses from firebase
     fun getSavedTrips(): CollectionReference {
-        return firebaseFirestore.collection("users/${user!!.uid}/trips")
+        return firebaseFirestore.collection("users/${user?.uid}/trips")
     }
 }

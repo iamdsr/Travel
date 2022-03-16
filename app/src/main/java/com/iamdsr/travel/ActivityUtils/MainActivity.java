@@ -40,12 +40,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setupFirebase();
-        final boolean[] allFabVisible = {false};
-        ExtendedFloatingActionButton floatingActionButton1 = findViewById(R.id.add_new_trip);
-        ExtendedFloatingActionButton floatingActionButton2 = findViewById(R.id.add_post);
-        FloatingActionButton floatingActionButton = findViewById(R.id.fab);
-        floatingActionButton2.hide();
-        floatingActionButton1.hide();
 
 //        floatingActionButton1.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -53,22 +47,6 @@ public class MainActivity extends AppCompatActivity {
 //                NavController.navigate(R.id.ac);
 //            }
 //        });
-
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!allFabVisible[0]){
-                    floatingActionButton2.show();
-                    floatingActionButton1.show();
-                    allFabVisible[0] = true;
-                }
-                else {
-                    floatingActionButton2.hide();
-                    floatingActionButton1.hide();
-                    allFabVisible[0] = false;
-                }
-            }
-        });
     }
 
     private void setupFirebase(){

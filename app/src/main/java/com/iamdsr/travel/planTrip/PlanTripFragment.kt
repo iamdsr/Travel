@@ -1,11 +1,11 @@
 package com.iamdsr.travel.planTrip
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -39,7 +39,6 @@ class PlanTripFragment : Fragment(), RecyclerViewActionsInterface {
         super.onViewCreated(view, savedInstanceState)
         setUpWidgets()
         initRecyclerView()
-        //createDummyData()
         val planTripFragmentViewModel = ViewModelProvider(this)[PlanTripFragmentViewModel::class.java]
         planTripFragmentViewModel.getSavedTrips().observe(this, Observer { it->
             tripList = it
@@ -49,13 +48,6 @@ class PlanTripFragment : Fragment(), RecyclerViewActionsInterface {
             findNavController().navigate(R.id.action_planTripFragment_to_addTripFragment)
         })
     }
-
-//    private fun createDummyData() {
-//        for (i in 1..10){
-//            planList.add(TripModel("i","Title $i","Desc $i","02/03/2022","10/03/2022","Kolkata","Delhi","${i+10}","10/03/2022",12, 5))
-//        }
-//        plannedTripsRecyclerAdapter.submitList(planList)
-//    }
 
     private fun initRecyclerView() {
         mPlannedTripRecyclerView?.layoutManager = LinearLayoutManager(context)
@@ -70,6 +62,15 @@ class PlanTripFragment : Fragment(), RecyclerViewActionsInterface {
     }
 
     override fun onItemClick(position: Int) {
-        Toast.makeText(context, tripList[position].trip_title, Toast.LENGTH_LONG).show()
+        val bundle: Bundle = Bundle()
+        bundle.putString("TRIP_ID",  tripList[position].trip_id)
+        bundle.putString("TRIP_TITLE",  tripList[position].trip_title)
+        bundle.putString("TRIP_DESCRIPTION",tripList[position].trip_desc)
+        bundle.putString("JOURNEY_DATE",  tripList[position].journey_date)
+        bundle.putString("RETURN_DATE",  tripList[position].return_date)
+        bundle.putString("PLACE_FROM", tripList[position].place_from)
+        bundle.putString("PLACE_TO", tripList[position].place_to)
+        bundle.putLong("TOTAL_PAX", tripList[position].total_heads)
+        findNavController().navigate(R.id.action_planTripFragment_to_updateTripFragment, bundle)
     }
 }
