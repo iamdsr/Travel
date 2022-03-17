@@ -63,11 +63,11 @@ class UpdateTripFragment : Fragment() {
         setUpWidgets()
         setUpDateDialogs()
         mUpdateTripBtn?.setOnClickListener(View.OnClickListener {
-            updateTripToDB()
+            updateTrip()
         })
     }
 
-    private fun updateTripToDB() {
+    private fun updateTrip() {
         val titleField = mAddTitle!!.text.toString().trim { it <= ' ' }
         val descField = mAddDesc!!.text.toString().trim { it <= ' ' }
         val fromField = mWhereFrom!!.text.toString().trim { it <= ' ' }
@@ -82,27 +82,27 @@ class UpdateTripFragment : Fragment() {
             )
         ) {
             if (titleBundle != titleField){
-                updateTrip(titleField,null,null,null,null,null,-1)
+                updateAndPushTrip(titleField,null,null,null,null,null,-1)
             }
             if (descBundle != descField) {
-                updateTrip(null, descField, null, null, null, null, -1)
+                updateAndPushTrip(null, descField, null, null, null, null, -1)
             }
             if (fromBundle != fromField) {
-                updateTrip(null, null, null, null, fromField, null, -1)
+                updateAndPushTrip(null, null, null, null, fromField, null, -1)
             }
             if (toBundle != toField) {
-                updateTrip(null, null, null, null, null, toField, -1)
+                updateAndPushTrip(null, null, null, null, null, toField, -1)
             }
             if (jDateBundle != jDateField || rDateBundle != rDateField) {
-                updateTrip(null, null, jDateField, rDateField, null, null, -1)
+                updateAndPushTrip(null, null, jDateField, rDateField, null, null, -1)
             }
             if (totalHeadsBundle != totalPersonField.toLong()) {
-                updateTrip(null, null, null, null, null, null, totalPersonField.toLong())
+                updateAndPushTrip(null, null, null, null, null, null, totalPersonField.toLong())
             }
         }
     }
 
-    private fun updateTrip(
+    private fun updateAndPushTrip(
         title: String?,
         desc: String?,
         jDate: String?,
@@ -115,34 +115,34 @@ class UpdateTripFragment : Fragment() {
         if (title != null) {
             val tripMap: MutableMap<String, Any> = HashMap()
             tripMap["trip_title"] = title
-            planTripFragmentViewModel.updateTripToFirebase(tripMap, tripIDBundle)
+            planTripFragmentViewModel._updateTripToFirebaseFirestore(tripMap, tripIDBundle)
         }
         if (desc != null) {
             val tripMap: MutableMap<String, Any> = HashMap()
             tripMap["trip_desc"] = desc
-            planTripFragmentViewModel.updateTripToFirebase(tripMap, tripIDBundle)
+            planTripFragmentViewModel._updateTripToFirebaseFirestore(tripMap, tripIDBundle)
         }
         if (jDate != null && rDate != null) {
             val tripMap: MutableMap<String, Any> = HashMap()
             tripMap["journey_date"] = jDate
             tripMap["return_date"] = rDate
             tripMap["duration_in_days"] = getDateDiff(jDate, rDate)
-            planTripFragmentViewModel.updateTripToFirebase(tripMap, tripIDBundle)
+            planTripFragmentViewModel._updateTripToFirebaseFirestore(tripMap, tripIDBundle)
         }
         if (from != null) {
             val tripMap: MutableMap<String, Any> = HashMap()
             tripMap["place_from"] = from
-            planTripFragmentViewModel.updateTripToFirebase(tripMap, tripIDBundle)
+            planTripFragmentViewModel._updateTripToFirebaseFirestore(tripMap, tripIDBundle)
         }
         if (to != null) {
             val tripMap: MutableMap<String, Any> = HashMap()
             tripMap["place_to"] = to
-            planTripFragmentViewModel.updateTripToFirebase(tripMap, tripIDBundle)
+            planTripFragmentViewModel._updateTripToFirebaseFirestore(tripMap, tripIDBundle)
         }
         if (pax != -1L) {
             val tripMap: MutableMap<String, Any> = HashMap()
             tripMap["total_heads"] = pax
-            planTripFragmentViewModel.updateTripToFirebase(tripMap, tripIDBundle)
+            planTripFragmentViewModel._updateTripToFirebaseFirestore(tripMap, tripIDBundle)
         }
         findNavController().navigate(R.id.action_updateTripFragment_to_planTripFragment)
         Toast.makeText(context, "Congrats! Trip Update Successfully.", Toast.LENGTH_SHORT).show()

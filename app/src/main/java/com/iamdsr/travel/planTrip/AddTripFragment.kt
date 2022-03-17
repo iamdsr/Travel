@@ -45,7 +45,7 @@ class AddTripFragment : Fragment() {
         setUpWidgets()
         setUpDateDialogs()
         mAddTripBtn!!.setOnClickListener {
-            addTripToDB()
+            addNewTrip()
         }
 
         return myView
@@ -55,7 +55,7 @@ class AddTripFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
     }
-    private fun addTripToDB() {
+    private fun addNewTrip() {
         if (FirebaseAuth.getInstance().currentUser!=null) {
             val title = mAddTitle!!.text.toString().trim { it <= ' ' }
             val desc = mAddDesc!!.text.toString().trim { it <= ' ' }
@@ -86,7 +86,7 @@ class AddTripFragment : Fragment() {
                     getDateDiff(jDate, rDate),
                     totalPerson.toLong()
                 )
-                planTripFragmentViewModel.saveNewTripToFirebase(tripModel)
+                planTripFragmentViewModel._addNewTripToFirebaseFirestore(tripModel)
                 findNavController().navigate(R.id.action_addTripFragment_to_planTripFragment)
                 progressBar?.visibility = View.INVISIBLE
             }

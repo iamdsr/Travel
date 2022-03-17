@@ -14,7 +14,7 @@ class FirestoreRepository {
     var user = FirebaseAuth.getInstance().currentUser
 
     // save new trip to firebase
-    fun addNewPlannedTripToDB(tripModel: TripModel) : Task<Void>{
+    fun addNewTripToFirebaseFirestore(tripModel: TripModel) : Task<Void>{
         val documentReference = user?.let {
             firebaseFirestore.collection("users")
                 .document(it.uid)
@@ -25,7 +25,7 @@ class FirestoreRepository {
     }
 
     // Update trip to DB
-    fun updateExistingTripToDB(tripMap: MutableMap<String, Any>, tripID: String) : Task<Void>{
+    fun updateTripToFirebaseFirestore(tripMap: MutableMap<String, Any>, tripID: String) : Task<Void>{
         Log.d(TAG, "updateExistingTripToDB: Trip ID : $tripID")
         Log.d(TAG, "updateExistingTripToDB: Trip ID : $tripMap")
         val documentRef = firebaseFirestore.collection("users").document(user!!.uid).collection("trips").document(tripID)
@@ -43,7 +43,7 @@ class FirestoreRepository {
     }
 
     // get saved addresses from firebase
-    fun getSavedTrips(): CollectionReference {
+    fun getAllSavedTripFromFirebaseFirestore(): CollectionReference {
         return firebaseFirestore.collection("users/${user?.uid}/trips")
     }
 }

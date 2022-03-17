@@ -16,23 +16,23 @@ class PlanTripFragmentViewModel : ViewModel() {
     var firebaseRepository = FirestoreRepository()
     var savedTrips : MutableLiveData<List<TripModel>> = MutableLiveData()
 
-    // save address to firebase
-    fun saveNewTripToFirebase(tripModel: TripModel){
-        firebaseRepository.addNewPlannedTripToDB(tripModel).addOnFailureListener {
+    // Add new trip to Firebase Database
+    fun _addNewTripToFirebaseFirestore(tripModel: TripModel){
+        firebaseRepository.addNewTripToFirebaseFirestore(tripModel).addOnFailureListener {
             Log.e(TAG,"Failed to save Trip!")
         }
     }
 
     // Update trip
-    fun updateTripToFirebase(tripMap: MutableMap<String, Any>, tripID: String){
-        firebaseRepository.updateExistingTripToDB(tripMap, tripID).addOnFailureListener {
+    fun _updateTripToFirebaseFirestore(tripMap: MutableMap<String, Any>, tripID: String){
+        firebaseRepository.updateTripToFirebaseFirestore(tripMap, tripID).addOnFailureListener {
             Log.e(TAG,"Failed to update Trip!")
         }
     }
 
     // get realtime updates from firebase regarding saved addresses
-    fun getSavedTrips(): LiveData<List<TripModel>> {
-        firebaseRepository.getSavedTrips().orderBy("date_created", Query.Direction.DESCENDING).addSnapshotListener(EventListener<QuerySnapshot> { value, e ->
+    fun _getAllSavedTripFromFirebaseFirestore(): LiveData<List<TripModel>> {
+        firebaseRepository.getAllSavedTripFromFirebaseFirestore().orderBy("date_created", Query.Direction.DESCENDING).addSnapshotListener(EventListener<QuerySnapshot> { value, e ->
             if (e != null) {
                 //Log.w(TAG, "Listen failed.", e)
                 //savedTrips.value = null
