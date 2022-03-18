@@ -41,7 +41,7 @@
     <string name="start_planning_add_trip">Start planning: Add Trip</string>
     <string name="start_planning_update_trip">Start planning : \nUpdate Trip</string>
     <string name="add_title">Add Title</string>
-    <string name="provide_a_short_description_here">Provide a short description here...</string>
+    <string name="provide_a_short_description_here">Provide a short description here…</string>
     <string name="journey_date">Journey Date</string>
     <string name="return_date">Return Date</string>
     <string name="where_from">Where From</string>
@@ -50,4 +50,8 @@
     <string name="add_trip">Add Trip</string>
     <string name="update_trip">Update</string>
     <string name="fab_add_stories">Add Stories</string>
+    <string name="update_plan">Update Plan</string>
+    <string name="add_itinerary">Add Itinerary</string>
+    <string name="persons_count">%d Persons</string>
+    <string name="duration_count">%d Days</string>
 </resources>

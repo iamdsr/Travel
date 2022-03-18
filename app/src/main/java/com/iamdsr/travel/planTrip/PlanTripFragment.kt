@@ -1,6 +1,7 @@
 package com.iamdsr.travel.planTrip
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -61,16 +62,21 @@ class PlanTripFragment : Fragment(), RecyclerViewActionsInterface {
         mPlannedTripRecyclerView = myView?.findViewById(R.id.trip_recycler_view)
     }
 
-    override fun onItemClick(position: Int) {
-        val bundle: Bundle = Bundle()
-        bundle.putString("TRIP_ID",  tripList[position].trip_id)
-        bundle.putString("TRIP_TITLE",  tripList[position].trip_title)
-        bundle.putString("TRIP_DESCRIPTION",tripList[position].trip_desc)
-        bundle.putString("JOURNEY_DATE",  tripList[position].journey_date)
-        bundle.putString("RETURN_DATE",  tripList[position].return_date)
-        bundle.putString("PLACE_FROM", tripList[position].place_from)
-        bundle.putString("PLACE_TO", tripList[position].place_to)
-        bundle.putLong("TOTAL_PAX", tripList[position].total_heads)
-        findNavController().navigate(R.id.action_planTripFragment_to_updateTripFragment, bundle)
+    override fun onItemClick(view: View, position: Int) {
+        if (view.resources.getResourceName(view.id) == "com.iamdsr.travel:id/update"){
+            val bundle: Bundle = Bundle()
+            bundle.putString("TRIP_ID",  tripList[position].trip_id)
+            bundle.putString("TRIP_TITLE",  tripList[position].trip_title)
+            bundle.putString("TRIP_DESCRIPTION",tripList[position].trip_desc)
+            bundle.putString("JOURNEY_DATE",  tripList[position].journey_date)
+            bundle.putString("RETURN_DATE",  tripList[position].return_date)
+            bundle.putString("PLACE_FROM", tripList[position].place_from)
+            bundle.putString("PLACE_TO", tripList[position].place_to)
+            bundle.putLong("TOTAL_PAX", tripList[position].total_heads)
+            findNavController().navigate(R.id.action_planTripFragment_to_updateTripFragment, bundle)
+        }
+        else if (view.resources.getResourceName(view.id) == "com.iamdsr.travel:id/addItinerary"){
+            findNavController().navigate(R.id.action_planTripFragment_to_myItinerariesFragment)
+        }
     }
 }

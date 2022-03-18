@@ -37,7 +37,8 @@ class PlannedTripRecyclerAdapter(val itemClickListener: RecyclerViewActionsInter
         private val mTo: TextView = itemView.findViewById(R.id.place_to)
         private val mDuration: TextView = itemView.findViewById(R.id.total_duration)
         private val mUpdate: TextView = itemView.findViewById(R.id.update)
-        private val mDelete: TextView = itemView.findViewById(R.id.delete)
+        //private val mDelete: TextView = itemView.findViewById(R.id.delete)
+        private val mAddItinerary: TextView = itemView.findViewById(R.id.addItinerary)
 
         fun bindView(tripModel: TripModel, context: Context?, clickListener: RecyclerViewActionsInterface) {
             mTitle.text = tripModel.trip_title
@@ -46,11 +47,15 @@ class PlannedTripRecyclerAdapter(val itemClickListener: RecyclerViewActionsInter
             mRDate.text = tripModel.return_date
             mFrom.text = tripModel.place_from
             mTo.text = tripModel.place_to
-            mTotalPax.text = tripModel.total_heads.toString()
-            mDuration.text = tripModel.duration_in_days.toString()
+            mTotalPax.text = context!!.getString(R.string.persons_count,tripModel.total_heads)
+            mDuration.text = context.getString(R.string.duration_count,tripModel.duration_in_days)
 
             mUpdate.setOnClickListener {
-                clickListener.onItemClick(absoluteAdapterPosition)
+                clickListener.onItemClick(it, absoluteAdapterPosition)
+            }
+
+            mAddItinerary.setOnClickListener {
+                clickListener.onItemClick(it, absoluteAdapterPosition)
             }
         }
     }

@@ -1,5 +1,7 @@
 package com.iamdsr.travel.interfaces;
 
+import android.view.View
+
 interface RecyclerViewActionsInterface {
-    fun onItemClick(position: Int)
+    fun onItemClick(view: View, position: Int)
 }

@@ -65,6 +65,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:text="@string/persons_count"
                     android:drawablePadding="8dp"
                     android:fontFamily="@font/roboto_bold"
                     android:gravity="center_vertical"
@@ -72,7 +73,6 @@
                     android:padding="8dp"
                     android:textSize="16sp"
                     app:drawableStartCompat="@drawable/ic_group"
-                    app:drawableTint="@color/primary_day_night"
                     tools:layout_editor_absoluteX="16dp"
                     tools:layout_editor_absoluteY="94dp" />
 
@@ -85,10 +85,10 @@
                     android:fontFamily="@font/roboto_bold"
                     android:gravity="center_vertical"
                     android:maxLines="5"
+                    android:text="@string/duration_count"
                     android:padding="8dp"
                     android:textSize="16sp"
                     app:drawableStartCompat="@drawable/ic_time"
-                    app:drawableTint="@color/primary_day_night"
                     tools:layout_editor_absoluteX="313dp"
                     tools:layout_editor_absoluteY="94dp" />
 
@@ -194,14 +194,16 @@
                     android:fontFamily="@font/roboto_bold"
                     android:gravity="center_vertical"
                     android:padding="8dp"
-                    android:text="Update Plan"
+                    android:text="@string/update_plan"
                     android:textSize="16sp"
+                    android:textColor="@color/primary_day_night"
                     app:drawableStartCompat="@drawable/ic_update"
+                    app:drawableTint="@color/primary_day_night"
                     tools:layout_editor_absoluteX="16dp"
                     tools:layout_editor_absoluteY="94dp" />
 
                 <TextView
-                    android:id="@+id/delete"
+                    android:id="@+id/addItinerary"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -211,10 +213,11 @@
                     android:gravity="center_vertical"
                     android:layout_margin="4dp"
                     android:padding="8dp"
-                    android:text="Delete Plan"
+                    android:text="@string/add_itinerary"
+                    app:drawableTint="@color/primary_day_night"
+                    android:textColor="@color/primary_day_night"
                     android:textSize="16sp"
-                    app:drawableStartCompat="@drawable/ic_delete"
-                    app:drawableTint="@color/error"
+                    app:drawableStartCompat="@drawable/ic_backpack"
                     tools:layout_editor_absoluteX="313dp"
                     tools:layout_editor_absoluteY="94dp" />
 

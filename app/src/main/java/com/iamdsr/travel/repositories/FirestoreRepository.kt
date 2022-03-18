@@ -19,7 +19,7 @@ class FirestoreRepository {
             firebaseFirestore.collection("users")
                 .document(it.uid)
                 .collection("trips")
-                .document()
+                .document(tripModel.trip_id)
         }
         return documentReference!!.set(tripModel)
     }
