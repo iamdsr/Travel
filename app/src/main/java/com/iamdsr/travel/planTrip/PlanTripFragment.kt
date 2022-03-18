@@ -76,7 +76,16 @@ class PlanTripFragment : Fragment(), RecyclerViewActionsInterface {
             findNavController().navigate(R.id.action_planTripFragment_to_updateTripFragment, bundle)
         }
         else if (view.resources.getResourceName(view.id) == "com.iamdsr.travel:id/addItinerary"){
-            findNavController().navigate(R.id.action_planTripFragment_to_myItinerariesFragment)
+            val bundle: Bundle = Bundle()
+            bundle.putString("TRIP_ID",  tripList[position].trip_id)
+            bundle.putString("TRIP_TITLE",  tripList[position].trip_title)
+            bundle.putString("TRIP_DESCRIPTION",tripList[position].trip_desc)
+            bundle.putString("JOURNEY_DATE",  tripList[position].journey_date)
+            bundle.putString("RETURN_DATE",  tripList[position].return_date)
+            bundle.putString("PLACE_FROM", tripList[position].place_from)
+            bundle.putString("PLACE_TO", tripList[position].place_to)
+            bundle.putLong("TOTAL_PAX", tripList[position].total_heads)
+            findNavController().navigate(R.id.action_planTripFragment_to_myItinerariesFragment, bundle)
         }
     }
 }

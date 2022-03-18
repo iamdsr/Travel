@@ -1,16 +1,17 @@
 package com.iamdsr.travel.viewModels
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class ItinerarySharedViewModel : ViewModel() {
-    var tripID = MutableLiveData<String>()
+    private var tripID: MutableLiveData<String> = MutableLiveData()
 
-    private fun setText(input: String){
+    fun setText(input: String){
         tripID.value = input
     }
-    public fun getText() : LiveData<String>{
+    fun getText() : LiveData<String>{
         return tripID
     }
 }
