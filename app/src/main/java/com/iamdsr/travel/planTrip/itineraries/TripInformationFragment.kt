@@ -1,4 +1,4 @@
-package com.iamdsr.travel.planTrip
+package com.iamdsr.travel.planTrip.itineraries
 
 import android.os.Bundle
 import android.util.Log
@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.iamdsr.travel.R
@@ -24,7 +23,8 @@ class TripInformationFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val itinerarySharedViewModel = ViewModelProvider(requireActivity())[ItinerarySharedViewModel::class.java]
         Log.d("TAG", "before observe: Trip id : ${itinerarySharedViewModel.getText().value}" )
-        itinerarySharedViewModel.getText().observe(this, Observer {
+        itinerarySharedViewModel.getText().observe(requireActivity(), Observer {
+            Log.d("TAG", "onViewCreated: $it")
         })
     }
 }

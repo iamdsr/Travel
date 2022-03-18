@@ -1,4 +1,4 @@
-package com.iamdsr.travel.planTrip
+package com.iamdsr.travel.planTrip.itineraries
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

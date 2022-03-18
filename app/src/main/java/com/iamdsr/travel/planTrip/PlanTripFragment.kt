@@ -73,6 +73,7 @@ class PlanTripFragment : Fragment(), RecyclerViewActionsInterface {
             bundle.putString("PLACE_FROM", tripList[position].place_from)
             bundle.putString("PLACE_TO", tripList[position].place_to)
             bundle.putLong("TOTAL_PAX", tripList[position].total_heads)
+            bundle.putString("JOURNEY_MODE", tripList[position].journey_mode)
             findNavController().navigate(R.id.action_planTripFragment_to_updateTripFragment, bundle)
         }
         else if (view.resources.getResourceName(view.id) == "com.iamdsr.travel:id/addItinerary"){
@@ -85,6 +86,7 @@ class PlanTripFragment : Fragment(), RecyclerViewActionsInterface {
             bundle.putString("PLACE_FROM", tripList[position].place_from)
             bundle.putString("PLACE_TO", tripList[position].place_to)
             bundle.putLong("TOTAL_PAX", tripList[position].total_heads)
+            bundle.putString("JOURNEY_MODE", tripList[position].journey_mode)
             findNavController().navigate(R.id.action_planTripFragment_to_myItinerariesFragment, bundle)
         }
     }

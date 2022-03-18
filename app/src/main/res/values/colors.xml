@@ -19,6 +19,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="gray">#C2C6C8</color>
     <color name="inverse_dark">#181F22</color>
+    <color name="blue_gray_light">#DFE4E9</color>
 
     <color name="day_night_gray">#C2C6C8</color>
     <color name="primary_day_night">#004ba0</color>

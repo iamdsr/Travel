@@ -5,14 +5,14 @@ import android.app.DatePickerDialog.OnDateSetListener
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ProgressBar
+import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.iamdsr.travel.R
 import com.iamdsr.travel.models.TripModel
@@ -26,19 +26,21 @@ class AddTripFragment : Fragment() {
 
     // Widgets
     private var myView: View?= null
-    private var mJourneyDate: EditText? = null
-    private var mReturnDate:EditText? = null
-    private var mAddTitle:EditText? = null
-    private var mAddDesc:EditText? = null
-    private var mWhereFrom:EditText? = null
-    private var mWhereTo:EditText? = null
-    private var mNumberOfPerson:EditText? = null
+    private var mJourneyDate: TextInputEditText? = null
+    private var mReturnDate:TextInputEditText? = null
+    private var mAddTitle:TextInputEditText? = null
+    private var mAddDesc:TextInputEditText? = null
+    private var mWhereFrom:TextInputEditText? = null
+    private var mWhereTo:TextInputEditText? = null
+    private var mNumberOfPerson:TextInputEditText? = null
+    private var mJourneyMode: AutoCompleteTextView? = null
     private var mAddTripBtn: Button? = null
     private var clickedEditText: EditText? = null
     private var progressBar: ProgressBar? = null
 
     // Utils
     private val myCalendar: Calendar? = Calendar.getInstance()
+    private val journeyModeEntries = arrayOf("Flight", "Train", "Car")
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         myView = inflater.inflate(R.layout.fragment_add_trip, container, false)
@@ -47,7 +49,15 @@ class AddTripFragment : Fragment() {
         mAddTripBtn!!.setOnClickListener {
             addNewTrip()
         }
+        mJourneyMode!!.setOnTouchListener(object : View.OnTouchListener {
+            override fun onTouch(v: View?, event: MotionEvent?): Boolean {
+                when (event?.action) {
+                    MotionEvent.ACTION_DOWN -> mJourneyMode!!.showDropDown()
+                }
 
+                return v?.onTouchEvent(event) ?: true
+            }
+        })
         return myView
     }
 
@@ -55,6 +65,8 @@ class AddTripFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
     }
+
+
     private fun addNewTrip() {
         if (FirebaseAuth.getInstance().currentUser!=null) {
             val title = mAddTitle!!.text.toString().trim { it <= ' ' }
@@ -64,13 +76,12 @@ class AddTripFragment : Fragment() {
             val jDate = mJourneyDate!!.text.toString().trim { it <= ' ' }
             val rDate = mReturnDate!!.text.toString().trim { it <= ' ' }
             val totalPerson = mNumberOfPerson!!.text.toString().trim { it <= ' ' }
+            val journeyMode = mJourneyMode!!.text.toString().trim { it <= ' ' }
             val planTripFragmentViewModel =
                 ViewModelProvider(this)[PlanTripFragmentViewModel::class.java]
             if (!TextUtils.isEmpty(title) && !TextUtils.isEmpty(desc) && !TextUtils.isEmpty(from)
-                && !TextUtils.isEmpty(to) && !TextUtils.isEmpty(jDate) && !TextUtils.isEmpty(rDate) && !TextUtils.isEmpty(
-                    totalPerson
-                )
-            ) {
+                && !TextUtils.isEmpty(to) && !TextUtils.isEmpty(jDate) && !TextUtils.isEmpty(rDate) && !TextUtils.isEmpty(totalPerson) && !TextUtils.isEmpty(journeyMode)) {
+
                 progressBar?.visibility = View.VISIBLE
                 var firebaseRepository = FirestoreRepository()
                 val tripModel = TripModel(
@@ -83,6 +94,7 @@ class AddTripFragment : Fragment() {
                     to,
                     FirebaseAuth.getInstance().currentUser!!.uid,
                     getTimestamp(),
+                    journeyMode,
                     getDateDiff(jDate, rDate),
                     totalPerson.toLong()
                 )
@@ -156,7 +168,11 @@ class AddTripFragment : Fragment() {
         mNumberOfPerson = myView!!.findViewById(R.id.total_person)
         mJourneyDate = myView!!.findViewById(R.id.journey_date)
         mReturnDate = myView!!.findViewById(R.id.return_date)
+        mJourneyMode = myView!!.findViewById(R.id.journey_mode)
         mAddTripBtn = myView!!.findViewById(R.id.add_trip_btn)
         progressBar = myView!!.findViewById(R.id.progress_horizontal)
+        val journeyModeAdapter = ArrayAdapter(context!!, android.R.layout.simple_list_item_1, journeyModeEntries)
+        mJourneyMode!!.setAdapter(journeyModeAdapter)
+        mJourneyMode!!.keyListener = null
     }
 }

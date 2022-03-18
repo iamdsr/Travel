@@ -45,7 +45,7 @@
     </fragment>
     <fragment
         android:id="@+id/myItinerariesFragment"
-        android:name="com.iamdsr.travel.planTrip.MyItinerariesFragment"
+        android:name="com.iamdsr.travel.planTrip.itineraries.MyItinerariesFragment"
         android:label="fragment_my_itineraries"
         tools:layout="@layout/fragment_my_itineraries" >
         <action

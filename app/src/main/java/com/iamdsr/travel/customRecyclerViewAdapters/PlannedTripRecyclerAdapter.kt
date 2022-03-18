@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -37,7 +38,7 @@ class PlannedTripRecyclerAdapter(val itemClickListener: RecyclerViewActionsInter
         private val mTo: TextView = itemView.findViewById(R.id.place_to)
         private val mDuration: TextView = itemView.findViewById(R.id.total_duration)
         private val mUpdate: TextView = itemView.findViewById(R.id.update)
-        //private val mDelete: TextView = itemView.findViewById(R.id.delete)
+        private val mJourneyModeImage: ImageView = itemView.findViewById(R.id.journey_mode_image)
         private val mAddItinerary: TextView = itemView.findViewById(R.id.addItinerary)
 
         fun bindView(tripModel: TripModel, context: Context?, clickListener: RecyclerViewActionsInterface) {
@@ -49,6 +50,16 @@ class PlannedTripRecyclerAdapter(val itemClickListener: RecyclerViewActionsInter
             mTo.text = tripModel.place_to
             mTotalPax.text = context!!.getString(R.string.persons_count,tripModel.total_heads)
             mDuration.text = context.getString(R.string.duration_count,tripModel.duration_in_days)
+
+            if (tripModel.journey_mode == "Train"){
+                mJourneyModeImage.setImageResource(R.drawable.ic_train_journey)
+            }
+            else if (tripModel.journey_mode == "Car"){
+                mJourneyModeImage.setImageResource(R.drawable.ic_car_journey)
+            }
+            else {
+                mJourneyModeImage.setImageResource(R.drawable.ic_flight_journey)
+            }
 
             mUpdate.setOnClickListener {
                 clickListener.onItemClick(it, absoluteAdapterPosition)

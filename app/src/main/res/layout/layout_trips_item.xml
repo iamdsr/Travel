@@ -134,12 +134,12 @@
                 </LinearLayout>
 
                 <ImageView
-                    android:id="@+id/image"
+                    android:id="@+id/journey_mode_image"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="48dp"
                     android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:src="@drawable/ic_right_arrow" />
+                    android:adjustViewBounds="true"
+                    android:layout_weight="1"/>
 
                 <LinearLayout
                     android:id="@+id/part2"

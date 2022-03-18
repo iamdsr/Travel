@@ -42,23 +42,44 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/add_Trip_label">
 
-        <EditText
-            android:id="@+id/trip_title"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/trip_title_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/add_title"
-            android:maxLines="1"
-            android:fontFamily="@font/roboto_bold"
-            android:padding="16dp"/>
-        <EditText
-            android:id="@+id/trip_desc"
+            app:endIconMode="clear_text"
+            app:counterEnabled="true"
+            app:counterMaxLength="35"
+            app:errorEnabled="true"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/trip_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:fontFamily="@font/roboto_bold"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/trip_desc_container"
             android:layout_width="match_parent"
-            android:layout_height="128dp"
+            android:layout_height="wrap_content"
             android:hint="@string/provide_a_short_description_here"
-            android:gravity="start"
-            android:maxHeight="256dp"
-            android:fontFamily="@font/roboto_regular"
-            android:padding="16dp"/>
+            app:errorEnabled="true"
+            app:counterEnabled="true"
+            app:counterMaxLength="100"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/trip_desc"
+                android:layout_width="match_parent"
+                android:layout_height="128dp"
+                android:maxHeight="256dp"
+                android:fontFamily="@font/roboto_regular"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <LinearLayout
             android:id="@+id/dates"
@@ -66,34 +87,60 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:weightSum="2">
-            <EditText
-                android:id="@+id/journey_date"
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/journey_date_container"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:hint="@string/journey_date"
-                android:maxLines="1"
-                android:clickable="false"
-                android:cursorVisible="false"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
-                android:layout_margin="8dp"
-                android:fontFamily="@font/roboto_regular"
-                android:padding="16dp"/>
-            <EditText
-                android:id="@+id/return_date"
+                android:layout_marginEnd="4dp"
+                app:startIconDrawable="@drawable/ic_calendar"
+                app:endIconMode="clear_text"
+                app:errorEnabled="true"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/journey_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:clickable="false"
+                    android:cursorVisible="false"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:fontFamily="@font/roboto_regular"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/return_date_container"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_marginStart="4dp"
                 android:hint="@string/return_date"
-                android:maxLines="1"
+                app:startIconDrawable="@drawable/ic_calendar"
+                app:errorEnabled="true"
                 android:clickable="false"
                 android:cursorVisible="false"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
-                android:layout_margin="8dp"
-                android:fontFamily="@font/roboto_regular"
-                android:padding="16dp"/>
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/return_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:clickable="false"
+                    android:cursorVisible="false"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:fontFamily="@font/roboto_regular"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
         </LinearLayout>
 
         <LinearLayout
@@ -102,39 +149,107 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:weightSum="2">
-            <EditText
-                android:id="@+id/place_from"
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/place_from_container"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                app:endIconMode="clear_text"
                 android:hint="@string/where_from"
-                android:maxLines="2"
-                android:layout_margin="8dp"
-                android:fontFamily="@font/roboto_regular"
-                android:padding="16dp"/>
-            <EditText
-                android:id="@+id/place_to"
+                app:errorEnabled="true"
+                app:counterEnabled="true"
+                app:counterMaxLength="20"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/place_from"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="2"
+                    android:maxHeight="256dp"
+                    android:fontFamily="@font/roboto_regular"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/place_to_container"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                app:endIconMode="clear_text"
+                android:layout_marginStart="4dp"
+                android:hint="@string/where_to"
+                app:errorEnabled="true"
+                app:counterEnabled="true"
+                app:counterMaxLength="20"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/place_to"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="2"
+                    android:maxHeight="256dp"
+                    android:fontFamily="@font/roboto_regular"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/total_person_container"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:hint="@string/where_to"
-                android:maxLines="2"
-                android:layout_margin="8dp"
-                android:fontFamily="@font/roboto_regular"
-                android:padding="16dp"/>
+                android:hint="@string/number_of_person"
+                app:startIconDrawable="@drawable/ic_group"
+                android:layout_marginEnd="4dp"
+                app:endIconMode="clear_text"
+                app:errorEnabled="true"
+                app:counterEnabled="true"
+                app:counterMaxLength="2"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/total_person"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:inputType="number"
+                    android:maxHeight="256dp"
+                    android:fontFamily="@font/roboto_regular"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="60dp"
+                android:hint="@string/journey_mode"
+                app:endIconMode="dropdown_menu"
+                app:errorEnabled="true"
+                android:layout_marginStart="4dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                    android:id="@+id/journey_mode"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/roboto_regular"
+                    android:maxHeight="256dp"
+                    android:maxLines="1"
+                    android:padding="8dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
         </LinearLayout>
-        <EditText
-            android:id="@+id/total_person"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:hint="@string/number_of_person"
-            android:maxLines="1"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="8dp"
-            android:inputType="number"
-            android:fontFamily="@font/roboto_regular"
-            android:padding="16dp"/>
+
     </LinearLayout>
 
     <Button
