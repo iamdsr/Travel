@@ -6,6 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".planTrip.itineraries.TripInformationFragment">
 
+    <ProgressBar
+        android:id="@+id/progress_horizontal"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/container"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <LinearLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
@@ -22,17 +34,15 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_black"
             android:padding="4dp"
-            android:textSize="32sp"
             android:textColor="@color/primary_day_night"
-            android:text="@string/lorem_one_line" />
+            android:textSize="32sp" />
 
         <TextView
             android:id="@+id/trip_desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_regular"
-            android:padding="4dp"
-            android:text="@string/lorem_paragraph" />
+            android:padding="4dp"/>
 
     </LinearLayout>
 
@@ -65,40 +75,52 @@
             android:padding="8dp">
 
             <TextView
+                android:id="@+id/total_duration"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableStart="@drawable/ic_time"
                 android:drawablePadding="8dp"
-                android:drawableTint="@color/primary"
                 android:fontFamily="@font/roboto_regular"
                 android:textColor="@color/black"
                 android:gravity="center_vertical"
                 android:padding="8dp"
-                android:text="10 days" />
+                app:drawableStartCompat="@drawable/ic_time"
+                app:drawableTint="@color/primary" />
 
             <TextView
+                android:id="@+id/start_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableStart="@drawable/ic_calendar"
                 android:textColor="@color/black"
                 android:drawablePadding="8dp"
                 android:fontFamily="@font/roboto_regular"
-                android:drawableTint="@color/primary"
                 android:gravity="center_vertical"
                 android:padding="8dp"
-                android:text="17/06/2022" />
+                app:drawableStartCompat="@drawable/ic_calendar"
+                app:drawableTint="@color/primary" />
 
             <TextView
+                android:id="@+id/journey_mode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableStart="@drawable/ic_flight_journey"
                 android:drawablePadding="8dp"
-                android:drawableTint="@color/primary"
                 android:textColor="@color/black"
                 android:fontFamily="@font/roboto_regular"
                 android:gravity="center_vertical"
                 android:padding="8dp"
-                android:text="Airplane" />
+                app:drawableStartCompat="@drawable/ic_flight_journey"
+                app:drawableTint="@color/primary" />
+
+            <TextView
+                android:id="@+id/total_heads"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="8dp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/roboto_regular"
+                android:gravity="center_vertical"
+                android:padding="8dp"
+                app:drawableStartCompat="@drawable/ic_group"
+                app:drawableTint="@color/primary" />
 
         </LinearLayout>
 
@@ -129,7 +151,6 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_bold"
                 android:gravity="center"
-                android:text="17/06/2022"
                 android:padding="8dp"
                 android:textSize="16sp" />
 
@@ -140,7 +161,6 @@
                 android:fontFamily="@font/roboto_bold"
                 android:gravity="center"
                 android:maxLines="2"
-                android:text="Kolkata"
                 android:padding="8dp"
                 android:textSize="16sp" />
 
@@ -168,7 +188,6 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_bold"
                 android:gravity="center"
-                android:text="27/06/2022"
                 android:padding="8dp"
                 android:textSize="16sp" />
 
@@ -179,7 +198,6 @@
                 android:fontFamily="@font/roboto_bold"
                 android:gravity="center"
                 android:maxLines="2"
-                android:text="Siliguri"
                 android:padding="8dp"
                 android:textSize="16sp" />
 

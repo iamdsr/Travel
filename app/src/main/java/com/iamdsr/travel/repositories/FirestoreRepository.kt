@@ -4,6 +4,8 @@ import android.util.Log
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.CollectionReference
+import com.google.firebase.firestore.DocumentReference
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.iamdsr.travel.models.TripModel
 import javax.sql.StatementEvent
@@ -13,6 +15,14 @@ class FirestoreRepository {
     var firebaseFirestore = FirebaseFirestore.getInstance()
     var user = FirebaseAuth.getInstance().currentUser
 
+    fun getSingleTripFromFirestoreDatabase(tripID: String) : Task<DocumentSnapshot>? {
+        if (tripID!=""){
+            val documentRef = firebaseFirestore.collection("users").document(user!!.uid).collection("trips").document(tripID)
+            return documentRef.get()
+        }
+        else
+            return null
+    }
     // save new trip to firebase
     fun addNewTripToFirebaseFirestore(tripModel: TripModel) : Task<Void>{
         val documentReference = user?.let {

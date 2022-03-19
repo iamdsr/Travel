@@ -40,7 +40,10 @@
         tools:layout="@layout/fragment_my_itineraries" >
         <action
             android:id="@+id/action_myItinerariesFragment_to_planTripFragment"
-            app:destination="@id/planTripFragment" />
+            app:destination="@id/planTripFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/planTripFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
     <fragment
         android:id="@+id/updateTripFragment"

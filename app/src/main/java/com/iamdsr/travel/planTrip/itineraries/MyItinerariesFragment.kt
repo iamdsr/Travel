@@ -1,11 +1,15 @@
 package com.iamdsr.travel.planTrip.itineraries
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -45,11 +49,28 @@ class MyItinerariesFragment : Fragment() {
             toBundle = arguments!!.getString("PLACE_TO","")
             totalHeadsBundle = arguments!!.getLong("TOTAL_PAX",-1)
         }
+        val callback: OnBackPressedCallback = object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    if (itineraryViewPager.currentItem == 1){
+                        itineraryViewPager.currentItem = 0
+                    }
+                    else{
+                        //clearViews()
+                        findNavController().navigate(R.id.action_myItinerariesFragment_to_planTripFragment)
+                    }
+                }
+            }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
         setupWidgets()
         setUpViewPager()
         val itinerarySharedViewModel = ViewModelProvider(requireActivity())[ItinerarySharedViewModel::class.java]
         itinerarySharedViewModel.setText(tripIDBundle)
     }
+
+    private fun clearViews() {
+        itineraryViewPager.adapter
+    }
+
 
     private fun setUpViewPager(){
         val itineraryViewPagerAdapter = ItineraryViewPagerAdapter(requireActivity().supportFragmentManager,requireActivity().lifecycle)

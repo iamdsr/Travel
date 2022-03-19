@@ -3,22 +3,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".planTrip.itineraries.TimelineFragment">
 
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/trip_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:text="@string/lorem_one_line"
+        android:maxLines="2"
+        android:fontFamily="@font/roboto_bold"
+        android:textSize="32sp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/itinerary_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="100dp"/>
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/add_new_itinerary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="32sp"
-        android:layout_gravity="center"
-        android:text="Timeline" />
-    <TextView
-        android:id="@+id/trip_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="32sp"
-        android:layout_marginBottom="128dp"
-        android:layout_gravity="center"
-        android:text="ID" />
+        android:layout_gravity="bottom|end"
+        android:text="Add Itinerary"
+        app:icon="@drawable/ic_backpack"
+        android:gravity="center"
+        android:layout_margin="32dp"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
