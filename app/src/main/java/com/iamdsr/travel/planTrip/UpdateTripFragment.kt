@@ -3,6 +3,7 @@ package com.iamdsr.travel.planTrip
 import android.app.DatePickerDialog
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -75,6 +76,8 @@ class UpdateTripFragment : Fragment() {
         })
         mUpdateTripBtn.setOnClickListener(View.OnClickListener {
             updateTrip()
+            findNavController().navigate(R.id.action_updateTripFragment_to_planTripFragment)
+            Toast.makeText(context, "Congrats! Trip Update Successfully.", Toast.LENGTH_SHORT).show()
         })
     }
 
@@ -166,8 +169,6 @@ class UpdateTripFragment : Fragment() {
             tripMap["journey_mode"] = journeyMode
             planTripFragmentViewModel._updateTripToFirebaseFirestore(tripMap, tripIDBundle)
         }
-        findNavController().navigate(R.id.action_updateTripFragment_to_planTripFragment)
-        Toast.makeText(context, "Congrats! Trip Update Successfully.", Toast.LENGTH_SHORT).show()
     }
 
 

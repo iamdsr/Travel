@@ -40,7 +40,7 @@ class PlanTripFragment : Fragment(), RecyclerViewActionsInterface {
         super.onViewCreated(view, savedInstanceState)
         setUpWidgets()
         initRecyclerView()
-        val planTripFragmentViewModel = ViewModelProvider(this)[PlanTripFragmentViewModel::class.java]
+        val planTripFragmentViewModel = ViewModelProvider(requireActivity())[PlanTripFragmentViewModel::class.java]
         planTripFragmentViewModel._getAllSavedTripFromFirebaseFirestore().observe(this, Observer { it->
             tripList = it
             plannedTripsRecyclerAdapter.submitList(it)
