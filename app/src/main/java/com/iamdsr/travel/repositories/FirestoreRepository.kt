@@ -7,6 +7,7 @@ import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
+import com.iamdsr.travel.models.ItineraryModel
 import com.iamdsr.travel.models.TripModel
 import javax.sql.StatementEvent
 
@@ -15,6 +16,24 @@ class FirestoreRepository {
     var firebaseFirestore = FirebaseFirestore.getInstance()
     var user = FirebaseAuth.getInstance().currentUser
 
+    // ITINERARIES --------------------------------------------------------------------------------------------------------------------------------------
+    // save new itinerary to firebase
+    fun addNewItineraryToFirebaseFirestore(itineraryModel: ItineraryModel) : Task<Void>{
+        val documentReference = user?.let {
+            firebaseFirestore.collection("users")
+                .document(it.uid)
+                .collection("trips")
+                .document(itineraryModel.trip_id)
+                .collection("itineraries")
+                .document(itineraryModel.itinerary_id)
+        }
+        return documentReference!!.set(itineraryModel)
+    }
+
+
+
+
+    // TRIPS --------------------------------------------------------------------------------------------------------------------------------------------
     fun getSingleTripFromFirestoreDatabase(tripID: String) : Task<DocumentSnapshot>? {
         if (tripID!=""){
             val documentRef = firebaseFirestore.collection("users").document(user!!.uid).collection("trips").document(tripID)
