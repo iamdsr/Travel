@@ -57,4 +57,16 @@
     <string name="journey_mode">Journey mode</string>
     <string name="lorem_one_line">Lorem ipsum dolor sit amet, consectetur adipiscing elit</string>
     <string name="lorem_paragraph">Nam in pharetra nisi. Sed sollicitudin tristique arcu non mollis. Pellentesque blandit mattis ipsum, id commodo odio fermentum et. Phasellus enim risus, laoreet sed erat et, tristique tincidunt sem. Fusce cursus porttitor erat, at efficitur velit auctor in. Sed at facilisis odio. Vivamus lobortis tincidunt convallis. Cras commodo sit amet lacus ac dignissim. Sed laoreet, arcu ac egestas vulputate, diam odio rutrum erat, in iaculis mauris urna vel est. Nunc vitae enim non ex euismod fermentum at et tellus. Vestibulum sed nulla ligula.</string>
+    <string name="add_journey_details">Add Journey Details</string>
+    <string name="start_date">Start date</string>
+    <string name="start_time">Start time</string>
+    <string name="add_hotel_check_in_details">Add Hotel Check-In Details</string>
+    <string name="hotel_check_in_date">Check-in date</string>
+    <string name="check_in_time">Check-in time</string>
+    <string name="hotel_address_location">Hotel address/ location</string>
+    <string name="hotel_name">Hotel name</string>
+    <string name="add_sightseeing_details">Add Sightseeing details</string>
+    <string name="date">Date</string>
+    <string name="time">Time</string>
+    <string name="place_name">Place name</string>
 </resources>
