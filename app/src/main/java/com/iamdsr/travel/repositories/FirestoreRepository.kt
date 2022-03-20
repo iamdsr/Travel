@@ -31,17 +31,7 @@ class FirestoreRepository {
     }
 
 
-
-
     // TRIPS --------------------------------------------------------------------------------------------------------------------------------------------
-    fun getSingleTripFromFirestoreDatabase(tripID: String) : Task<DocumentSnapshot>? {
-        if (tripID!=""){
-            val documentRef = firebaseFirestore.collection("users").document(user!!.uid).collection("trips").document(tripID)
-            return documentRef.get()
-        }
-        else
-            return null
-    }
     // save new trip to firebase
     fun addNewTripToFirebaseFirestore(tripModel: TripModel) : Task<Void>{
         val documentReference = user?.let {

@@ -12,26 +12,13 @@ import com.iamdsr.travel.repositories.FirestoreRepository
 class ItinerarySharedViewModel : ViewModel() {
 
     var firebaseRepository = FirestoreRepository()
-    private var tripID: MutableLiveData<String> = MutableLiveData()
-    private var tripModel: MutableLiveData<TripModel> = MutableLiveData()
+    private var mutableTripModel: MutableLiveData<TripModel> = MutableLiveData()
 
-    fun _getSingleTripFromFirestoreDatabase(tripId: String): LiveData<TripModel>{
-        if (firebaseRepository.getSingleTripFromFirestoreDatabase(tripId)!=null){
-            firebaseRepository.getSingleTripFromFirestoreDatabase(tripId)!!
-                .addOnFailureListener { exception -> Log.d("TAG", "get failed with ", exception) }
-                .addOnSuccessListener { documentSnapshot ->
-                    if (documentSnapshot!=null){
-                        tripModel.value = documentSnapshot.toObject(TripModel::class.java)
-                    }
-                }
-        }
-        return tripModel
-    }
 
-    fun setText(input: String){
-        tripID.value = input
+    fun setModel(model: TripModel){
+        mutableTripModel.value = model
     }
-    fun getText() : LiveData<String>{
-        return tripID
+    fun getModel() : LiveData<TripModel>{
+        return mutableTripModel
     }
 }

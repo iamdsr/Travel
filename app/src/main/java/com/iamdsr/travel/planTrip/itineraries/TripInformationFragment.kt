@@ -20,8 +20,6 @@ import com.iamdsr.travel.viewModels.ItinerarySharedViewModel
 class TripInformationFragment : Fragment() {
 
     // Utils
-    private var tripID: String=""
-    private var model = TripModel()
 
     // Widgets
     private lateinit var mTitle: TextView
@@ -47,24 +45,18 @@ class TripInformationFragment : Fragment() {
         setupWidgets()
         mProgress.visibility = View.VISIBLE
         val itinerarySharedViewModel = ViewModelProvider(requireActivity())[ItinerarySharedViewModel::class.java]
-        itinerarySharedViewModel.getText().observe(requireActivity(), Observer {
-            tripID = it
-        })
-        itinerarySharedViewModel._getSingleTripFromFirestoreDatabase(tripID).observe(requireActivity(), Observer {
-            model = it
-            if (model!=null){
-                mTitle.text = model.trip_title
-                mDesc.text = model.trip_desc
-                mDuration.text = model.duration_in_days.toString()
-                mStartDate.text = model.journey_date
-                mJourneyMode.text = model.journey_mode
-                mJourneyDate.text = model.journey_date
-                mReturnDate.text = model.return_date
-                mWhereFrom.text = model.place_from
-                mWhereTo.text = model.place_to
-                mNumberOfPerson.text = model.total_heads.toString()
-                mProgress.visibility = View.INVISIBLE
-            }
+        itinerarySharedViewModel.getModel().observe(requireActivity(), Observer {
+            mTitle.text = it.trip_title
+            mDesc.text = it.trip_desc
+            mDuration.text = it.duration_in_days.toString()
+            mStartDate.text = it.journey_date
+            mJourneyMode.text = it.journey_mode
+            mJourneyDate.text = it.journey_date
+            mReturnDate.text = it.return_date
+            mWhereFrom.text = it.place_from
+            mWhereTo.text = it.place_to
+            mNumberOfPerson.text = it.total_heads.toString()
+            mProgress.visibility = View.INVISIBLE
         })
     }
 

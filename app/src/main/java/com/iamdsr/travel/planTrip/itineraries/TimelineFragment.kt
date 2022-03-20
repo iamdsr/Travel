@@ -6,14 +6,21 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.iamdsr.travel.R
+import com.iamdsr.travel.viewModels.ItinerarySharedViewModel
 import java.time.Duration
 
 
 class TimelineFragment : Fragment() {
+
+    // Widgets
+    private lateinit var mTitle: TextView
 
     private lateinit var addNewItinerary: ExtendedFloatingActionButton
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -26,6 +33,10 @@ class TimelineFragment : Fragment() {
         setupWidgets()
         addNewItinerary.setOnClickListener(View.OnClickListener {
             setupDialog()
+        })
+        val itinerarySharedViewModel = ViewModelProvider(requireActivity())[ItinerarySharedViewModel::class.java]
+        itinerarySharedViewModel.getModel().observe(requireActivity(), Observer {
+            mTitle.text = it.trip_title
         })
     }
 
@@ -49,6 +60,7 @@ class TimelineFragment : Fragment() {
 
         if (view != null){
             addNewItinerary = view!!.findViewById(R.id.add_new_itinerary)
+            mTitle =  view!!.findViewById(R.id.trip_title)
         }
     }
 }

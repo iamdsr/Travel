@@ -13,7 +13,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import com.google.firebase.auth.FirebaseAuth
 import com.iamdsr.travel.R
+import com.iamdsr.travel.models.TripModel
 import com.iamdsr.travel.viewModels.ItinerarySharedViewModel
 
 class MyItinerariesFragment : Fragment() {
@@ -56,7 +58,7 @@ class MyItinerariesFragment : Fragment() {
                     }
                     else{
                         //clearViews()
-                        findNavController().navigate(R.id.action_myItinerariesFragment_to_planTripFragment)
+                        findNavController().navigateUp()
                     }
                 }
             }
@@ -64,7 +66,21 @@ class MyItinerariesFragment : Fragment() {
         setupWidgets()
         setUpViewPager()
         val itinerarySharedViewModel = ViewModelProvider(requireActivity())[ItinerarySharedViewModel::class.java]
-        itinerarySharedViewModel.setText(tripIDBundle)
+        val tripModel = TripModel(
+            tripIDBundle,
+            titleBundle,
+            descBundle,
+            jDateBundle,
+            rDateBundle,
+            fromBundle,
+            toBundle,
+            FirebaseAuth.getInstance().currentUser!!.uid,
+            "",
+            "",
+            0,
+            totalHeadsBundle
+        )
+        itinerarySharedViewModel.setModel(tripModel)
     }
 
     private fun clearViews() {
