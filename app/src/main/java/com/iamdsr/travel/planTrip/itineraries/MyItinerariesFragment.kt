@@ -83,10 +83,6 @@ class MyItinerariesFragment : Fragment() {
         itinerarySharedViewModel.setModel(tripModel)
     }
 
-    private fun clearViews() {
-        itineraryViewPager.adapter
-    }
-
 
     private fun setUpViewPager(){
         val itineraryViewPagerAdapter = ItineraryViewPagerAdapter(requireActivity().supportFragmentManager,requireActivity().lifecycle)

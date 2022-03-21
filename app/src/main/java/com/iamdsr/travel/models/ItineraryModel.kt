@@ -22,10 +22,7 @@ data class ItineraryModel (
         "","","","","","","","", 0)
 
     override fun toString(): String {
-        return "ItineraryModel(itinerary_id='$itinerary_id', title='$title', description='$description'" +
-                ", start_date='$date', start_time='$time', day=$day, type='$type', journey_mode='$journey_mode'" +
-                ", from='$from', to='$to', hotel_name='$hotel_name', hotel_address='$hotel_address', timestamp='$timestamp', trip_id='$trip_id'" +
-                ", trip_title='$trip_title', user_id='$user_id', position=$position)"
+        return "ItineraryModel(itinerary_id='$itinerary_id', title='$title', description='$description', date='$date', time='$time', day=$day, type='$type', journey_mode='$journey_mode', from='$from', to='$to', hotel_name='$hotel_name', hotel_address='$hotel_address', timestamp='$timestamp', trip_id='$trip_id', trip_title='$trip_title', user_id='$user_id', position=$position)"
     }
 
 

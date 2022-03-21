@@ -77,8 +77,7 @@ class AddTripFragment : Fragment() {
             val rDate = mReturnDate!!.text.toString().trim { it <= ' ' }
             val totalPerson = mNumberOfPerson!!.text.toString().trim { it <= ' ' }
             val journeyMode = mJourneyMode!!.text.toString().trim { it <= ' ' }
-            val planTripFragmentViewModel =
-                ViewModelProvider(this)[PlanTripFragmentViewModel::class.java]
+            val planTripFragmentViewModel = ViewModelProvider(this)[PlanTripFragmentViewModel::class.java]
             if (!TextUtils.isEmpty(title) && !TextUtils.isEmpty(desc) && !TextUtils.isEmpty(from)
                 && !TextUtils.isEmpty(to) && !TextUtils.isEmpty(jDate) && !TextUtils.isEmpty(rDate) && !TextUtils.isEmpty(totalPerson) && !TextUtils.isEmpty(journeyMode)) {
 

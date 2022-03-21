@@ -4,6 +4,9 @@ import android.content.ContentValues
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.android.gms.tasks.Task
+import com.google.firebase.firestore.CollectionReference
+import com.google.firebase.firestore.QuerySnapshot
 import com.iamdsr.travel.models.ItineraryModel
 import com.iamdsr.travel.models.TripModel
 import com.iamdsr.travel.repositories.FirestoreRepository

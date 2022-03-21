@@ -3,17 +3,25 @@ package com.iamdsr.travel.planTrip.itineraries.itineraryTypes
 import android.app.DatePickerDialog
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
+import com.google.firebase.auth.FirebaseAuth
 import com.iamdsr.travel.R
 import com.iamdsr.travel.models.ItineraryModel
+import com.iamdsr.travel.repositories.FirestoreRepository
+import com.iamdsr.travel.viewModels.ItinerarySharedViewModel
+import com.iamdsr.travel.viewModels.ItineraryTimelineViewModel
+import com.iamdsr.travel.viewModels.PlanTripFragmentViewModel
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -30,6 +38,9 @@ class AddHotelCheckInFragment : Fragment() {
 
     // Utils
     private val myCalendar: Calendar? = Calendar.getInstance()
+    private var tripID: String=""
+    private var tripTitle: String=""
+    private var firbaseRepository = FirestoreRepository()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_add_hotel_check_in, container, false)
@@ -39,39 +50,50 @@ class AddHotelCheckInFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupWidgets()
         setUpDateDialogs()
+        val itinerarySharedViewModel = ViewModelProvider(requireActivity())[ItinerarySharedViewModel::class.java]
+        itinerarySharedViewModel.getModel().observe(requireActivity(), Observer{
+            tripID = it.trip_id
+            tripTitle = it.trip_title
+        })
         mChekInTime.setOnClickListener(View.OnClickListener {
             setUpTimeDialogs()
         })
         mAddItineraryButton.setOnClickListener(View.OnClickListener {
-            val title: String = mTitle.text.toString().trim()
-            val desc: String = mTitle.text.toString().trim()
-            val checkInDate: String = mTitle.text.toString().trim()
-            val checkInTime: String = mTitle.text.toString().trim()
-            val hotelName: String = mTitle.text.toString().trim()
-            val hotelAddress: String = mTitle.text.toString().trim()
-            if (TextUtils.isEmpty(title) || TextUtils.isEmpty(desc) || TextUtils.isEmpty(checkInDate) || TextUtils.isEmpty(checkInTime) ||
-                TextUtils.isEmpty(hotelName) || TextUtils.isEmpty(hotelAddress)) {
-                val itineraryModel = ItineraryModel(
-                    "",
-                    title,
-                    desc,
-                    checkInDate,
-                    checkInTime,
-                    0,
-                    "HOTEL_CHECK_IN",
-                    "",
-                    "",
-                    "",
-                    hotelName,
-                    hotelAddress,
-                    getTimestamp(),
-                    "",
-                    "",
-                    "",
-                    0,
-                )
-            }
+            addNewItinerary()
         })
+    }
+    private fun addNewItinerary(){
+        val title: String = mTitle.text.toString().trim()
+        val desc: String = mDesc.text.toString().trim()
+        val checkInDate: String = mChekInDate.text.toString().trim()
+        val checkInTime: String = mChekInTime.text.toString().trim()
+        val hotelName: String = mHotelName.text.toString().trim()
+        val hotelAddress: String = mHotelLocation.text.toString().trim()
+        if (!TextUtils.isEmpty(title) && !TextUtils.isEmpty(desc) && !TextUtils.isEmpty(checkInDate) && !TextUtils.isEmpty(checkInTime) &&
+            !TextUtils.isEmpty(hotelName) && !TextUtils.isEmpty(hotelAddress)) {
+            val itineraryModel = ItineraryModel(
+                firbaseRepository.getNewItineraryID(tripID),
+                title,
+                desc,
+                checkInDate,
+                checkInTime,
+                0,
+                "HOTEL_CHECK_IN",
+                "",
+                "",
+                "",
+                hotelName,
+                hotelAddress,
+                getTimestamp(),
+                tripID,
+                tripTitle,
+                FirebaseAuth.getInstance().currentUser!!.uid,
+                0,
+            )
+            //Log.d("TAG", "addNewItinerary: Itinerary Model : $itineraryModel")
+            val itineraryTimelineViewModel = ViewModelProvider(this)[ItineraryTimelineViewModel::class.java]
+            //itineraryTimelineViewModel._addNewItineraryToFirebaseFirestore(itineraryModel)
+        }
     }
     private fun setUpTimeDialogs(){
         val materialTimePicker: MaterialTimePicker = MaterialTimePicker.Builder()
