@@ -11,38 +11,36 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import com.google.firebase.auth.FirebaseAuth
+import com.iamdsr.travel.utils.MySharedPreferences
 import com.iamdsr.travel.R
 import com.iamdsr.travel.models.ItineraryModel
 import com.iamdsr.travel.repositories.FirestoreRepository
-import com.iamdsr.travel.viewModels.ItinerarySharedViewModel
 import com.iamdsr.travel.viewModels.ItineraryTimelineViewModel
-import com.iamdsr.travel.viewModels.PlanTripFragmentViewModel
 import java.text.SimpleDateFormat
 import java.util.*
 
 class AddHotelCheckInFragment : Fragment() {
 
     // Widgets
-    lateinit var mTitle: TextInputEditText
-    lateinit var mDesc: TextInputEditText
-    lateinit var mChekInDate: TextInputEditText
-    lateinit var mChekInTime: TextInputEditText
-    lateinit var mHotelName: TextInputEditText
-    lateinit var mHotelLocation: TextInputEditText
+    private lateinit var mTitle: TextInputEditText
+    private lateinit var mDesc: TextInputEditText
+    private lateinit var mChekInDate: TextInputEditText
+    private lateinit var mChekInTime: TextInputEditText
+    private lateinit var mHotelName: TextInputEditText
+    private lateinit var mHotelLocation: TextInputEditText
     private lateinit var mAddItineraryButton: Button
 
     // Utils
     private val myCalendar: Calendar? = Calendar.getInstance()
     private var tripID: String=""
     private var tripTitle: String=""
-    private var firbaseRepository = FirestoreRepository()
+    private var firebaseRepository = FirestoreRepository()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_add_hotel_check_in, container, false)
@@ -52,11 +50,9 @@ class AddHotelCheckInFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupWidgets()
         setUpDateDialogs()
-        val itinerarySharedViewModel = ViewModelProvider(requireActivity())[ItinerarySharedViewModel::class.java]
-        itinerarySharedViewModel.getModel().observe(requireActivity(), Observer{
-            tripID = it.trip_id
-            tripTitle = it.trip_title
-        })
+        val mySharedPreferences = MySharedPreferences(context!!)
+        tripID = mySharedPreferences.getTripModel().trip_id
+        tripTitle = mySharedPreferences.getTripModel().trip_title
         mChekInTime.setOnClickListener(View.OnClickListener {
             setUpTimeDialogs()
         })
@@ -74,7 +70,7 @@ class AddHotelCheckInFragment : Fragment() {
         if (!TextUtils.isEmpty(title) && !TextUtils.isEmpty(desc) && !TextUtils.isEmpty(checkInDate) && !TextUtils.isEmpty(checkInTime) &&
             !TextUtils.isEmpty(hotelName) && !TextUtils.isEmpty(hotelAddress)) {
             val itineraryModel = ItineraryModel(
-                firbaseRepository.getNewItineraryID(tripID),
+                firebaseRepository.getNewItineraryID(tripID),
                 title,
                 desc,
                 checkInDate,

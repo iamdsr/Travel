@@ -1,22 +1,19 @@
 package com.iamdsr.travel.planTrip.itineraries
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.auth.FirebaseAuth
+import com.iamdsr.travel.utils.MySharedPreferences
 import com.iamdsr.travel.R
 import com.iamdsr.travel.models.TripModel
-import com.iamdsr.travel.viewModels.ItinerarySharedViewModel
 
 class MyItinerariesFragment : Fragment() {
 
@@ -32,7 +29,9 @@ class MyItinerariesFragment : Fragment() {
     private var fromBundle: String = ""
     private var toBundle: String = ""
     private var totalHeadsBundle: Long = -1
+    private var totalDurationBundle: Long = -1
     private var tripIDBundle: String = ""
+    private var journeyModeBundle: String = ""
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -50,14 +49,16 @@ class MyItinerariesFragment : Fragment() {
             fromBundle = arguments!!.getString("PLACE_FROM","")
             toBundle = arguments!!.getString("PLACE_TO","")
             totalHeadsBundle = arguments!!.getLong("TOTAL_PAX",-1)
+            totalDurationBundle = arguments!!.getLong("DURATION",-1)
+            journeyModeBundle = arguments!!.getString("JOURNEY_MODE","")
         }
+
         val callback: OnBackPressedCallback = object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
                     if (itineraryViewPager.currentItem == 1){
                         itineraryViewPager.currentItem = 0
                     }
                     else{
-                        //clearViews()
                         findNavController().navigateUp()
                     }
                 }
@@ -65,7 +66,7 @@ class MyItinerariesFragment : Fragment() {
         requireActivity().onBackPressedDispatcher.addCallback(this, callback)
         setupWidgets()
         setUpViewPager()
-        val itinerarySharedViewModel = ViewModelProvider(requireActivity())[ItinerarySharedViewModel::class.java]
+        val mySharedPreferences = MySharedPreferences(context!!)
         val tripModel = TripModel(
             tripIDBundle,
             titleBundle,
@@ -76,11 +77,11 @@ class MyItinerariesFragment : Fragment() {
             toBundle,
             FirebaseAuth.getInstance().currentUser!!.uid,
             "",
-            "",
-            0,
+            journeyModeBundle,
+            totalDurationBundle,
             totalHeadsBundle
         )
-        itinerarySharedViewModel.setModel(tripModel)
+        mySharedPreferences.setTripModel(tripModel)
     }
 
 

@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.iamdsr.travel.AppConstants
+import com.iamdsr.travel.utils.AppConstants
 import com.iamdsr.travel.R
 import com.iamdsr.travel.models.ItineraryModel
 
@@ -36,26 +36,17 @@ class ItineraryRecyclerAdapter: ListAdapter<ItineraryModel, RecyclerView.ViewHol
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private fun bindFirstHotelItem(item: ItineraryModel, context: Context) {
-            val mTitle: TextView = itemView.findViewById(R.id.action_title)
-            val mDesc: TextView = itemView.findViewById(R.id.action_desc)
-            Log.d("TAG", "bindFirstHotelItem -------------------------------: ")
-            mTitle.text = item.title
-            mDesc.text = item.description
-        }
         private fun bindHotelItem(item: ItineraryModel, context: Context) {
             val mTitle: TextView = itemView.findViewById(R.id.action_title)
             val mDesc: TextView = itemView.findViewById(R.id.action_desc)
-            Log.d("TAG", "bindHotelItem -------------------------------: ")
+            val mHotelDetails: TextView = itemView.findViewById(R.id.hotel_details)
+            val mDayDate: TextView = itemView.findViewById(R.id.day_and_date)
+            val mCheckIn: TextView = itemView.findViewById(R.id.check_in_time)
             mTitle.text = item.title
             mDesc.text = item.description
-        }
-        private fun bindLastHotelItem(item: ItineraryModel, context: Context) {
-            val mTitle: TextView = itemView.findViewById(R.id.action_title)
-            val mDesc: TextView = itemView.findViewById(R.id.action_desc)
-            Log.d("TAG", "bindLastHotelItem -------------------------------: ")
-            mTitle.text = item.title
-            mDesc.text = item.description
+            mDayDate.text = context.getString(R.string.day_date, (absoluteAdapterPosition+1), item.date)
+            mHotelDetails.text = context.getString(R.string.hotel_details, item.hotel_name, item.hotel_address)
+            mCheckIn.text = context.getString(R.string.check_in_details, item.time)
         }
         private fun bindJourney(item: ItineraryModel, context: Context) {
 
@@ -64,47 +55,28 @@ class ItineraryRecyclerAdapter: ListAdapter<ItineraryModel, RecyclerView.ViewHol
 
         }
         fun bindView(dataModel: ItineraryModel, context: Context) {
-            //Log.d("TAG", "bindView: absoluteAdapterPosition $absoluteAdapterPosition")
             when (dataModel.type) {
-                dataModel.type -> {
-//                    if (absoluteAdapterPosition == 0){
-//                        bindFirstHotelItem(dataModel, context)
-//                        Log.d("TAG", "bindView: absoluteAdapterPosition $absoluteAdapterPosition")
-//                    }
-//                    else if (absoluteAdapterPosition > 0 && absoluteAdapterPosition < 2) {
-//                        bindHotelItem(dataModel, context)
-//                        Log.d("TAG", "bindView: absoluteAdapterPosition $absoluteAdapterPosition")
-//                    }
-//                    else if (absoluteAdapterPosition == 2){
-//                        bindLastHotelItem(dataModel, context )
-//                        Log.d("TAG", "bindView: absoluteAdapterPosition $absoluteAdapterPosition")
-//                    }
-                }
+                dataModel.type -> bindHotelItem(dataModel, context)
                 dataModel.type -> bindJourney(dataModel, context)
                 dataModel.type -> bindSightseeing(dataModel, context)
             }
         }
     }
 
+    override fun getItemCount(): Int {
+        return super.getItemCount()
+    }
+
     override fun getItemViewType(position: Int): Int {
         val itineraryModel: ItineraryModel = getItem(position)
         if (itineraryModel.type == "HOTEL_CHECK_IN"){
             if (position == (itemCount-1)){
-                Log.d("TAG", "getItemViewType: Item count $itemCount")
-                Log.d("TAG", "getItemViewType: position $position")
-                Log.d("TAG", "getItemViewType: itineraryModel title ${itineraryModel.title}")
                 return AppConstants.HOTEL_CHECK_IN_FIRST_ITEM
             }
             if (position == 0){
-                Log.d("TAG", "getItemViewType: Item count $itemCount")
-                Log.d("TAG", "getItemViewType: position $position")
-                Log.d("TAG", "getItemViewType: itineraryModel title ${itineraryModel.title}")
                 return AppConstants.HOTEL_CHECK_IN_LAST_ITEM
             }
             if (position < (itemCount-1)){
-                Log.d("TAG", "getItemViewType: Item count $itemCount")
-                Log.d("TAG", "getItemViewType: position $position")
-                Log.d("TAG", "getItemViewType: itineraryModel title ${itineraryModel.title}")
                 return AppConstants.HOTEL_CHECK_IN_ITEM
             }
         }

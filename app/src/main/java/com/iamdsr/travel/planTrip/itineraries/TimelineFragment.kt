@@ -2,13 +2,11 @@ package com.iamdsr.travel.planTrip.itineraries
 
 import android.app.AlertDialog
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -17,13 +15,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.iamdsr.travel.R
 import com.iamdsr.travel.customRecyclerViewAdapters.ItineraryRecyclerAdapter
-import com.iamdsr.travel.customRecyclerViewAdapters.PlannedTripRecyclerAdapter
 import com.iamdsr.travel.models.ItineraryModel
-import com.iamdsr.travel.models.TripModel
-import com.iamdsr.travel.viewModels.ItinerarySharedViewModel
+import com.iamdsr.travel.utils.MySharedPreferences
 import com.iamdsr.travel.viewModels.ItineraryTimelineViewModel
-import com.iamdsr.travel.viewModels.PlanTripFragmentViewModel
-import java.time.Duration
+import java.util.*
 
 
 class TimelineFragment : Fragment() {
@@ -33,7 +28,7 @@ class TimelineFragment : Fragment() {
     private var mItineraryRecyclerView: RecyclerView? = null
 
     // Utils
-    private var tripID: String = ""
+    private lateinit var tripID: String
     private lateinit var tripTitle: String
     private lateinit var itineraryList: List<ItineraryModel>
     private lateinit var itineraryRecyclerAdapter: ItineraryRecyclerAdapter
@@ -47,19 +42,17 @@ class TimelineFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupWidgets()
+        val mySharedPreferences = MySharedPreferences(context!!)
+        tripID = mySharedPreferences.getTripModel().trip_id
+        tripTitle = mySharedPreferences.getTripModel().trip_title
         initRecyclerView()
         addNewItinerary.setOnClickListener(View.OnClickListener {
             setupDialog()
         })
-        val itinerarySharedViewModel = ViewModelProvider(requireActivity())[ItinerarySharedViewModel::class.java]
-        itinerarySharedViewModel.getModel().observe(requireActivity(), Observer {
-            tripTitle = it.trip_title
-            mTitle.text = tripTitle
-            tripID = it.trip_id
-        })
         val itineraryTimelineViewModel = ViewModelProvider(requireActivity())[ItineraryTimelineViewModel::class.java]
-        itineraryTimelineViewModel._getAllSavedItinerariesFromFirebaseFirestore(tripID)?.observe(this, Observer { it->
+        itineraryTimelineViewModel._getAllSavedItinerariesFromFirebaseFirestore(tripID).observe(this, Observer {
             itineraryList = it
+            Collections.reverse(itineraryList)
             itineraryRecyclerAdapter.submitList(itineraryList)
         })
     }
@@ -81,8 +74,12 @@ class TimelineFragment : Fragment() {
     }
 
     private fun initRecyclerView() {
-        mItineraryRecyclerView?.layoutManager = LinearLayoutManager(context)
+        val linearLayoutManager = LinearLayoutManager(context)
+        //linearLayoutManager.reverseLayout = true;
+        //linearLayoutManager.stackFromEnd = true;
+        mItineraryRecyclerView?.layoutManager = linearLayoutManager
         mItineraryRecyclerView?.setHasFixedSize(true)
+
         itineraryRecyclerAdapter = ItineraryRecyclerAdapter()
         mItineraryRecyclerView?.adapter = itineraryRecyclerAdapter
     }

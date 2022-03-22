@@ -33,7 +33,6 @@
     <string name="profile">Profile</string>
     <string name="action_calculate">Calculate</string>
     <string name="action_menu">Menu</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="error_text_empty_fields">Please provide all necessary details.</string>
     <string name="auth_failed">Authentication failed. Please try again after sometime</string>
@@ -69,4 +68,7 @@
     <string name="date">Date</string>
     <string name="time">Time</string>
     <string name="place_name">Place name</string>
+    <string name="day_date">Day %d\n\n %s</string>
+    <string name="hotel_details">%s, \n%s</string>
+    <string name="check_in_details">Check-In at %s</string>
 </resources>

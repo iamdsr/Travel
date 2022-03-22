@@ -1,25 +1,21 @@
 package com.iamdsr.travel.planTrip.itineraries
 
-import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.TextView
-import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
+import com.iamdsr.travel.utils.MySharedPreferences
 import com.iamdsr.travel.R
 import com.iamdsr.travel.models.TripModel
-import com.iamdsr.travel.viewModels.ItinerarySharedViewModel
 
 
 class TripInformationFragment : Fragment() {
 
     // Utils
+    private var tripModel = TripModel()
 
     // Widgets
     private lateinit var mTitle: TextView
@@ -44,20 +40,28 @@ class TripInformationFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupWidgets()
         mProgress.visibility = View.VISIBLE
-        val itinerarySharedViewModel = ViewModelProvider(requireActivity())[ItinerarySharedViewModel::class.java]
-        itinerarySharedViewModel.getModel().observe(requireActivity(), Observer {
-            mTitle.text = it.trip_title
-            mDesc.text = it.trip_desc
-            mDuration.text = it.duration_in_days.toString()
-            mStartDate.text = it.journey_date
-            mJourneyMode.text = it.journey_mode
-            mJourneyDate.text = it.journey_date
-            mReturnDate.text = it.return_date
-            mWhereFrom.text = it.place_from
-            mWhereTo.text = it.place_to
-            mNumberOfPerson.text = it.total_heads.toString()
-            mProgress.visibility = View.INVISIBLE
-        })
+        val mySharedPreferences = MySharedPreferences(context!!)
+        tripModel = mySharedPreferences.getTripModel()
+        setValueToTextViews()
+    }
+
+    private fun setValueToTextViews() {
+        mTitle.text = tripModel.trip_title
+        mDesc.text = tripModel.trip_desc
+        mDuration.text = tripModel.duration_in_days.toString()
+        mStartDate.text = tripModel.journey_date
+        mJourneyMode.text = tripModel.journey_mode
+        when (tripModel.journey_mode){
+            "Car" -> mJourneyMode.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_car_journey, 0, 0, 0)
+            "Train" -> mJourneyMode.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_train_journey, 0, 0, 0)
+            "Flight" -> mJourneyMode.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_flight_journey, 0, 0, 0)
+        }
+        mJourneyDate.text = tripModel.journey_date
+        mReturnDate.text = tripModel.return_date
+        mWhereFrom.text = tripModel.place_from
+        mWhereTo.text = tripModel.place_to
+        mNumberOfPerson.text = tripModel.total_heads.toString()
+        mProgress.visibility = View.INVISIBLE
     }
 
     private fun setupWidgets() {

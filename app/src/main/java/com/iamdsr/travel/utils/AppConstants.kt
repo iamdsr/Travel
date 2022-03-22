@@ -1,4 +1,4 @@
-package com.iamdsr.travel
+package com.iamdsr.travel.utils
 
 class AppConstants {
     companion object {
@@ -17,5 +17,7 @@ class AppConstants {
         const val SIGHT_SEEING_FIRST_ITEM: Int= 13
         const val SIGHT_SEEING_ITEM: Int= 14
         const val SIGHT_SEEING_LAST_ITEM: Int= 15
+
+        const val TRIP_ID_SHARED_PREFERENCE_NAME: String = "TRIP_ID_SHARED_PREFERENCE_NAME"
     }
 }
