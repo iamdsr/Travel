@@ -77,7 +77,6 @@ class AddHotelCheckInFragment : Fragment() {
                 desc,
                 checkInDate,
                 checkInTime,
-                0,
                 "HOTEL_CHECK_IN",
                 "",
                 "",
@@ -88,7 +87,7 @@ class AddHotelCheckInFragment : Fragment() {
                 tripID,
                 tripTitle,
                 FirebaseAuth.getInstance().currentUser!!.uid,
-                0,
+                false,
             )
             //Log.d("TAG", "addNewItinerary: Itinerary Model : $itineraryModel")
             val itineraryTimelineViewModel = ViewModelProvider(this)[ItineraryTimelineViewModel::class.java]

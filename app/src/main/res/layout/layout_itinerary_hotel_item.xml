@@ -7,13 +7,13 @@
 
     <TextView
         android:id="@+id/day_and_date"
-        android:layout_width="128dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:background="@drawable/right_round_corner_gray_bg"
         android:fontFamily="@font/roboto_bold"
         android:gravity="center"
-        android:padding="16dp"
-        android:text="Day 01,\n 14th DECEMBER"
+        android:padding="20dp"
+        android:text="Day 01\n\n 14th Dec"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -58,12 +58,25 @@
             app:layout_constraintTop_toBottomOf="@+id/view2" />
 
         <ImageView
-            android:id="@+id/image"
+            android:id="@+id/checked"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
+            android:visibility="invisible"
             android:src="@drawable/ic_radio_filled"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/view4"
+            app:layout_constraintTop_toBottomOf="@+id/view3" />
+        <ImageView
+            android:id="@+id/not_checked"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:src="@drawable/ic_radio_outlined"
+            android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toTopOf="@id/view4"
@@ -137,7 +150,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
-                    android:id="@+id/action_type"
+                    android:id="@+id/action_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_bold"
@@ -153,20 +166,20 @@
                     android:text="This is a small description of the action" />
 
                 <TextView
-                    android:id="@+id/hotel_name"
+                    android:id="@+id/hotel_details"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_bold"
+                    android:fontFamily="@font/roboto_regular"
                     android:padding="4dp"
-                    android:text="Five Star Hotel" />
+                    android:text="Five Star Hotel, \nAkshya Nagar 1st Block 1st Cross, Rammurthy nagar, Bangalore-560016" />
 
                 <TextView
-                    android:id="@+id/location"
+                    android:id="@+id/check_in_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_bold"
+                    android:fontFamily="@font/roboto_regular"
                     android:padding="4dp"
-                    android:text="Rammurthy nagar, Bangalore-560016" />
+                    android:text="03:16 PM" />
 
 
             </LinearLayout>

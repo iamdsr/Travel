@@ -58,12 +58,25 @@
             app:layout_constraintTop_toBottomOf="@+id/view2" />
 
         <ImageView
-            android:id="@+id/image"
+            android:id="@+id/checked"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
+            android:visibility="invisible"
             android:src="@drawable/ic_radio_filled"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/view4"
+            app:layout_constraintTop_toBottomOf="@+id/view3" />
+        <ImageView
+            android:id="@+id/not_checked"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:visibility="visible"
+            android:src="@drawable/ic_radio_outlined"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toTopOf="@id/view4"
@@ -137,7 +150,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
-                    android:id="@+id/action_type"
+                    android:id="@+id/action_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_bold"
