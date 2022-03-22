@@ -17,6 +17,7 @@ class PlannedTripRecyclerAdapter(val itemClickListener: RecyclerViewActionsInter
 
     var context: Context?= null
 
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TripsViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         context = parent.context

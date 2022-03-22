@@ -62,16 +62,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <View
-            android:id="@+id/bottom_half"
-            android:layout_width="2dp"
-            android:layout_height="0dp"
-            android:background="@drawable/vertical_dotted_line"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/checked" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.card.MaterialCardView
@@ -96,7 +86,7 @@
                 android:layout_height="48dp"
                 android:layout_margin="8dp"
                 android:adjustViewBounds="true"
-                android:src="@drawable/ic_sight_seeing"
+                android:src="@drawable/ic_car_journey"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -127,20 +117,20 @@
                     android:text="@string/lorem_paragraph" />
 
                 <TextView
-                    android:id="@+id/sight_details"
+                    android:id="@+id/from_to"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_medium_italic"
                     android:padding="4dp"
-                    android:text="Rock garden, Akshya Nagar 1st Block 1st Cross, Rammurthy nagar, Bangalore-560016" />
+                    android:text="From: Kolkata\nTo: Durgapur" />
 
                 <TextView
-                    android:id="@+id/visit_time"
+                    android:id="@+id/start_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_regular"
                     android:padding="4dp"
-                    android:text="Visit at 08:00 AM" />
+                    android:text="Start at 08:00 AM" />
 
 
             </LinearLayout>

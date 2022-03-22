@@ -10,8 +10,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
@@ -83,15 +85,19 @@ class AddHotelCheckInFragment : Fragment() {
                 "",
                 hotelName,
                 hotelAddress,
+                "",
+                "",
                 getTimestamp(),
                 tripID,
                 tripTitle,
                 FirebaseAuth.getInstance().currentUser!!.uid,
                 false,
             )
-            //Log.d("TAG", "addNewItinerary: Itinerary Model : $itineraryModel")
+            Log.d("TAG", "addNewItinerary: Itinerary Model : $itineraryModel")
             val itineraryTimelineViewModel = ViewModelProvider(this)[ItineraryTimelineViewModel::class.java]
-            //itineraryTimelineViewModel._addNewItineraryToFirebaseFirestore(itineraryModel)
+            itineraryTimelineViewModel._addNewItineraryToFirebaseFirestore(itineraryModel)
+            Toast.makeText(context,"Itinerary added successfully", Toast.LENGTH_SHORT).show()
+            findNavController().navigateUp()
         }
     }
     private fun setUpTimeDialogs(){

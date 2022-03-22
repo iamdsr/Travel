@@ -50,12 +50,22 @@
         <entry key="..\:/Users/DIPAYAN/AndroidStudioProjects/Travel/app/src/main/res/layout/fragment_timeline.xml" value="0.29473684210526313" />
         <entry key="..\:/Users/DIPAYAN/AndroidStudioProjects/Travel/app/src/main/res/layout/fragment_trip_information.xml" value="0.29473684210526313" />
         <entry key="..\:/Users/DIPAYAN/AndroidStudioProjects/Travel/app/src/main/res/layout/fragment_update_trip.xml" value="0.29473684210526313" />
+        <entry key="..\:/Users/DIPAYAN/AndroidStudioProjects/Travel/app/src/main/res/layout/layout_itinerary_car_journey_first_item.xml" value="0.29473684210526313" />
         <entry key="..\:/Users/DIPAYAN/AndroidStudioProjects/Travel/app/src/main/res/layout/layout_itinerary_car_journey_item.xml" value="0.29473684210526313" />
-        <entry key="..\:/Users/DIPAYAN/AndroidStudioProjects/Travel/app/src/main/res/layout/layout_itinerary_hotel_item.xml" value="0.29473684210526313" />
+        <entry key="..\:/Users/DIPAYAN/AndroidStudioProjects/Travel/app/src/main/res/layout/layout_itinerary_car_journey_last_item.xml" value="0.29473684210526313" />
+        <entry key="..\:/Users/DIPAYAN/AndroidStudioProjects/Travel/app/src/main/res/layout/layout_itinerary_hotel_first_item.xml" value="0.29473684210526313" />
+        <entry key="..\:/Users/DIPAYAN/AndroidStudioProjects/Travel/app/src/main/res/layout/layout_itinerary_hotel_item.xml" value="0.33" />
+        <entry key="..\:/Users/DIPAYAN/AndroidStudioProjects/Travel/app/src/main/res/layout/layout_itinerary_hotel_last_item.xml" value="0.29473684210526313" />
         <entry key="..\:/Users/DIPAYAN/AndroidStudioProjects/Travel/app/src/main/res/layout/layout_itinerary_item.xml" value="0.29473684210526313" />
+        <entry key="..\:/Users/DIPAYAN/AndroidStudioProjects/Travel/app/src/main/res/layout/layout_itinerary_plane_journey_first_item.xml" value="0.29473684210526313" />
         <entry key="..\:/Users/DIPAYAN/AndroidStudioProjects/Travel/app/src/main/res/layout/layout_itinerary_plane_journey_item.xml" value="0.29473684210526313" />
+        <entry key="..\:/Users/DIPAYAN/AndroidStudioProjects/Travel/app/src/main/res/layout/layout_itinerary_plane_journey_last_item.xml" value="0.29473684210526313" />
+        <entry key="..\:/Users/DIPAYAN/AndroidStudioProjects/Travel/app/src/main/res/layout/layout_itinerary_sight_seeing_first_item.xml" value="0.2942982456140351" />
         <entry key="..\:/Users/DIPAYAN/AndroidStudioProjects/Travel/app/src/main/res/layout/layout_itinerary_sight_seeing_item.xml" value="0.29473684210526313" />
+        <entry key="..\:/Users/DIPAYAN/AndroidStudioProjects/Travel/app/src/main/res/layout/layout_itinerary_sight_seeing_last_item.xml" value="0.29473684210526313" />
+        <entry key="..\:/Users/DIPAYAN/AndroidStudioProjects/Travel/app/src/main/res/layout/layout_itinerary_train_journey_first_item.xml" value="0.29473684210526313" />
         <entry key="..\:/Users/DIPAYAN/AndroidStudioProjects/Travel/app/src/main/res/layout/layout_itinerary_train_journey_item.xml" value="0.29473684210526313" />
+        <entry key="..\:/Users/DIPAYAN/AndroidStudioProjects/Travel/app/src/main/res/layout/layout_itinerary_train_journey_last_item.xml" value="0.29473684210526313" />
         <entry key="..\:/Users/DIPAYAN/AndroidStudioProjects/Travel/app/src/main/res/layout/layout_trips_item.xml" value="0.33" />
         <entry key="..\:/Users/DIPAYAN/AndroidStudioProjects/Travel/app/src/main/res/menu/bottom_nav_menu.xml" value="0.1949529935675408" />
       </map>

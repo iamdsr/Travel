@@ -43,6 +43,14 @@ class FirestoreRepository {
         return documentReference!!.id
     }
 
+    fun getAllSavedItinerariesFromFirebaseFirestore(tripID: String): CollectionReference {
+        return firebaseFirestore.collection("users")
+            .document(user!!.uid)
+            .collection("trips")
+            .document(tripID)
+            .collection("itineraries")
+    }
+
 
     // TRIPS --------------------------------------------------------------------------------------------------------------------------------------------
     // save new trip to firebase

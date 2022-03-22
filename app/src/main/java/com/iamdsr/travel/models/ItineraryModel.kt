@@ -12,6 +12,8 @@ data class ItineraryModel (
     val to: String,
     val hotel_name: String,
     val hotel_address: String,
+    val sight_name: String,
+    val sight_address: String,
     val timestamp: String,
     val trip_id: String,
     val trip_title: String,
@@ -19,12 +21,11 @@ data class ItineraryModel (
     val completed: Boolean
 ){
     constructor() : this("","","","","","","","",
-        "","","","","","","",false)
+        "","","","","","","", "", "",false)
 
     override fun toString(): String {
-        return "ItineraryModel(itinerary_id='$itinerary_id', title='$title', description='$description', date='$date', " +
-                "time='$time', type='$type', journey_mode='$journey_mode', from='$from', to='$to', hotel_name='$hotel_name', " +
-                "hotel_address='$hotel_address', timestamp='$timestamp', trip_id='$trip_id', trip_title='$trip_title', " +
-                "user_id='$user_id', completed=$completed)"
+        return "ItineraryModel(itinerary_id='$itinerary_id', title='$title', description='$description', date='$date', time='$time', type='$type', journey_mode='$journey_mode', from='$from', to='$to', hotel_name='$hotel_name', hotel_address='$hotel_address', sight_name='$sight_name', sight_address='$sight_address', timestamp='$timestamp', trip_id='$trip_id', trip_title='$trip_title', user_id='$user_id', completed=$completed)"
     }
+
+
 }
