@@ -2,6 +2,7 @@ package com.iamdsr.travel.planTrip.itineraries
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -53,7 +54,6 @@ class TimelineFragment : Fragment() {
         val itineraryTimelineViewModel = ViewModelProvider(requireActivity())[ItineraryTimelineViewModel::class.java]
         itineraryTimelineViewModel._getAllSavedItinerariesFromFirebaseFirestore(tripID).observe(this, Observer {
             itineraryList = it
-            //Collections.reverse(itineraryList)
             itineraryRecyclerAdapter.submitList(itineraryList)
         })
     }
@@ -65,9 +65,18 @@ class TimelineFragment : Fragment() {
         val animals = arrayOf("Travel to Destination", "Hotel Check-In", "Roam nearby/ Sightseeing ")
         builder.setItems(animals) { _, which ->
             when (which) {
-                0 -> { findNavController().navigate(R.id.action_myItinerariesFragment_to_journeyFragment) }
+                0 -> {
+                    val bundle = Bundle()
+                    bundle.putLong("LIST_SIZE", itineraryList.size.toLong())
+                    bundle.putLong("LAST_DAY", itineraryList[0].day)
+                    bundle.putString("LAST_DATE", itineraryList[0].date)
+                    findNavController().navigate(R.id.action_myItinerariesFragment_to_journeyFragment, bundle)
+                }
                 1 -> {
                     val bundle = Bundle()
+                    bundle.putLong("LIST_SIZE", itineraryList.size.toLong())
+                    bundle.putLong("LAST_DAY", itineraryList[0].day)
+                    bundle.putString("LAST_DATE", itineraryList[0].date)
                     bundle.putLong("LIST_SIZE", itineraryList.size.toLong())
                     findNavController().navigate(R.id.action_myItinerariesFragment_to_addHotelCheckInFragment, bundle)
                 }
@@ -80,11 +89,8 @@ class TimelineFragment : Fragment() {
 
     private fun initRecyclerView() {
         val linearLayoutManager = LinearLayoutManager(context)
-        //linearLayoutManager.reverseLayout = true;
-        //linearLayoutManager.stackFromEnd = true;
         mItineraryRecyclerView?.layoutManager = linearLayoutManager
         mItineraryRecyclerView?.setHasFixedSize(true)
-
         itineraryRecyclerAdapter = ItineraryRecyclerAdapter()
         mItineraryRecyclerView?.adapter = itineraryRecyclerAdapter
     }

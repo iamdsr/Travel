@@ -22,6 +22,15 @@ class ItineraryRecyclerAdapter: ListAdapter<ItineraryModel, RecyclerView.ViewHol
             AppConstants.HOTEL_CHECK_IN_ITEM -> R.layout.layout_itinerary_hotel_item
             AppConstants.HOTEL_CHECK_IN_FIRST_ITEM -> R.layout.layout_itinerary_hotel_first_item
             AppConstants.HOTEL_CHECK_IN_LAST_ITEM -> R.layout.layout_itinerary_hotel_last_item
+            AppConstants.CAR_JOURNEY_ITEM -> R.layout.layout_itinerary_car_journey_item
+            AppConstants.CAR_JOURNEY_FIRST_ITEM -> R.layout.layout_itinerary_car_journey_first_item
+            AppConstants.CAR_JOURNEY_LAST_ITEM -> R.layout.layout_itinerary_car_journey_last_item
+            AppConstants.FLIGHT_JOURNEY_ITEM -> R.layout.layout_itinerary_plane_journey_item
+            AppConstants.FLIGHT_JOURNEY_FIRST_ITEM -> R.layout.layout_itinerary_plane_journey_first_item
+            AppConstants.FLIGHT_JOURNEY_LAST_ITEM -> R.layout.layout_itinerary_plane_journey_last_item
+            AppConstants.TRAIN_JOURNEY_ITEM -> R.layout.layout_itinerary_train_journey_item
+            AppConstants.TRAIN_JOURNEY_FIRST_ITEM -> R.layout.layout_itinerary_train_journey_first_item
+            AppConstants.TRAIN_JOURNEY_LAST_ITEM -> R.layout.layout_itinerary_train_journey_last_item
             else -> throw IllegalArgumentException("Invalid type")
         }
         context = parent.context
@@ -36,6 +45,7 @@ class ItineraryRecyclerAdapter: ListAdapter<ItineraryModel, RecyclerView.ViewHol
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
         private fun bindHotelItem(item: ItineraryModel, context: Context) {
             val mTitle: TextView = itemView.findViewById(R.id.action_title)
             val mDesc: TextView = itemView.findViewById(R.id.action_desc)
@@ -49,16 +59,25 @@ class ItineraryRecyclerAdapter: ListAdapter<ItineraryModel, RecyclerView.ViewHol
             mCheckIn.text = context.getString(R.string.check_in_details, item.time)
         }
         private fun bindJourney(item: ItineraryModel, context: Context) {
-
+            val mTitle: TextView = itemView.findViewById(R.id.action_title)
+            val mDesc: TextView = itemView.findViewById(R.id.action_desc)
+            val mFromTo: TextView = itemView.findViewById(R.id.from_to)
+            val mDayDate: TextView = itemView.findViewById(R.id.day_and_date)
+            val mStartTime: TextView = itemView.findViewById(R.id.start_time)
+            mTitle.text = item.title
+            mDesc.text = item.description
+            mDayDate.text = context.getString(R.string.day_date, (item.day), item.date)
+            mFromTo.text = context.getString(R.string.from_to_details, item.from, item.to)
+            mStartTime.text = context.getString(R.string.start_at_details, item.time)
         }
         private fun bindSightseeing(item: ItineraryModel, context: Context) {
 
         }
         fun bindView(dataModel: ItineraryModel, context: Context) {
             when (dataModel.type) {
-                dataModel.type -> bindHotelItem(dataModel, context)
-                dataModel.type -> bindJourney(dataModel, context)
-                dataModel.type -> bindSightseeing(dataModel, context)
+                "HOTEL_CHECK_IN" -> bindHotelItem(dataModel, context)
+                "JOURNEY" -> bindJourney(dataModel, context)
+                "SIGHT_SEEING" -> bindSightseeing(dataModel, context)
             }
         }
     }
@@ -70,20 +89,73 @@ class ItineraryRecyclerAdapter: ListAdapter<ItineraryModel, RecyclerView.ViewHol
     override fun getItemViewType(position: Int): Int {
         val itineraryModel: ItineraryModel = getItem(position)
         if (itineraryModel.type == "HOTEL_CHECK_IN"){
-            if (position == 0){
-                Log.d("TAG", "getItemViewType itemCount : $itemCount")
-                Log.d("TAG", "getItemViewType position : $position")
-                return AppConstants.HOTEL_CHECK_IN_LAST_ITEM
-            }
-            if (position > 0 && position == (itemCount-1)){
-                Log.d("TAG", "getItemViewType itemCount : $itemCount")
-                Log.d("TAG", "getItemViewType position : $position")
+            if (position == 0 && itemCount == 1){
+//                Log.d("TAG", "getItemViewType position == 0 && itemCount == 1 Title : ${itineraryModel.title}")
+//                Log.d("TAG", "getItemViewType position == 0 && itemCount == 1 itemCount : $itemCount")
+//                Log.d("TAG", "getItemViewType position == 0 && itemCount == 1 position : $position")
                 return AppConstants.HOTEL_CHECK_IN_FIRST_ITEM
             }
-            if (position < (itemCount-1)){
-                Log.d("TAG", "getItemViewType itemCount : $itemCount")
-                Log.d("TAG", "getItemViewType position : $position")
+            if (position == 0 && itemCount > 1){
+//                Log.d("TAG", "getItemViewType position == 0 && itemCount > 1 Title : ${itineraryModel.title}")
+//                Log.d("TAG", "getItemViewType position == 0 && itemCount > 1 itemCount : $itemCount")
+//                Log.d("TAG", "getItemViewType position == 0 && itemCount > 1 position : $position")
+                return AppConstants.HOTEL_CHECK_IN_LAST_ITEM
+            }
+            if (position > 0 && position < (itemCount-1)){
+//                Log.d("TAG", "getItemViewType position > 0 && position < (itemCount-1) Title : ${itineraryModel.title}")
+//                Log.d("TAG", "getItemViewType position > 0 && position < (itemCount-1) itemCount : $itemCount")
+//                Log.d("TAG", "getItemViewType position > 0 && position < (itemCount-1) position : $position")
                 return AppConstants.HOTEL_CHECK_IN_ITEM
+            }
+            if (position == (itemCount-1)){
+//                Log.d("TAG", "getItemViewType position == (itemCount-1) Title : ${itineraryModel.title}")
+//                Log.d("TAG", "getItemViewType position == (itemCount-1) itemCount : $itemCount")
+//                Log.d("TAG", "getItemViewType position == (itemCount-1) position : $position")
+                return AppConstants.HOTEL_CHECK_IN_FIRST_ITEM
+            }
+        }
+        if (itineraryModel.type == "JOURNEY"){
+            if (itineraryModel.journey_mode == "Train"){
+                if (position == 0 && itemCount == 1){
+                    return AppConstants.TRAIN_JOURNEY_FIRST_ITEM
+                }
+                if (position == 0 && itemCount > 1){
+                    return AppConstants.TRAIN_JOURNEY_LAST_ITEM
+                }
+                if (position > 0 && position < (itemCount-1)){
+                    return AppConstants.TRAIN_JOURNEY_ITEM
+                }
+                if (position == (itemCount-1)){
+                    return AppConstants.TRAIN_JOURNEY_FIRST_ITEM
+                }
+            }
+            if (itineraryModel.journey_mode == "Flight"){
+                if (position == 0 && itemCount == 1){
+                    return AppConstants.FLIGHT_JOURNEY_FIRST_ITEM
+                }
+                if (position == 0 && itemCount > 1){
+                    return AppConstants.FLIGHT_JOURNEY_LAST_ITEM
+                }
+                if (position > 0 && position < (itemCount-1)){
+                    return AppConstants.FLIGHT_JOURNEY_ITEM
+                }
+                if (position == (itemCount-1)){
+                    return AppConstants.FLIGHT_JOURNEY_LAST_ITEM
+                }
+            }
+            if (itineraryModel.journey_mode == "Car"){
+                if (position == 0 && itemCount == 1){
+                    return AppConstants.CAR_JOURNEY_FIRST_ITEM
+                }
+                if (position == 0 && itemCount > 1){
+                    return AppConstants.CAR_JOURNEY_LAST_ITEM
+                }
+                if (position > 0 && position < (itemCount-1)){
+                    return AppConstants.CAR_JOURNEY_ITEM
+                }
+                if (position == (itemCount-1)){
+                    return AppConstants.CAR_JOURNEY_LAST_ITEM
+                }
             }
         }
         return -1

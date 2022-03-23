@@ -40,7 +40,9 @@ class AddHotelCheckInFragment : Fragment() {
     private val myCalendar: Calendar? = Calendar.getInstance()
     private var tripID: String=""
     private var tripTitle: String=""
+    private var lastDate: String? = null
     private var listSize: Long = -1
+    private var lastDay: Long = -1
     private var firebaseRepository = FirestoreRepository()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -53,7 +55,8 @@ class AddHotelCheckInFragment : Fragment() {
         setUpDateDialogs()
         if (arguments!=null){
             listSize = arguments!!.getLong("LIST_SIZE")
-            Log.d("TAG", "arguments: $listSize")
+            lastDay = arguments!!.getLong("LAST_DAY")
+            lastDate = arguments!!.getString("LAST_DATE")
         }
         val mySharedPreferences = MySharedPreferences(context!!)
         tripID = mySharedPreferences.getTripModel().trip_id
@@ -74,6 +77,11 @@ class AddHotelCheckInFragment : Fragment() {
         val hotelAddress: String = mHotelLocation.text.toString().trim()
         if (!TextUtils.isEmpty(title) && !TextUtils.isEmpty(desc) && !TextUtils.isEmpty(checkInDate) && !TextUtils.isEmpty(checkInTime) &&
             !TextUtils.isEmpty(hotelName) && !TextUtils.isEmpty(hotelAddress)) {
+            val day = if (lastDate == checkInDate){
+                lastDay
+            } else{
+                listSize+1
+            }
             val itineraryModel = ItineraryModel(
                 firebaseRepository.getNewItineraryID(tripID),
                 title,
@@ -93,7 +101,7 @@ class AddHotelCheckInFragment : Fragment() {
                 tripTitle,
                 FirebaseAuth.getInstance().currentUser!!.uid,
                 false,
-                listSize+1
+                day
             )
             Log.d("TAG", "addNewItinerary: Itinerary Model : $itineraryModel")
             val itineraryTimelineViewModel = ViewModelProvider(this)[ItineraryTimelineViewModel::class.java]
