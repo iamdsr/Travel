@@ -45,6 +45,7 @@ class TimelineFragment : Fragment() {
         val mySharedPreferences = MySharedPreferences(context!!)
         tripID = mySharedPreferences.getTripModel().trip_id
         tripTitle = mySharedPreferences.getTripModel().trip_title
+        mTitle.text = tripTitle
         initRecyclerView()
         addNewItinerary.setOnClickListener(View.OnClickListener {
             setupDialog()
@@ -52,7 +53,7 @@ class TimelineFragment : Fragment() {
         val itineraryTimelineViewModel = ViewModelProvider(requireActivity())[ItineraryTimelineViewModel::class.java]
         itineraryTimelineViewModel._getAllSavedItinerariesFromFirebaseFirestore(tripID).observe(this, Observer {
             itineraryList = it
-            Collections.reverse(itineraryList)
+            //Collections.reverse(itineraryList)
             itineraryRecyclerAdapter.submitList(itineraryList)
         })
     }
@@ -65,7 +66,11 @@ class TimelineFragment : Fragment() {
         builder.setItems(animals) { _, which ->
             when (which) {
                 0 -> { findNavController().navigate(R.id.action_myItinerariesFragment_to_journeyFragment) }
-                1 -> { findNavController().navigate(R.id.action_myItinerariesFragment_to_addHotelCheckInFragment) }
+                1 -> {
+                    val bundle = Bundle()
+                    bundle.putLong("LIST_SIZE", itineraryList.size.toLong())
+                    findNavController().navigate(R.id.action_myItinerariesFragment_to_addHotelCheckInFragment, bundle)
+                }
                 2 -> { findNavController().navigate(R.id.action_myItinerariesFragment_to_addSightseeingFragment) }
             }
         }

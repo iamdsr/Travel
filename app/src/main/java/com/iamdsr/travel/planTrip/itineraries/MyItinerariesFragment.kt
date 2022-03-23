@@ -100,6 +100,7 @@ class MyItinerariesFragment : Fragment() {
                 }
             }
         }.attach()
+        itineraryViewPager.offscreenPageLimit = 2
     }
 
     private fun setupWidgets() {

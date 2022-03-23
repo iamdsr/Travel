@@ -18,13 +18,14 @@ data class ItineraryModel (
     val trip_id: String,
     val trip_title: String,
     val user_id: String,
-    val completed: Boolean
+    val completed: Boolean,
+    val day: Long
 ){
     constructor() : this("","","","","","","","",
-        "","","","","","","", "", "",false)
+        "","","","","","","", "", "",false, -1)
 
     override fun toString(): String {
-        return "ItineraryModel(itinerary_id='$itinerary_id', title='$title', description='$description', date='$date', time='$time', type='$type', journey_mode='$journey_mode', from='$from', to='$to', hotel_name='$hotel_name', hotel_address='$hotel_address', sight_name='$sight_name', sight_address='$sight_address', timestamp='$timestamp', trip_id='$trip_id', trip_title='$trip_title', user_id='$user_id', completed=$completed)"
+        return "ItineraryModel(itinerary_id='$itinerary_id', title='$title', description='$description', date='$date', time='$time', type='$type', journey_mode='$journey_mode', from='$from', to='$to', hotel_name='$hotel_name', hotel_address='$hotel_address', sight_name='$sight_name', sight_address='$sight_address', timestamp='$timestamp', trip_id='$trip_id', trip_title='$trip_title', user_id='$user_id', completed=$completed, day=$day)"
     }
 
 

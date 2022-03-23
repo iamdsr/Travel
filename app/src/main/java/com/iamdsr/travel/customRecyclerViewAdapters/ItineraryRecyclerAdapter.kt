@@ -44,7 +44,7 @@ class ItineraryRecyclerAdapter: ListAdapter<ItineraryModel, RecyclerView.ViewHol
             val mCheckIn: TextView = itemView.findViewById(R.id.check_in_time)
             mTitle.text = item.title
             mDesc.text = item.description
-            mDayDate.text = context.getString(R.string.day_date, (absoluteAdapterPosition+1), item.date)
+            mDayDate.text = context.getString(R.string.day_date, (item.day), item.date)
             mHotelDetails.text = context.getString(R.string.hotel_details, item.hotel_name, item.hotel_address)
             mCheckIn.text = context.getString(R.string.check_in_details, item.time)
         }
@@ -70,13 +70,19 @@ class ItineraryRecyclerAdapter: ListAdapter<ItineraryModel, RecyclerView.ViewHol
     override fun getItemViewType(position: Int): Int {
         val itineraryModel: ItineraryModel = getItem(position)
         if (itineraryModel.type == "HOTEL_CHECK_IN"){
-            if (position == (itemCount-1)){
-                return AppConstants.HOTEL_CHECK_IN_FIRST_ITEM
-            }
             if (position == 0){
+                Log.d("TAG", "getItemViewType itemCount : $itemCount")
+                Log.d("TAG", "getItemViewType position : $position")
                 return AppConstants.HOTEL_CHECK_IN_LAST_ITEM
             }
+            if (position > 0 && position == (itemCount-1)){
+                Log.d("TAG", "getItemViewType itemCount : $itemCount")
+                Log.d("TAG", "getItemViewType position : $position")
+                return AppConstants.HOTEL_CHECK_IN_FIRST_ITEM
+            }
             if (position < (itemCount-1)){
+                Log.d("TAG", "getItemViewType itemCount : $itemCount")
+                Log.d("TAG", "getItemViewType position : $position")
                 return AppConstants.HOTEL_CHECK_IN_ITEM
             }
         }

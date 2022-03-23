@@ -40,6 +40,7 @@ class AddHotelCheckInFragment : Fragment() {
     private val myCalendar: Calendar? = Calendar.getInstance()
     private var tripID: String=""
     private var tripTitle: String=""
+    private var listSize: Long = -1
     private var firebaseRepository = FirestoreRepository()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -50,6 +51,10 @@ class AddHotelCheckInFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupWidgets()
         setUpDateDialogs()
+        if (arguments!=null){
+            listSize = arguments!!.getLong("LIST_SIZE")
+            Log.d("TAG", "arguments: $listSize")
+        }
         val mySharedPreferences = MySharedPreferences(context!!)
         tripID = mySharedPreferences.getTripModel().trip_id
         tripTitle = mySharedPreferences.getTripModel().trip_title
@@ -88,6 +93,7 @@ class AddHotelCheckInFragment : Fragment() {
                 tripTitle,
                 FirebaseAuth.getInstance().currentUser!!.uid,
                 false,
+                listSize+1
             )
             Log.d("TAG", "addNewItinerary: Itinerary Model : $itineraryModel")
             val itineraryTimelineViewModel = ViewModelProvider(this)[ItineraryTimelineViewModel::class.java]
@@ -159,7 +165,7 @@ class AddHotelCheckInFragment : Fragment() {
         }
     }
     private fun updateLabel(view: EditText) {
-        val myFormat = "dd/MM/yyyy"
+        val myFormat = "EEE, MMM d, yyyy"
         val dateFormat = SimpleDateFormat(myFormat, Locale.getDefault())
         view.setText(dateFormat.format(myCalendar!!.time))
     }
