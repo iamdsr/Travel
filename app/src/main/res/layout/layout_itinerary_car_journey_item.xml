@@ -81,6 +81,7 @@
         android:layout_margin="8dp"
         app:cardCornerRadius="8dp"
         app:cardElevation="4dp"
+        app:cardBackgroundColor="@color/car_journey_bg"
         app:layout_constraintStart_toEndOf="@id/line_container"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -117,6 +118,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_bold"
                     android:padding="4dp"
+                    android:textColor="@color/all_text_color"
                     android:text="@string/lorem_one_line" />
 
                 <TextView
@@ -124,6 +126,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="4dp"
+                    android:textColor="@color/all_text_color"
                     android:text="@string/lorem_paragraph" />
 
                 <TextView
@@ -132,6 +135,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_medium_italic"
                     android:padding="4dp"
+                    android:textColor="@color/all_text_color"
                     android:text="@string/from_to_details" />
 
                 <TextView
@@ -140,6 +144,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_regular"
                     android:padding="4dp"
+                    android:textColor="@color/all_text_color"
                     android:text="@string/start_at_details" />
 
 

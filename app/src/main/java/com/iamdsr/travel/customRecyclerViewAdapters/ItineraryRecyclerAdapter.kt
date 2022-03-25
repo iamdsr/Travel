@@ -31,6 +31,9 @@ class ItineraryRecyclerAdapter: ListAdapter<ItineraryModel, RecyclerView.ViewHol
             AppConstants.TRAIN_JOURNEY_ITEM -> R.layout.layout_itinerary_train_journey_item
             AppConstants.TRAIN_JOURNEY_FIRST_ITEM -> R.layout.layout_itinerary_train_journey_first_item
             AppConstants.TRAIN_JOURNEY_LAST_ITEM -> R.layout.layout_itinerary_train_journey_last_item
+            AppConstants.SIGHT_SEEING_ITEM -> R.layout.layout_itinerary_sight_seeing_item
+            AppConstants.SIGHT_SEEING_FIRST_ITEM -> R.layout.layout_itinerary_sight_seeing_first_item
+            AppConstants.SIGHT_SEEING_LAST_ITEM -> R.layout.layout_itinerary_sight_seeing_last_item
             else -> throw IllegalArgumentException("Invalid type")
         }
         context = parent.context
@@ -71,24 +74,29 @@ class ItineraryRecyclerAdapter: ListAdapter<ItineraryModel, RecyclerView.ViewHol
             mStartTime.text = context.getString(R.string.start_at_details, item.time)
         }
         private fun bindSightseeing(item: ItineraryModel, context: Context) {
-
+            val mTitle: TextView = itemView.findViewById(R.id.action_title)
+            val mDesc: TextView = itemView.findViewById(R.id.action_desc)
+            val mSightDetails: TextView = itemView.findViewById(R.id.sight_details)
+            val mDayDate: TextView = itemView.findViewById(R.id.day_and_date)
+            val mVisitTime: TextView = itemView.findViewById(R.id.visit_time)
+            mTitle.text = item.title
+            mDesc.text = item.description
+            mDayDate.text = context.getString(R.string.day_date, (item.day), item.date)
+            mSightDetails.text = context.getString(R.string.sight_details, item.sight_name, item.sight_address)
+            mVisitTime.text = context.getString(R.string.visit_details, item.time)
         }
         fun bindView(dataModel: ItineraryModel, context: Context) {
             when (dataModel.type) {
-                "HOTEL_CHECK_IN" -> bindHotelItem(dataModel, context)
-                "JOURNEY" -> bindJourney(dataModel, context)
-                "SIGHT_SEEING" -> bindSightseeing(dataModel, context)
+                AppConstants.HOTEL_CHECK_IN_ITINERARY_TYPE -> bindHotelItem(dataModel, context)
+                AppConstants.JOURNEY_ITINERARY_TYPE -> bindJourney(dataModel, context)
+                AppConstants.SIGHT_SEEING_ITINERARY_TYPE -> bindSightseeing(dataModel, context)
             }
         }
     }
 
-    override fun getItemCount(): Int {
-        return super.getItemCount()
-    }
-
     override fun getItemViewType(position: Int): Int {
         val itineraryModel: ItineraryModel = getItem(position)
-        if (itineraryModel.type == "HOTEL_CHECK_IN"){
+        if (itineraryModel.type == AppConstants.HOTEL_CHECK_IN_ITINERARY_TYPE){
             if (position == 0 && itemCount == 1){
 //                Log.d("TAG", "getItemViewType position == 0 && itemCount == 1 Title : ${itineraryModel.title}")
 //                Log.d("TAG", "getItemViewType position == 0 && itemCount == 1 itemCount : $itemCount")
@@ -114,7 +122,33 @@ class ItineraryRecyclerAdapter: ListAdapter<ItineraryModel, RecyclerView.ViewHol
                 return AppConstants.HOTEL_CHECK_IN_FIRST_ITEM
             }
         }
-        if (itineraryModel.type == "JOURNEY"){
+        if (itineraryModel.type == AppConstants.SIGHT_SEEING_ITINERARY_TYPE){
+            if (position == 0 && itemCount == 1){
+//                Log.d("TAG", "getItemViewType position == 0 && itemCount == 1 Title : ${itineraryModel.title}")
+//                Log.d("TAG", "getItemViewType position == 0 && itemCount == 1 itemCount : $itemCount")
+//                Log.d("TAG", "getItemViewType position == 0 && itemCount == 1 position : $position")
+                return AppConstants.SIGHT_SEEING_FIRST_ITEM
+            }
+            if (position == 0 && itemCount > 1){
+//                Log.d("TAG", "getItemViewType position == 0 && itemCount > 1 Title : ${itineraryModel.title}")
+//                Log.d("TAG", "getItemViewType position == 0 && itemCount > 1 itemCount : $itemCount")
+//                Log.d("TAG", "getItemViewType position == 0 && itemCount > 1 position : $position")
+                return AppConstants.SIGHT_SEEING_LAST_ITEM
+            }
+            if (position > 0 && position < (itemCount-1)){
+//                Log.d("TAG", "getItemViewType position > 0 && position < (itemCount-1) Title : ${itineraryModel.title}")
+//                Log.d("TAG", "getItemViewType position > 0 && position < (itemCount-1) itemCount : $itemCount")
+//                Log.d("TAG", "getItemViewType position > 0 && position < (itemCount-1) position : $position")
+                return AppConstants.SIGHT_SEEING_ITEM
+            }
+            if (position == (itemCount-1)){
+//                Log.d("TAG", "getItemViewType position == (itemCount-1) Title : ${itineraryModel.title}")
+//                Log.d("TAG", "getItemViewType position == (itemCount-1) itemCount : $itemCount")
+//                Log.d("TAG", "getItemViewType position == (itemCount-1) position : $position")
+                return AppConstants.SIGHT_SEEING_FIRST_ITEM
+            }
+        }
+        if (itineraryModel.type == AppConstants.JOURNEY_ITINERARY_TYPE){
             if (itineraryModel.journey_mode == "Train"){
                 if (position == 0 && itemCount == 1){
                     return AppConstants.TRAIN_JOURNEY_FIRST_ITEM

@@ -73,4 +73,6 @@
     <string name="check_in_details">Check-In at %s</string>
     <string name="from_to_details">From: %s\nTo: %s</string>
     <string name="start_at_details">Start at %s</string>
+    <string name="visit_details">Visit at %s</string>
+    <string name="sight_details">%s, %s</string>
 </resources>

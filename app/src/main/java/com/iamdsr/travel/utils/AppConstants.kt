@@ -19,5 +19,9 @@ class AppConstants {
         const val SIGHT_SEEING_LAST_ITEM: Int= 15
 
         const val TRIP_ID_SHARED_PREFERENCE_NAME: String = "TRIP_ID_SHARED_PREFERENCE_NAME"
+
+        const val HOTEL_CHECK_IN_ITINERARY_TYPE : String = "HOTEL_CHECK_IN"
+        const val JOURNEY_ITINERARY_TYPE : String = "JOURNEY"
+        const val SIGHT_SEEING_ITINERARY_TYPE : String = "SIGHT_SEEING"
     }
 }

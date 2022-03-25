@@ -68,19 +68,30 @@ class TimelineFragment : Fragment() {
                 0 -> {
                     val bundle = Bundle()
                     bundle.putLong("LIST_SIZE", itineraryList.size.toLong())
-                    bundle.putLong("LAST_DAY", itineraryList[0].day)
-                    bundle.putString("LAST_DATE", itineraryList[0].date)
+                    if (itineraryList.isNotEmpty()){
+                        bundle.putLong("LAST_DAY", itineraryList[0].day)
+                        bundle.putString("LAST_DATE", itineraryList[0].date)
+                    }
                     findNavController().navigate(R.id.action_myItinerariesFragment_to_journeyFragment, bundle)
                 }
                 1 -> {
                     val bundle = Bundle()
-                    bundle.putLong("LIST_SIZE", itineraryList.size.toLong())
-                    bundle.putLong("LAST_DAY", itineraryList[0].day)
-                    bundle.putString("LAST_DATE", itineraryList[0].date)
+                    if (itineraryList.isNotEmpty()){
+                        bundle.putLong("LAST_DAY", itineraryList[0].day)
+                        bundle.putString("LAST_DATE", itineraryList[0].date)
+                    }
                     bundle.putLong("LIST_SIZE", itineraryList.size.toLong())
                     findNavController().navigate(R.id.action_myItinerariesFragment_to_addHotelCheckInFragment, bundle)
                 }
-                2 -> { findNavController().navigate(R.id.action_myItinerariesFragment_to_addSightseeingFragment) }
+                2 -> {
+                    val bundle = Bundle()
+                    if (itineraryList.isNotEmpty()){
+                        bundle.putLong("LAST_DAY", itineraryList[0].day)
+                        bundle.putString("LAST_DATE", itineraryList[0].date)
+                    }
+                    bundle.putLong("LIST_SIZE", itineraryList.size.toLong())
+                    findNavController().navigate(R.id.action_myItinerariesFragment_to_addSightseeingFragment, bundle)
+                }
             }
         }
         val dialog = builder.create()

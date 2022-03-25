@@ -23,4 +23,13 @@
 
     <color name="day_night_gray">#C2C6C8</color>
     <color name="primary_day_night">#63a4ff</color>
+
+    <!-- Itinerary colors -->
+    <color name="sight_seeing_bg">#00695c</color>
+    <color name="car_journey_bg">#47355F</color>
+    <color name="train_journey_bg">#326690</color>
+    <color name="flight_journey_bg">#804056</color>
+    <color name="hotel_bg">#7b5e57</color>
+    <color name="all_text_color">#FFFFFF</color>
+
 </resources>
