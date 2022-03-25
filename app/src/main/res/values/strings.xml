@@ -54,6 +54,7 @@
     <string name="persons_count">%d Persons</string>
     <string name="duration_count">%d Days</string>
     <string name="journey_mode">Journey mode</string>
+    <string name="lorem_3_words">Lorem ipsum dolor</string>
     <string name="lorem_one_line">Lorem ipsum dolor sit amet, consectetur adipiscing elit</string>
     <string name="lorem_paragraph">Nam in pharetra nisi. Sed sollicitudin tristique arcu non mollis. Pellentesque blandit mattis ipsum, id commodo odio fermentum et. Phasellus enim risus, laoreet sed erat et, tristique tincidunt sem. Fusce cursus porttitor erat, at efficitur velit auctor in. Sed at facilisis odio. Vivamus lobortis tincidunt convallis. Cras commodo sit amet lacus ac dignissim. Sed laoreet, arcu ac egestas vulputate, diam odio rutrum erat, in iaculis mauris urna vel est. Nunc vitae enim non ex euismod fermentum at et tellus. Vestibulum sed nulla ligula.</string>
     <string name="add_journey_details">Add Journey Details</string>
@@ -75,4 +76,11 @@
     <string name="start_at_details">Start at %s</string>
     <string name="visit_details">Visit at %s</string>
     <string name="sight_details">%s, %s</string>
+    <string name="my_stories">My Stories</string>
+    <string name="settings_ask_a_question">Ask a question</string>
+    <string name="settings_faq">FAQ</string>
+    <string name="settings_privacy_policy">Privacy policy</string>
+    <string name="app_theme">App theme</string>
+    <string name="app_language">App language</string>
+    <string name="version_1_0_0">Version 1.0.0</string>
 </resources>

@@ -7,15 +7,249 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Profile.ProfileFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/materialCardView"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Profile Fragment"
-        android:textSize="64sp"
-        android:gravity="center"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_margin="16dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp"
+        app:contentPadding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/user_image"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/user_placeholder"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <LinearLayout
+                    android:id="@+id/linearLayout4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/edit_account_details"
+                    app:layout_constraintStart_toEndOf="@+id/user_image"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/username"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_bold"
+                        android:text="@string/hint_username"
+                        android:textColor="@color/primary_day_night"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@+id/user_image"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/full_ame"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_bold"
+                        android:text="@string/lorem_3_words"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/user_image"
+                        app:layout_constraintStart_toEndOf="@+id/user_image"
+                        app:layout_constraintTop_toBottomOf="@+id/username" />
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/edit_account_details"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/ic_outline_edit"
+                    android:padding="4dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?android:attr/selectableItemBackgroundBorderless"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/user_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:drawablePadding="16dp"
+                        android:focusable="true"
+                        android:fontFamily="@font/roboto_medium"
+                        android:padding="16sp"
+                        android:text="a.b@gmail.com"
+                        app:drawableStartCompat="@drawable/ic_email"
+                        app:drawableTint="@color/primary_day_night" />
+
+                    <TextView
+                        android:id="@+id/user_phone_number"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:drawablePadding="16dp"
+                        android:focusable="true"
+                        android:fontFamily="@font/roboto_medium"
+                        android:gravity="center_vertical"
+                        android:padding="16dp"
+                        android:text="+91 9856510236"
+                        app:drawableStartCompat="@drawable/ic_phone_outlined"
+                        app:drawableTint="@color/primary_day_night" />
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/materialCardView">
+
+        <TextView
+            android:id="@+id/myStories"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:drawablePadding="16dp"
+            android:focusable="true"
+            android:fontFamily="@font/roboto_medium"
+            android:padding="16sp"
+            android:text="@string/my_stories"
+            app:drawableStartCompat="@drawable/ic_stories_outlined"
+            app:drawableTint="@color/primary_day_night" />
+
+        <TextView
+            android:id="@+id/app_theme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:drawablePadding="16dp"
+            android:focusable="true"
+            android:fontFamily="@font/roboto_medium"
+            android:gravity="center_vertical"
+            android:padding="16dp"
+            android:text="@string/app_theme"
+            app:drawableTint="@color/primary_day_night"
+            app:drawableStartCompat="@drawable/ic_app_theme" />
+
+        <TextView
+            android:id="@+id/app_language"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:drawablePadding="16dp"
+            android:focusable="true"
+            android:fontFamily="@font/roboto_medium"
+            android:gravity="center_vertical"
+            android:padding="16dp"
+            android:text="@string/app_language"
+            app:drawableTint="@color/primary_day_night"
+            app:drawableStartCompat="@drawable/ic_language" />
+
+        <TextView
+            android:id="@+id/ask_question"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:drawablePadding="16dp"
+            android:focusable="true"
+            android:fontFamily="@font/roboto_medium"
+            android:gravity="center_vertical"
+            android:padding="16dp"
+            app:drawableTint="@color/primary_day_night"
+            android:text="@string/settings_ask_a_question"
+            app:drawableStartCompat="@drawable/ic_question" />
+
+        <TextView
+            android:id="@+id/faq"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:drawablePadding="16dp"
+            android:focusable="true"
+            android:fontFamily="@font/roboto_medium"
+            android:gravity="center_vertical"
+            android:padding="16dp"
+            app:drawableTint="@color/primary_day_night"
+            android:text="@string/settings_faq"
+            app:drawableStartCompat="@drawable/ic_help" />
+
+        <TextView
+            android:id="@+id/privacy_policy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:drawablePadding="16dp"
+            android:focusable="true"
+            android:fontFamily="@font/roboto_medium"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:gravity="center_vertical"
+            android:padding="16dp"
+            app:drawableTint="@color/primary_day_night"
+            android:text="@string/settings_privacy_policy"
+            app:drawableStartCompat="@drawable/ic_privacy_policy" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/app_version"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawablePadding="16dp"
+        android:fontFamily="@font/roboto_medium"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="@string/version_1_0_0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
+        app:layout_constraintVertical_bias="1.0" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

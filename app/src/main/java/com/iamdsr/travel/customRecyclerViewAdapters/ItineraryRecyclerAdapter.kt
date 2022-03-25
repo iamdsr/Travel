@@ -98,97 +98,133 @@ class ItineraryRecyclerAdapter: ListAdapter<ItineraryModel, RecyclerView.ViewHol
         val itineraryModel: ItineraryModel = getItem(position)
         if (itineraryModel.type == AppConstants.HOTEL_CHECK_IN_ITINERARY_TYPE){
             if (position == 0 && itemCount == 1){
-//                Log.d("TAG", "getItemViewType position == 0 && itemCount == 1 Title : ${itineraryModel.title}")
-//                Log.d("TAG", "getItemViewType position == 0 && itemCount == 1 itemCount : $itemCount")
-//                Log.d("TAG", "getItemViewType position == 0 && itemCount == 1 position : $position")
+                /*Log.d("TAG", "getItemViewType position == 0 && itemCount == 1 Type: ${itineraryModel.type} Title : ${itineraryModel.title}")
+                Log.d("TAG", "getItemViewType position == 0 && itemCount == 1 Type: ${itineraryModel.type} itemCount : $itemCount")
+                Log.d("TAG", "getItemViewType position == 0 && itemCount == 1 Type: ${itineraryModel.type} position : $position")*/
                 return AppConstants.HOTEL_CHECK_IN_FIRST_ITEM
             }
             if (position == 0 && itemCount > 1){
-//                Log.d("TAG", "getItemViewType position == 0 && itemCount > 1 Title : ${itineraryModel.title}")
-//                Log.d("TAG", "getItemViewType position == 0 && itemCount > 1 itemCount : $itemCount")
-//                Log.d("TAG", "getItemViewType position == 0 && itemCount > 1 position : $position")
+                /*Log.d("TAG", "getItemViewType position == 0 && itemCount > 1 Type: ${itineraryModel.type} Title : ${itineraryModel.title}")
+                Log.d("TAG", "getItemViewType position == 0 && itemCount > 1 Type: ${itineraryModel.type} itemCount : $itemCount")
+                Log.d("TAG", "getItemViewType position == 0 && itemCount > 1 Type: ${itineraryModel.type} position : $position")*/
                 return AppConstants.HOTEL_CHECK_IN_LAST_ITEM
             }
             if (position > 0 && position < (itemCount-1)){
-//                Log.d("TAG", "getItemViewType position > 0 && position < (itemCount-1) Title : ${itineraryModel.title}")
-//                Log.d("TAG", "getItemViewType position > 0 && position < (itemCount-1) itemCount : $itemCount")
-//                Log.d("TAG", "getItemViewType position > 0 && position < (itemCount-1) position : $position")
+                /*Log.d("TAG", "getItemViewType position > 0 && position < (itemCount-1) Type: ${itineraryModel.type} Title : ${itineraryModel.title}")
+                Log.d("TAG", "getItemViewType position > 0 && position < (itemCount-1) Type: ${itineraryModel.type} itemCount : $itemCount")
+                Log.d("TAG", "getItemViewType position > 0 && position < (itemCount-1) Type: ${itineraryModel.type} position : $position")*/
                 return AppConstants.HOTEL_CHECK_IN_ITEM
             }
             if (position == (itemCount-1)){
-//                Log.d("TAG", "getItemViewType position == (itemCount-1) Title : ${itineraryModel.title}")
-//                Log.d("TAG", "getItemViewType position == (itemCount-1) itemCount : $itemCount")
-//                Log.d("TAG", "getItemViewType position == (itemCount-1) position : $position")
+                /*Log.d("TAG", "getItemViewType position == (itemCount-1) Type: ${itineraryModel.type} Title : ${itineraryModel.title}")
+                Log.d("TAG", "getItemViewType position == (itemCount-1) Type: ${itineraryModel.type} itemCount : $itemCount")
+                Log.d("TAG", "getItemViewType position == (itemCount-1) Type: ${itineraryModel.type} position : $position")*/
                 return AppConstants.HOTEL_CHECK_IN_FIRST_ITEM
             }
         }
         if (itineraryModel.type == AppConstants.SIGHT_SEEING_ITINERARY_TYPE){
             if (position == 0 && itemCount == 1){
-//                Log.d("TAG", "getItemViewType position == 0 && itemCount == 1 Title : ${itineraryModel.title}")
-//                Log.d("TAG", "getItemViewType position == 0 && itemCount == 1 itemCount : $itemCount")
-//                Log.d("TAG", "getItemViewType position == 0 && itemCount == 1 position : $position")
+                /*Log.d("TAG", "getItemViewType position == 0 && itemCount == 1 Type: ${itineraryModel.type} Title : ${itineraryModel.title}")
+                Log.d("TAG", "getItemViewType position == 0 && itemCount == 1 Type: ${itineraryModel.type} itemCount : $itemCount")
+                Log.d("TAG", "getItemViewType position == 0 && itemCount == 1 Type: ${itineraryModel.type} position : $position")*/
                 return AppConstants.SIGHT_SEEING_FIRST_ITEM
             }
             if (position == 0 && itemCount > 1){
-//                Log.d("TAG", "getItemViewType position == 0 && itemCount > 1 Title : ${itineraryModel.title}")
-//                Log.d("TAG", "getItemViewType position == 0 && itemCount > 1 itemCount : $itemCount")
-//                Log.d("TAG", "getItemViewType position == 0 && itemCount > 1 position : $position")
+                /*Log.d("TAG", "getItemViewType position == 0 && itemCount > 1 Type: ${itineraryModel.type} Title : ${itineraryModel.title}")
+                Log.d("TAG", "getItemViewType position == 0 && itemCount > 1 Type: ${itineraryModel.type} itemCount : $itemCount")
+                Log.d("TAG", "getItemViewType position == 0 && itemCount > 1 Type: ${itineraryModel.type} position : $position")*/
                 return AppConstants.SIGHT_SEEING_LAST_ITEM
             }
             if (position > 0 && position < (itemCount-1)){
-//                Log.d("TAG", "getItemViewType position > 0 && position < (itemCount-1) Title : ${itineraryModel.title}")
-//                Log.d("TAG", "getItemViewType position > 0 && position < (itemCount-1) itemCount : $itemCount")
-//                Log.d("TAG", "getItemViewType position > 0 && position < (itemCount-1) position : $position")
+                /*Log.d("TAG", "getItemViewType position > 0 && position < (itemCount-1) Type: ${itineraryModel.type} Title : ${itineraryModel.title}")
+                Log.d("TAG", "getItemViewType position > 0 && position < (itemCount-1) Type: ${itineraryModel.type} itemCount : $itemCount")
+                Log.d("TAG", "getItemViewType position > 0 && position < (itemCount-1) Type: ${itineraryModel.type} position : $position")*/
                 return AppConstants.SIGHT_SEEING_ITEM
             }
             if (position == (itemCount-1)){
-//                Log.d("TAG", "getItemViewType position == (itemCount-1) Title : ${itineraryModel.title}")
-//                Log.d("TAG", "getItemViewType position == (itemCount-1) itemCount : $itemCount")
-//                Log.d("TAG", "getItemViewType position == (itemCount-1) position : $position")
+                /*Log.d("TAG", "getItemViewType position == (itemCount-1) Title : Type: ${itineraryModel.type} ${itineraryModel.title}")
+                Log.d("TAG", "getItemViewType position == (itemCount-1) itemCount : Type: ${itineraryModel.type} $itemCount")
+                Log.d("TAG", "getItemViewType position == (itemCount-1) position : Type: ${itineraryModel.type} $position")*/
                 return AppConstants.SIGHT_SEEING_FIRST_ITEM
             }
         }
         if (itineraryModel.type == AppConstants.JOURNEY_ITINERARY_TYPE){
             if (itineraryModel.journey_mode == "Train"){
                 if (position == 0 && itemCount == 1){
+                    /*Log.d("TAG", "getItemViewType position == 0 && itemCount == 1 Type: ${itineraryModel.type} Title : ${itineraryModel.title}")
+                    Log.d("TAG", "getItemViewType position == 0 && itemCount == 1 Type: ${itineraryModel.type} itemCount : $itemCount")
+                    Log.d("TAG", "getItemViewType position == 0 && itemCount == 1 Type: ${itineraryModel.type} position : $position")*/
                     return AppConstants.TRAIN_JOURNEY_FIRST_ITEM
                 }
                 if (position == 0 && itemCount > 1){
+                    /*Log.d("TAG", "getItemViewType position == 0 && itemCount > 1 Type: ${itineraryModel.type} Title : ${itineraryModel.title}")
+                    Log.d("TAG", "getItemViewType position == 0 && itemCount > 1 Type: ${itineraryModel.type} itemCount : $itemCount")
+                    Log.d("TAG", "getItemViewType position == 0 && itemCount > 1 Type: ${itineraryModel.type} position : $position")*/
                     return AppConstants.TRAIN_JOURNEY_LAST_ITEM
                 }
                 if (position > 0 && position < (itemCount-1)){
+                    /*Log.d("TAG", "getItemViewType position > 0 && position < (itemCount-1) Type: ${itineraryModel.type} Title : ${itineraryModel.title}")
+                    Log.d("TAG", "getItemViewType position > 0 && position < (itemCount-1) Type: ${itineraryModel.type} itemCount : $itemCount")
+                    Log.d("TAG", "getItemViewType position > 0 && position < (itemCount-1) Type: ${itineraryModel.type} position : $position")*/
                     return AppConstants.TRAIN_JOURNEY_ITEM
                 }
                 if (position == (itemCount-1)){
+                    /*Log.d("TAG", "getItemViewType position == (itemCount-1) Type: ${itineraryModel.type} Title : ${itineraryModel.title}")
+                    Log.d("TAG", "getItemViewType position == (itemCount-1) Type: ${itineraryModel.type} itemCount : $itemCount")
+                    Log.d("TAG", "getItemViewType position == (itemCount-1) Type: ${itineraryModel.type} position : $position")*/
                     return AppConstants.TRAIN_JOURNEY_FIRST_ITEM
                 }
             }
             if (itineraryModel.journey_mode == "Flight"){
                 if (position == 0 && itemCount == 1){
+                    /*Log.d("TAG", "getItemViewType position == 0 && itemCount == 1 Type: ${itineraryModel.type} Title : ${itineraryModel.title}")
+                    Log.d("TAG", "getItemViewType position == 0 && itemCount == 1 Type: ${itineraryModel.type} itemCount : $itemCount")
+                    Log.d("TAG", "getItemViewType position == 0 && itemCount == 1 Type: ${itineraryModel.type} position : $position")*/
                     return AppConstants.FLIGHT_JOURNEY_FIRST_ITEM
                 }
                 if (position == 0 && itemCount > 1){
+                    /*Log.d("TAG", "getItemViewType position == 0 && itemCount > 1 Type: ${itineraryModel.type} Title : ${itineraryModel.title}")
+                    Log.d("TAG", "getItemViewType position == 0 && itemCount > 1 Type: ${itineraryModel.type} itemCount : $itemCount")
+                    Log.d("TAG", "getItemViewType position == 0 && itemCount > 1 Type: ${itineraryModel.type} position : $position")*/
                     return AppConstants.FLIGHT_JOURNEY_LAST_ITEM
                 }
                 if (position > 0 && position < (itemCount-1)){
+                    /*Log.d("TAG", "getItemViewType position > 0 && position < (itemCount-1) Type: ${itineraryModel.type} Title : ${itineraryModel.title}")
+                    Log.d("TAG", "getItemViewType position > 0 && position < (itemCount-1) Type: ${itineraryModel.type} itemCount : $itemCount")
+                    Log.d("TAG", "getItemViewType position > 0 && position < (itemCount-1) Type: ${itineraryModel.type} position : $position")*/
                     return AppConstants.FLIGHT_JOURNEY_ITEM
                 }
                 if (position == (itemCount-1)){
-                    return AppConstants.FLIGHT_JOURNEY_LAST_ITEM
+                    /*Log.d("TAG", "getItemViewType position == (itemCount-1) Type: ${itineraryModel.type} Title : ${itineraryModel.title}")
+                    Log.d("TAG", "getItemViewType position == (itemCount-1) Type: ${itineraryModel.type} itemCount : $itemCount")
+                    Log.d("TAG", "getItemViewType position == (itemCount-1) Type: ${itineraryModel.type} position : $position")*/
+                    return AppConstants.FLIGHT_JOURNEY_FIRST_ITEM
                 }
             }
             if (itineraryModel.journey_mode == "Car"){
                 if (position == 0 && itemCount == 1){
+                    /*Log.d("TAG", "getItemViewType position == 0 && itemCount == 1 Type: ${itineraryModel.type} Title : ${itineraryModel.title}")
+                    Log.d("TAG", "getItemViewType position == 0 && itemCount == 1 Type: ${itineraryModel.type} itemCount : $itemCount")
+                    Log.d("TAG", "getItemViewType position == 0 && itemCount == 1 Type: ${itineraryModel.type} position : $position")*/
                     return AppConstants.CAR_JOURNEY_FIRST_ITEM
                 }
                 if (position == 0 && itemCount > 1){
+                    /*Log.d("TAG", "getItemViewType position == 0 && itemCount > 1 Type: ${itineraryModel.type} Title : ${itineraryModel.title}")
+                    Log.d("TAG", "getItemViewType position == 0 && itemCount > 1 Type: ${itineraryModel.type} itemCount : $itemCount")
+                    Log.d("TAG", "getItemViewType position == 0 && itemCount > 1 Type: ${itineraryModel.type} position : $position")*/
                     return AppConstants.CAR_JOURNEY_LAST_ITEM
                 }
                 if (position > 0 && position < (itemCount-1)){
+                    /*Log.d("TAG", "getItemViewType position > 0 && position < (itemCount-1) Type: ${itineraryModel.type} Title : ${itineraryModel.title}")
+                    Log.d("TAG", "getItemViewType position > 0 && position < (itemCount-1) Type: ${itineraryModel.type} itemCount : $itemCount")
+                    Log.d("TAG", "getItemViewType position > 0 && position < (itemCount-1) Type: ${itineraryModel.type} position : $position")*/
                     return AppConstants.CAR_JOURNEY_ITEM
                 }
                 if (position == (itemCount-1)){
-                    return AppConstants.CAR_JOURNEY_LAST_ITEM
+                    /*Log.d("TAG", "getItemViewType position == (itemCount-1) Type: ${itineraryModel.type} Title : ${itineraryModel.title}")
+                    Log.d("TAG", "getItemViewType position == (itemCount-1) Type: ${itineraryModel.type} itemCount : $itemCount")
+                    Log.d("TAG", "getItemViewType position == (itemCount-1) Type: ${itineraryModel.type} position : $position")*/
+                    return AppConstants.CAR_JOURNEY_FIRST_ITEM
                 }
             }
         }
