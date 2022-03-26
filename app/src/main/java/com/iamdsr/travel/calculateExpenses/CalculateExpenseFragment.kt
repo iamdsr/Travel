@@ -7,21 +7,36 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.iamdsr.travel.R
+import com.iamdsr.travel.customRecyclerViewAdapters.ExpenseGroupRecyclerAdapter
+import com.iamdsr.travel.customRecyclerViewAdapters.PlannedTripRecyclerAdapter
+import com.iamdsr.travel.interfaces.RecyclerViewActionsInterface
 import com.iamdsr.travel.models.ExpenseGroupModel
+import com.iamdsr.travel.models.TripModel
 import com.iamdsr.travel.repositories.FirestoreRepository
 import com.iamdsr.travel.viewModels.CalculateExpenseViewModel
 import com.iamdsr.travel.viewModels.PlanTripFragmentViewModel
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 
-class CalculateExpenseFragment : Fragment(){
+class CalculateExpenseFragment : Fragment(), RecyclerViewActionsInterface{
 
     // Widgets
     private lateinit var mCreateNewGroup: Button
+    private lateinit var mExpenseGroupRecyclerView: RecyclerView
+
+    // Utils
+    private lateinit var expenseGroupList: List<ExpenseGroupModel>
+    private lateinit var expenseGroupRecyclerAdapter: ExpenseGroupRecyclerAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_calculate_expense, container,false)
@@ -30,9 +45,23 @@ class CalculateExpenseFragment : Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupWidgets()
+        initRecyclerView()
+        val calculateExpenseViewModel = ViewModelProvider(requireActivity())[CalculateExpenseViewModel::class.java]
+        calculateExpenseViewModel._getAllSavedExpenseGroupsFromFirebaseFirestore(FirebaseAuth.getInstance().currentUser!!.displayName.toString()).observe(this, Observer { it->
+            expenseGroupList = it
+            Log.d("TAG", "onViewCreated: IT $it")
+            expenseGroupRecyclerAdapter.submitList(it)
+        })
         mCreateNewGroup.setOnClickListener(View.OnClickListener {
             setupAlertDialog()
         })
+    }
+
+    private fun initRecyclerView() {
+        mExpenseGroupRecyclerView.layoutManager = LinearLayoutManager(context)
+        mExpenseGroupRecyclerView.setHasFixedSize(true)
+        expenseGroupRecyclerAdapter = ExpenseGroupRecyclerAdapter(this)
+        mExpenseGroupRecyclerView.adapter = expenseGroupRecyclerAdapter
     }
 
     private fun setupAlertDialog() {
@@ -52,7 +81,7 @@ class CalculateExpenseFragment : Fragment(){
                 val groupName: String = mGroupName.text.toString().trim()
                 val groupID: String = firebaseRepository.getNewExpenseGroupID()
                 val memberList =ArrayList<String>()
-                memberList.add(FirebaseAuth.getInstance().currentUser!!.displayName!!+";"+FirebaseAuth.getInstance().currentUser!!.uid)
+                memberList.add(FirebaseAuth.getInstance().currentUser!!.displayName!!)
                 Log.d("TAG", "setupAlertDialog: Display name ${FirebaseAuth.getInstance().currentUser!!.displayName!!}")
                 val expenseGroupModel = ExpenseGroupModel(
                     groupID,
@@ -60,22 +89,29 @@ class CalculateExpenseFragment : Fragment(){
                     "",
                     1,
                     FirebaseAuth.getInstance().currentUser!!.uid,
-                    memberList
+                    memberList,
+                    getTimestamp()
                 )
                 Log.d("TAG", "setupAlertDialog: Model $expenseGroupModel")
                 calculateExpenseViewModel._addNewExpenseGroupToFirebaseFirestore(expenseGroupModel)
             }
             .show()
+    }
 
-//            val editText = dialogView.findViewById<View>(R.id.label_field) as EditText
-//            editText.setText("test label")
-//        val alertDialog: AlertDialog = dialogBuilder.create()
-//        alertDialog.show()
+    private fun getTimestamp(): String {
+        val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US)
+        format.timeZone = TimeZone.getDefault()
+        return format.format(Date())
     }
 
     private fun setupWidgets() {
         if (view!=null) {
             mCreateNewGroup = view!!.findViewById(R.id.create_new_group)
+            mExpenseGroupRecyclerView = view!!.findViewById(R.id.group_recycler_view)
         }
+    }
+
+    override fun onItemClick(view: View, position: Int) {
+
     }
 }

@@ -6,9 +6,10 @@ data class ExpenseGroupModel(
     var group_image_url: String,
     var member_count: Long,
     var created_by_id: String,
-    var members: ArrayList<String>
+    var members: ArrayList<String>,
+    var timestamp: String
 ) {
-    constructor() : this("", "", "", 0, "", arrayListOf())
+    constructor() : this("", "", "", 0, "", arrayListOf(),"")
 
     override fun toString(): String {
         return "ExpenseGroupModel(id='$id', name='$name', group_image_url='$group_image_url', " +

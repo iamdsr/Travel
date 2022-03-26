@@ -33,6 +33,10 @@ class FirestoreRepository {
         return documentReference!!.id
     }
 
+    fun getAllSavedExpenseGroupsFromFirebaseFirestore(): CollectionReference {
+        return firebaseFirestore.collection("expense_groups")
+    }
+
 
     // ITINERARIES --------------------------------------------------------------------------------------------------------------------------------------
     // save new itinerary to firebase
