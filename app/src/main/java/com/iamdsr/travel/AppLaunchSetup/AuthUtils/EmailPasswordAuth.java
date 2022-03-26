@@ -16,6 +16,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.iamdsr.travel.ActivityUtils.MainActivity;
 import com.iamdsr.travel.AppLaunchSetup.LoginActivity;
@@ -66,8 +67,17 @@ public class EmailPasswordAuth {
                 if (task.isSuccessful()) {
                     FirebaseUser user = mAuth.getCurrentUser();
                     addUserToDB(user.getUid(), username, fullName, email);
-                    progressDialog.dismiss();
-                    context.startActivity(new Intent(context, LoginActivity.class));
+                    UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder().setDisplayName(fullName).build();
+                    user.updateProfile(profileUpdates)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        progressDialog.dismiss();
+                                        context.startActivity(new Intent(context, LoginActivity.class));
+                                    }
+                                }
+                            });
                 } else {
                     Log.w(TAG, "createUserWithEmail:failure", task.getException());
                     mErrorText.setText(R.string.auth_failed);

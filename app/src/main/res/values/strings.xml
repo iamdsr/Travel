@@ -83,4 +83,11 @@
     <string name="app_theme">App theme</string>
     <string name="app_language">App language</string>
     <string name="version_1_0_0">Version 1.0.0</string>
+    <string name="create_new_group">Create new Group</string>
+    <string name="manage_all_your_expenses_here">Manage all your expenses here!</string>
+    <string name="simple_debts_desc">Automatically combine debts to reduce the total number of repayments between group members.</string>
+    <string name="group_name">Group name</string>
+    <string name="create">Create</string>
+    <string name="cancel">Close</string>
+
 </resources>

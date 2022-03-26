@@ -1,12 +1,11 @@
 package com.iamdsr.travel.repositories
 
 import android.util.Log
-import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.QuerySnapshot
+import com.iamdsr.travel.models.ExpenseGroupModel
 import com.iamdsr.travel.models.ItineraryModel
 import com.iamdsr.travel.models.TripModel
 
@@ -15,6 +14,25 @@ class FirestoreRepository {
     val TAG = "FIREBASE_REPOSITORY"
     var firebaseFirestore = FirebaseFirestore.getInstance()
     var user = FirebaseAuth.getInstance().currentUser
+
+    // EXPENSES ----------------------------------------------------------------------------------------------------------------------------------------
+    //add new expense group
+    fun addNewExpenseGroupToFirebaseFirestore(expenseGroupModel: ExpenseGroupModel) : Task<Void>{
+        val documentReference = user?.let {
+            firebaseFirestore.collection("expense_groups")
+                .document(expenseGroupModel.id)
+        }
+        return documentReference!!.set(expenseGroupModel)
+    }
+
+    fun getNewExpenseGroupID(): String{
+        val documentReference = user?.let {
+            firebaseFirestore.collection("expense_groups")
+                .document()
+        }
+        return documentReference!!.id
+    }
+
 
     // ITINERARIES --------------------------------------------------------------------------------------------------------------------------------------
     // save new itinerary to firebase
@@ -31,12 +49,12 @@ class FirestoreRepository {
     }
 
 
-    fun getNewItineraryID(tripId: String): String{
+    fun getNewItineraryID(itineraryID: String): String{
         val documentReference = user?.let {
             firebaseFirestore.collection("users")
                 .document(it.uid)
                 .collection("trips")
-                .document(tripId)
+                .document(itineraryID)
                 .collection("itineraries")
                 .document()
         }
