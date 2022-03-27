@@ -89,5 +89,8 @@
     <string name="group_name">Group name</string>
     <string name="create">Create</string>
     <string name="cancel">Close</string>
+    <string name="signout_message">Are you sure you want to Sign Out?</string>
+    <string name="confirm">Confirm</string>
+    <string name="search_members_by_name">Search members by name</string>
 
 </resources>

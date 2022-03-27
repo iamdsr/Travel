@@ -9,5 +9,14 @@
         android:id="@+id/calculateExpenseFragment"
         android:name="com.iamdsr.travel.calculateExpenses.CalculateExpenseFragment"
         android:label="fragment_calculate_expense"
-        tools:layout="@layout/fragment_calculate_expense" />
+        tools:layout="@layout/fragment_calculate_expense" >
+        <action
+            android:id="@+id/action_calculateExpenseFragment_to_expensesFragment"
+            app:destination="@id/expensesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/expensesFragment"
+        android:name="com.iamdsr.travel.calculateExpenses.ExpensesFragment"
+        android:label="fragment_expenses"
+        tools:layout="@layout/fragment_expenses" />
 </navigation>

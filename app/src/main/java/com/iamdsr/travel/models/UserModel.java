@@ -1,13 +1,14 @@
 package com.iamdsr.travel.models;
 
 public class UserModel {
-    private String id, full_name, username, email;
+    private String id, full_name, username, email, full_name_lowercase;
 
-    public UserModel(String id, String full_name, String username, String email) {
+    public UserModel(String id, String full_name, String username, String email, String full_name_lowercase) {
         this.id = id;
         this.full_name = full_name;
         this.username = username;
         this.email = email;
+        this.full_name_lowercase = full_name_lowercase;
     }
 
     public String getId() {
@@ -40,5 +41,13 @@ public class UserModel {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getFull_name_lowercase() {
+        return full_name_lowercase;
+    }
+
+    public void setFull_name_lowercase(String full_name_lowercase) {
+        this.full_name_lowercase = full_name_lowercase;
     }
 }

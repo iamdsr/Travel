@@ -23,6 +23,8 @@ import com.iamdsr.travel.AppLaunchSetup.LoginActivity;
 import com.iamdsr.travel.models.UserModel;
 import com.iamdsr.travel.R;
 
+import java.util.Locale;
+
 public class EmailPasswordAuth {
     private Context context;
     private FirebaseAuth mAuth;
@@ -39,7 +41,7 @@ public class EmailPasswordAuth {
     }
 
     public void addUserToDB(String id,String username, String fullName, String email){
-        UserModel users = new UserModel(id,fullName, username, email);
+        UserModel users = new UserModel(id,fullName, username, email, fullName.toLowerCase(Locale.getDefault()));
         firebaseFirestore = FirebaseFirestore.getInstance();
         firebaseFirestore
                 .collection("users")

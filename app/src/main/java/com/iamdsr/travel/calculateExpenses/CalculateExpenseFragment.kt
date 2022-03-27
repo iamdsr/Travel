@@ -9,6 +9,7 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -112,6 +113,13 @@ class CalculateExpenseFragment : Fragment(), RecyclerViewActionsInterface{
     }
 
     override fun onItemClick(view: View, position: Int) {
-
+        val bundle = Bundle()
+        bundle.putString("EXPENSE_GROUP_ID",  expenseGroupList[position].id)
+        bundle.putString("EXPENSE_GROUP_NAME",  expenseGroupList[position].name)
+        bundle.putString("EXPENSE_GROUP_IMAGE_URL",expenseGroupList[position].group_image_url)
+        bundle.putStringArrayList("EXPENSE_GROUP_MEMBERS",  expenseGroupList[position].members)
+        bundle.putLong("EXPENSE_GROUP_MEMBER_COUNT",  expenseGroupList[position].member_count)
+        bundle.putString("GROUP_CREATED_BY", expenseGroupList[position].created_by_id)
+        findNavController().navigate(R.id.action_calculateExpenseFragment_to_expensesFragment, bundle)
     }
 }

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Profile.ProfileFragment">
+    tools:context=".profile.ProfileFragment">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/materialCardView"
@@ -126,6 +126,21 @@
                         android:padding="16dp"
                         android:text="+91 9856510236"
                         app:drawableStartCompat="@drawable/ic_phone_outlined"
+                        app:drawableTint="@color/primary_day_night" />
+
+                    <TextView
+                        android:id="@+id/sign_out"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:drawablePadding="16dp"
+                        android:focusable="true"
+                        android:fontFamily="@font/roboto_medium"
+                        android:gravity="center_vertical"
+                        android:padding="16dp"
+                        android:text="Signout"
+                        app:drawableStartCompat="@drawable/ic_sign_out"
                         app:drawableTint="@color/primary_day_night" />
                 </LinearLayout>
 
