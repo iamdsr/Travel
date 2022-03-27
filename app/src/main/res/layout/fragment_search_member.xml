@@ -18,11 +18,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
+        <EditText
+            android:id="@+id/search_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:drawablePadding="16dp"
+            android:background="@color/surface"
+            android:maxLines="1"
             android:gravity="center_vertical"
             android:hint="@string/search_members_by_name"
             android:padding="16dp"

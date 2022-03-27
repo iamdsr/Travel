@@ -4,6 +4,7 @@ import android.util.Log
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.CollectionReference
+import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.iamdsr.travel.models.ExpenseGroupModel
 import com.iamdsr.travel.models.ItineraryModel
@@ -35,6 +36,14 @@ class FirestoreRepository {
 
     fun getAllSavedExpenseGroupsFromFirebaseFirestore(): CollectionReference {
         return firebaseFirestore.collection("expense_groups")
+    }
+
+    fun getSearchedUsersFromFirebaseFirestore(): CollectionReference {
+        return firebaseFirestore.collection("users")
+    }
+
+    fun addMemberToExpenseGroupFirebaseFirestore(groupID: String) : DocumentReference{
+        return firebaseFirestore.collection("expense_groups").document(groupID)
     }
 
 

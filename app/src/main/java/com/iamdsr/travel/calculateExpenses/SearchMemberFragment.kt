@@ -1,15 +1,114 @@
 package com.iamdsr.travel.calculateExpenses
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.text.Editable
+import android.text.TextUtils
+import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FieldValue
 import com.iamdsr.travel.R
+import com.iamdsr.travel.customRecyclerViewAdapters.SearchMemberRecyclerAdapter
+import com.iamdsr.travel.interfaces.RecyclerViewActionsInterface
+import com.iamdsr.travel.models.UserModel
+import com.iamdsr.travel.viewModels.SearchMemberFragmentViewModel
+import java.util.*
 
-class SearchMemberFragment : Fragment() {
+
+class SearchMemberFragment : Fragment(), RecyclerViewActionsInterface{
+
+    // Widgets
+    private lateinit var mSearchUserRecyclerView: RecyclerView
+    private lateinit var mSearchText: EditText
+
+    // Utils
+    private lateinit var searchedUserList: List<UserModel>
+    private lateinit var searchMemberRecyclerAdapter: SearchMemberRecyclerAdapter
+    private var groupID: String = ""
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_search_member, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupWidgets()
+        initRecyclerView()
+        if (arguments!=null){
+            groupID = arguments!!.getString("EXPENSE_GROUP_ID","")
+        }
+        Log.d("TAG", "onItemClick: $groupID")
+        mSearchText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                searchUsers(s.toString().lowercase(Locale.getDefault()))
+            }
+
+            override fun afterTextChanged(s: Editable) {
+                //searchUsers(s.toString().lowercase(Locale.getDefault()))
+            }
+        })
+    }
+
+    private fun searchUsers(searchText: String) {
+        if (!TextUtils.isEmpty(searchText)){
+            Log.d("TAG", "searchUsers: Search text : $searchText")
+            val searchMemberFragmentViewModel = ViewModelProvider(requireActivity())[SearchMemberFragmentViewModel::class.java]
+            searchMemberFragmentViewModel._getSearchedUsersFromFirebaseFirestore(searchText).observe(requireActivity(), androidx.lifecycle.Observer {
+                searchedUserList = it
+                searchMemberRecyclerAdapter.submitList(it)
+                Log.d("TAG", "searchUsers: Submit ist $it")
+            })
+        }
+        else {
+            searchMemberRecyclerAdapter.submitList(listOf())
+        }
+    }
+
+
+    private fun setupWidgets() {
+        if (view!=null) {
+            mSearchUserRecyclerView = view!!.findViewById(R.id.search_recycler_view)
+            mSearchText = view!!.findViewById(R.id.search_text)
+        }
+    }
+
+    private fun setDialogForSignOut(position: Int) {
+        MaterialAlertDialogBuilder(context!!)
+            .setTitle(resources.getString(R.string.add_member_to_group))
+            .setNegativeButton(resources.getString(R.string.cancel)) { dialog, which ->
+                // Respond to negative button press
+            }
+            .setPositiveButton(resources.getString(R.string.confirm)) { dialog, which ->
+                val addMemberMap: MutableMap<String, Any> = HashMap()
+                val searchMemberFragmentViewModel = ViewModelProvider(requireActivity())[SearchMemberFragmentViewModel::class.java]
+                addMemberMap["members"] = FieldValue.arrayUnion(searchedUserList[position].full_name)
+                Log.d("TAG", "addMemberToExpenseGroup: $groupID  $addMemberMap")
+                searchMemberFragmentViewModel._addMemberToExpenseGroupFirebaseFirestore(groupID, addMemberMap)
+            }
+            .show()
+    }
+
+    private fun initRecyclerView() {
+        mSearchUserRecyclerView.layoutManager = LinearLayoutManager(context)
+        mSearchUserRecyclerView.setHasFixedSize(true)
+        searchMemberRecyclerAdapter = SearchMemberRecyclerAdapter(this)
+        mSearchUserRecyclerView.adapter = searchMemberRecyclerAdapter
+    }
+
+    override fun onItemClick(view: View, position: Int) {
+        if (FirebaseAuth.getInstance().currentUser?.uid != searchedUserList[position].id){
+            setDialogForSignOut(position)
+        }
     }
 
 }

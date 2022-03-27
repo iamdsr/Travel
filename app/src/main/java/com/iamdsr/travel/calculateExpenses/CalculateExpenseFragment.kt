@@ -1,6 +1,7 @@
 package com.iamdsr.travel.calculateExpenses
 
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -80,21 +81,23 @@ class CalculateExpenseFragment : Fragment(), RecyclerViewActionsInterface{
                 val firebaseRepository = FirestoreRepository()
                 val mGroupName = dialogView.findViewById<View>(R.id.group_name) as TextInputEditText
                 val groupName: String = mGroupName.text.toString().trim()
-                val groupID: String = firebaseRepository.getNewExpenseGroupID()
-                val memberList =ArrayList<String>()
-                memberList.add(FirebaseAuth.getInstance().currentUser!!.displayName!!)
-                Log.d("TAG", "setupAlertDialog: Display name ${FirebaseAuth.getInstance().currentUser!!.displayName!!}")
-                val expenseGroupModel = ExpenseGroupModel(
-                    groupID,
-                    groupName,
-                    "",
-                    1,
-                    FirebaseAuth.getInstance().currentUser!!.uid,
-                    memberList,
-                    getTimestamp()
-                )
-                Log.d("TAG", "setupAlertDialog: Model $expenseGroupModel")
-                calculateExpenseViewModel._addNewExpenseGroupToFirebaseFirestore(expenseGroupModel)
+                if (!TextUtils.isEmpty(groupName)){
+                    val groupID: String = firebaseRepository.getNewExpenseGroupID()
+                    val memberList =ArrayList<String>()
+                    memberList.add(FirebaseAuth.getInstance().currentUser!!.displayName!!)
+                    Log.d("TAG", "setupAlertDialog: Display name ${FirebaseAuth.getInstance().currentUser!!.displayName!!}")
+                    val expenseGroupModel = ExpenseGroupModel(
+                        groupID,
+                        groupName,
+                        "",
+                        1,
+                        FirebaseAuth.getInstance().currentUser!!.uid,
+                        memberList,
+                        getTimestamp()
+                    )
+                    Log.d("TAG", "setupAlertDialog: Model $expenseGroupModel")
+                    calculateExpenseViewModel._addNewExpenseGroupToFirebaseFirestore(expenseGroupModel)
+                }
             }
             .show()
     }

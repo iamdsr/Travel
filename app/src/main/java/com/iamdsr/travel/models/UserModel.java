@@ -1,7 +1,13 @@
 package com.iamdsr.travel.models;
 
+import java.util.Objects;
+
 public class UserModel {
     private String id, full_name, username, email, full_name_lowercase;
+
+    public UserModel(){
+
+    }
 
     public UserModel(String id, String full_name, String username, String email, String full_name_lowercase) {
         this.id = id;
@@ -50,4 +56,13 @@ public class UserModel {
     public void setFull_name_lowercase(String full_name_lowercase) {
         this.full_name_lowercase = full_name_lowercase;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserModel userModel = (UserModel) o;
+        return id.equals(userModel.id) && full_name.equals(userModel.full_name) && username.equals(userModel.username) && email.equals(userModel.email) && full_name_lowercase.equals(userModel.full_name_lowercase);
+    }
+
 }

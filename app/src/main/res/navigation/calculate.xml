@@ -18,5 +18,14 @@
         android:id="@+id/expensesFragment"
         android:name="com.iamdsr.travel.calculateExpenses.ExpensesFragment"
         android:label="fragment_expenses"
-        tools:layout="@layout/fragment_expenses" />
+        tools:layout="@layout/fragment_expenses" >
+        <action
+            android:id="@+id/action_expensesFragment_to_searchMemberFragment"
+            app:destination="@id/searchMemberFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchMemberFragment"
+        android:name="com.iamdsr.travel.calculateExpenses.SearchMemberFragment"
+        android:label="fragment_search_member"
+        tools:layout="@layout/fragment_search_member" />
 </navigation>
