@@ -67,45 +67,62 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_regular"
-                    android:textSize="16sp"
                     android:paddingStart="8dp"
                     android:paddingTop="4dp"
                     android:paddingEnd="8dp"
                     android:text="Person 01\nPerson 02\nPerson 03\n+2 more..."
-                    app:layout_constraintTop_toBottomOf="@id/get_back_owes"
+                    android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/get_back_owes" />
+
+                <LinearLayout
+                    android:id="@+id/button_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <ImageView
-                    android:id="@+id/add_group_member"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:background="?android:attr/selectableItemBackgroundBorderless"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:padding="8dp"
-                    android:src="@drawable/ic_round_group_add"
-                    android:tooltipText="Add member"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/group_member_list">
 
-                <ImageView
-                    android:id="@+id/update_group_details"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:background="?android:attr/selectableItemBackgroundBorderless"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginEnd="8dp"
-                    android:padding="8dp"
-                    android:src="@drawable/ic_outline_edit"
-                    android:tooltipText="Edit Group"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/add_group_member" />
+                    <TextView
+                        android:id="@+id/add_group_member"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/round_corner_gray_border_bg"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:fontFamily="@font/roboto_bold"
+                        android:layout_margin="4dp"
+                        android:padding="8dp"
+                        android:text="Add Member"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        app:drawableStartCompat="@drawable/ic_round_group_add" />
+
+                    <TextView
+                        android:id="@+id/update_group_details"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/round_corner_gray_border_bg"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:fontFamily="@font/roboto_bold"
+                        android:layout_margin="4dp"
+                        android:padding="8dp"
+                        android:text="Update Group"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        app:drawableStartCompat="@drawable/ic_outline_edit" />
+                </LinearLayout>
+
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

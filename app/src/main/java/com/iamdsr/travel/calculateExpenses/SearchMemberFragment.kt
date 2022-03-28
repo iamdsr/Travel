@@ -1,5 +1,6 @@
 package com.iamdsr.travel.calculateExpenses
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextUtils
@@ -8,7 +9,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -82,20 +85,36 @@ class SearchMemberFragment : Fragment(), RecyclerViewActionsInterface{
         }
     }
 
-    private fun setDialogForSignOut(position: Int) {
-        MaterialAlertDialogBuilder(context!!)
-            .setTitle(resources.getString(R.string.add_member_to_group))
-            .setNegativeButton(resources.getString(R.string.cancel)) { dialog, which ->
-                // Respond to negative button press
-            }
-            .setPositiveButton(resources.getString(R.string.confirm)) { dialog, which ->
-                val addMemberMap: MutableMap<String, Any> = HashMap()
-                val searchMemberFragmentViewModel = ViewModelProvider(requireActivity())[SearchMemberFragmentViewModel::class.java]
-                addMemberMap["members"] = FieldValue.arrayUnion(searchedUserList[position].full_name)
-                Log.d("TAG", "addMemberToExpenseGroup: $groupID  $addMemberMap")
-                searchMemberFragmentViewModel._addMemberToExpenseGroupFirebaseFirestore(groupID, addMemberMap)
-            }
-            .show()
+    private fun setDialogToAddMember(position: Int) {
+
+        val inflater = this.layoutInflater
+        val dialogView: View = inflater.inflate(R.layout.layout_dialog_confirm_cancel, null)
+        val mDialogTitle  = dialogView.findViewById<View>(R.id.title) as TextView
+        val mDialogDesc  = dialogView.findViewById<View>(R.id.desc) as TextView
+        val mDialogCancelBtn  = dialogView.findViewById<View>(R.id.cancel) as Button
+        val mDialogConfirmBtn  = dialogView.findViewById<View>(R.id.confirm) as Button
+
+        mDialogTitle.setText(R.string.add_member_to_group)
+        mDialogDesc.setText(R.string.add_member_desc)
+
+        val builder = AlertDialog.Builder(context)
+        builder.setView(dialogView)
+        val dialog = builder.create()
+        dialog.show()
+
+        mDialogCancelBtn.setOnClickListener(View.OnClickListener {
+            dialog.dismiss()
+        })
+
+        mDialogConfirmBtn.setOnClickListener(View.OnClickListener {
+            val addMemberMap: MutableMap<String, Any> = HashMap()
+            val searchMemberFragmentViewModel = ViewModelProvider(requireActivity())[SearchMemberFragmentViewModel::class.java]
+            addMemberMap["members"] = FieldValue.arrayUnion(searchedUserList[position].full_name)
+            //Log.d("TAG", "addMemberToExpenseGroup: $groupID  $addMemberMap")
+            searchMemberFragmentViewModel._addMemberToExpenseGroupFirebaseFirestore(groupID, addMemberMap)
+            dialog.dismiss()
+        })
+
     }
 
     private fun initRecyclerView() {
@@ -107,7 +126,7 @@ class SearchMemberFragment : Fragment(), RecyclerViewActionsInterface{
 
     override fun onItemClick(view: View, position: Int) {
         if (FirebaseAuth.getInstance().currentUser?.uid != searchedUserList[position].id){
-            setDialogForSignOut(position)
+            setDialogToAddMember(position)
         }
     }
 

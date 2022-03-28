@@ -6,13 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import com.iamdsr.travel.R
 
 class ExpensesFragment : Fragment() {
 
     private var groupID: String = ""
-    private lateinit var mAddMember: ImageView
+    private lateinit var mAddMember: TextView
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_expenses, container, false)
     }

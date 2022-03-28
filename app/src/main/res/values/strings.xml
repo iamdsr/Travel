@@ -89,9 +89,11 @@
     <string name="group_name">Group name</string>
     <string name="create">Create</string>
     <string name="cancel">Close</string>
-    <string name="signout_message">Are you sure you want to Sign Out?</string>
+    <string name="sign_out_message">This action will sign you out of the app. Need a break? You can always come back later.</string>
+    <string name="sign_out_title">Sign Out</string>
     <string name="confirm">Confirm</string>
-    <string name="add_member_to_group">Add this member to group?</string>
+    <string name="add_member_to_group">Add to group</string>
     <string name="search_members_by_name">Search members by name</string>
+    <string name="add_member_desc">Adding a member to this group will include the member in all transactions henceforth.</string>
 
 </resources>
