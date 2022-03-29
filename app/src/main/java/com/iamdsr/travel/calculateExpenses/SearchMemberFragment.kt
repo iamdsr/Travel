@@ -12,11 +12,13 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.iamdsr.travel.R
@@ -32,11 +34,13 @@ class SearchMemberFragment : Fragment(), RecyclerViewActionsInterface{
     // Widgets
     private lateinit var mSearchUserRecyclerView: RecyclerView
     private lateinit var mSearchText: EditText
+    private lateinit var mRootLayout: CoordinatorLayout
 
     // Utils
     private lateinit var searchedUserList: List<UserModel>
     private lateinit var searchMemberRecyclerAdapter: SearchMemberRecyclerAdapter
     private var groupID: String = ""
+    private var groupCreatedByID: String = ""
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_search_member, container, false)
@@ -48,6 +52,7 @@ class SearchMemberFragment : Fragment(), RecyclerViewActionsInterface{
         initRecyclerView()
         if (arguments!=null){
             groupID = arguments!!.getString("EXPENSE_GROUP_ID","")
+            groupCreatedByID = arguments!!.getString("GROUP_CREATED_BY","")
         }
         Log.d("TAG", "onItemClick: $groupID")
         mSearchText.addTextChangedListener(object : TextWatcher {
@@ -82,6 +87,7 @@ class SearchMemberFragment : Fragment(), RecyclerViewActionsInterface{
         if (view!=null) {
             mSearchUserRecyclerView = view!!.findViewById(R.id.search_recycler_view)
             mSearchText = view!!.findViewById(R.id.search_text)
+            mRootLayout = view!!.findViewById(R.id.layout)
         }
     }
 
@@ -132,8 +138,13 @@ class SearchMemberFragment : Fragment(), RecyclerViewActionsInterface{
     }
 
     override fun onItemClick(view: View, position: Int) {
-        if (FirebaseAuth.getInstance().currentUser?.uid != searchedUserList[position].id){
-            setDialogToAddMember(searchedUserList[position])
+        if (FirebaseAuth.getInstance().currentUser?.uid == groupCreatedByID){
+            if (FirebaseAuth.getInstance().currentUser?.uid != searchedUserList[position].id){
+                setDialogToAddMember(searchedUserList[position])
+            }
+        }
+        else {
+            Snackbar.make(mRootLayout, "Only Group admins can add member.", Snackbar.LENGTH_LONG).show()
         }
     }
 

@@ -8,6 +8,7 @@
         <entry key="..\:/Users/DIPAYAN/AndroidStudioProjects/Travel/app/src/main/res/drawable-v24/selector_profile.xml" value="0.223" />
         <entry key="..\:/Users/DIPAYAN/AndroidStudioProjects/Travel/app/src/main/res/drawable-xhdpi/round_corner_gray_bg.xml" value="0.291" />
         <entry key="..\:/Users/DIPAYAN/AndroidStudioProjects/Travel/app/src/main/res/drawable/blue_circle_bg.xml" value="0.291" />
+        <entry key="..\:/Users/DIPAYAN/AndroidStudioProjects/Travel/app/src/main/res/drawable/gray_bottom_border_bg.xml" value="0.2735" />
         <entry key="..\:/Users/DIPAYAN/AndroidStudioProjects/Travel/app/src/main/res/drawable/ic_calculate.xml" value="0.223" />
         <entry key="..\:/Users/DIPAYAN/AndroidStudioProjects/Travel/app/src/main/res/drawable/ic_car_journey.xml" value="0.2735" />
         <entry key="..\:/Users/DIPAYAN/AndroidStudioProjects/Travel/app/src/main/res/drawable/ic_facebook_sign_in.xml" value="0.228" />
@@ -41,6 +42,7 @@
         <entry key="..\:/Users/DIPAYAN/AndroidStudioProjects/Travel/app/src/main/res/layout/activity_otp.xml" value="0.29473684210526313" />
         <entry key="..\:/Users/DIPAYAN/AndroidStudioProjects/Travel/app/src/main/res/layout/activity_phone_login.xml" value="0.29473684210526313" />
         <entry key="..\:/Users/DIPAYAN/AndroidStudioProjects/Travel/app/src/main/res/layout/activity_sign_up.xml" value="0.2909090909090909" />
+        <entry key="..\:/Users/DIPAYAN/AndroidStudioProjects/Travel/app/src/main/res/layout/fragment_add_expense.xml" value="0.29473684210526313" />
         <entry key="..\:/Users/DIPAYAN/AndroidStudioProjects/Travel/app/src/main/res/layout/fragment_add_hotel_check_in.xml" value="0.29473684210526313" />
         <entry key="..\:/Users/DIPAYAN/AndroidStudioProjects/Travel/app/src/main/res/layout/fragment_add_journey.xml" value="0.29473684210526313" />
         <entry key="..\:/Users/DIPAYAN/AndroidStudioProjects/Travel/app/src/main/res/layout/fragment_add_sightseeing.xml" value="0.29473684210526313" />
@@ -60,6 +62,7 @@
         <entry key="..\:/Users/DIPAYAN/AndroidStudioProjects/Travel/app/src/main/res/layout/layout_dialog_confirm_cancel.xml" value="0.29473684210526313" />
         <entry key="..\:/Users/DIPAYAN/AndroidStudioProjects/Travel/app/src/main/res/layout/layout_dialog_create_group.xml" value="0.29473684210526313" />
         <entry key="..\:/Users/DIPAYAN/AndroidStudioProjects/Travel/app/src/main/res/layout/layout_expense_group_item.xml" value="0.29473684210526313" />
+        <entry key="..\:/Users/DIPAYAN/AndroidStudioProjects/Travel/app/src/main/res/layout/layout_expense_item.xml" value="0.29473684210526313" />
         <entry key="..\:/Users/DIPAYAN/AndroidStudioProjects/Travel/app/src/main/res/layout/layout_itinerary_car_journey_first_item.xml" value="0.29473684210526313" />
         <entry key="..\:/Users/DIPAYAN/AndroidStudioProjects/Travel/app/src/main/res/layout/layout_itinerary_car_journey_item.xml" value="0.29473684210526313" />
         <entry key="..\:/Users/DIPAYAN/AndroidStudioProjects/Travel/app/src/main/res/layout/layout_itinerary_car_journey_last_item.xml" value="0.29473684210526313" />
