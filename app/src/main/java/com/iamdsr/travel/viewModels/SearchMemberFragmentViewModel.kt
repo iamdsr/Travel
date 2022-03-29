@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
+import com.google.firebase.firestore.SetOptions
 import com.iamdsr.travel.models.UserModel
 import com.iamdsr.travel.repositories.FirestoreRepository
 
@@ -16,8 +17,18 @@ class SearchMemberFragmentViewModel: ViewModel() {
     var firebaseRepository = FirestoreRepository()
     var users : MutableLiveData<List<UserModel>> = MutableLiveData()
 
-    fun _addMemberToExpenseGroupFirebaseFirestore(groupID: String, expenseGroupMap: MutableMap<String, Any>){
-        firebaseRepository.addMemberToExpenseGroupFirebaseFirestore(groupID).update(expenseGroupMap).addOnFailureListener {
+    fun _addMemberToExpenseGroupFirebaseFirestore(groupID: String,
+                                                  memberListMap: MutableMap<String, Any>,
+                                                  addIDMemberMap: MutableMap<String, MutableMap<String, Any>>,
+                                                  addMemberPayStatusMap: MutableMap<String, MutableMap<String, Any>>){
+
+        firebaseRepository.addMemberToExpenseGroupFirebaseFirestore(groupID).update(memberListMap).addOnFailureListener {
+            Log.e(ContentValues.TAG,"Failed to add user!")
+        }
+        firebaseRepository.addMemberToExpenseGroupFirebaseFirestore(groupID).set(addIDMemberMap as Map<String, Any>, SetOptions.merge()).addOnFailureListener {
+            Log.e(ContentValues.TAG,"Failed to add user!")
+        }
+        firebaseRepository.addMemberToExpenseGroupFirebaseFirestore(groupID).set(addMemberPayStatusMap as Map<String, Any>, SetOptions.merge()).addOnFailureListener {
             Log.e(ContentValues.TAG,"Failed to add user!")
         }
     }

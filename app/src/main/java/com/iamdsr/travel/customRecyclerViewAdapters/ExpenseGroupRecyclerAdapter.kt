@@ -1,6 +1,7 @@
 package com.iamdsr.travel.customRecyclerViewAdapters
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +15,6 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.iamdsr.travel.R
 import com.iamdsr.travel.interfaces.RecyclerViewActionsInterface
 import com.iamdsr.travel.models.ExpenseGroupModel
-import com.iamdsr.travel.models.TripModel
 
 class ExpenseGroupRecyclerAdapter(private val itemClickListener: RecyclerViewActionsInterface) : ListAdapter<ExpenseGroupModel, ExpenseGroupRecyclerAdapter.ExpenseGroupViewHolder>(ExpenseGroupDiffUtilCallback()){
 
@@ -50,17 +50,19 @@ class ExpenseGroupRecyclerAdapter(private val itemClickListener: RecyclerViewAct
             }
 
             mGroupName.text = model.name
-            var memberList: String = ""
+
+            var memberPayStatusList: String = ""
             var index = 0
-            for (member in model.members){
-                if (index <= 2)
-                    memberList += member+"\n"
+            for ((key, value) in model.members_payment_status) {
+                if (index <= 2) {
+                    Log.d("TAG", "bindView: $key = $value")
+                    memberPayStatusList = memberPayStatusList + key.split(" ")[0]+ " " + value + "\n"
+                }
                 else
                     break
                 index++
             }
-
-            mMemberList.text = memberList
+            mMemberList.text = memberPayStatusList
 
             itemView.setOnClickListener(View.OnClickListener {
                 itemClickListener.onItemClick(it, absoluteAdapterPosition)

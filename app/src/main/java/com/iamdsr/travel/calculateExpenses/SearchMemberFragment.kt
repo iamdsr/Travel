@@ -85,7 +85,7 @@ class SearchMemberFragment : Fragment(), RecyclerViewActionsInterface{
         }
     }
 
-    private fun setDialogToAddMember(position: Int) {
+    private fun setDialogToAddMember(userModel: UserModel) {
 
         val inflater = this.layoutInflater
         val dialogView: View = inflater.inflate(R.layout.layout_dialog_confirm_cancel, null)
@@ -108,10 +108,17 @@ class SearchMemberFragment : Fragment(), RecyclerViewActionsInterface{
 
         mDialogConfirmBtn.setOnClickListener(View.OnClickListener {
             val addMemberMap: MutableMap<String, Any> = HashMap()
+            val addIDMemberMap: MutableMap<String, MutableMap<String, Any>> = HashMap()
+            val addMemberPayStatusMap: MutableMap<String, MutableMap<String, Any>> = HashMap()
+            val iDNameMap:  MutableMap<String, Any> = HashMap()
+            val namePayStatMap:  MutableMap<String, Any> = HashMap()
             val searchMemberFragmentViewModel = ViewModelProvider(requireActivity())[SearchMemberFragmentViewModel::class.java]
-            addMemberMap["members"] = FieldValue.arrayUnion(searchedUserList[position].full_name)
-            //Log.d("TAG", "addMemberToExpenseGroup: $groupID  $addMemberMap")
-            searchMemberFragmentViewModel._addMemberToExpenseGroupFirebaseFirestore(groupID, addMemberMap)
+            addMemberMap["members_name"] = FieldValue.arrayUnion(userModel.full_name)
+            iDNameMap[userModel.id] = userModel.full_name
+            namePayStatMap[userModel.full_name] = ""
+            addIDMemberMap["members_id_name_map"] = iDNameMap
+            addMemberPayStatusMap["members_payment_status"] = namePayStatMap
+            searchMemberFragmentViewModel._addMemberToExpenseGroupFirebaseFirestore(groupID, addMemberMap, addIDMemberMap, addMemberPayStatusMap)
             dialog.dismiss()
         })
 
@@ -126,7 +133,7 @@ class SearchMemberFragment : Fragment(), RecyclerViewActionsInterface{
 
     override fun onItemClick(view: View, position: Int) {
         if (FirebaseAuth.getInstance().currentUser?.uid != searchedUserList[position].id){
-            setDialogToAddMember(position)
+            setDialogToAddMember(searchedUserList[position])
         }
     }
 

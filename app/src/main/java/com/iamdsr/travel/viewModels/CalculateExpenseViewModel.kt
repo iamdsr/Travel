@@ -26,7 +26,7 @@ class CalculateExpenseViewModel: ViewModel()  {
 
     fun _getAllSavedExpenseGroupsFromFirebaseFirestore(userName: String): LiveData<List<ExpenseGroupModel>> {
         firebaseRepository.getAllSavedExpenseGroupsFromFirebaseFirestore()
-            .whereArrayContains("members",userName)
+            .whereArrayContains("members_name",userName)
             .orderBy("timestamp", Query.Direction.DESCENDING)
             .addSnapshotListener(
                 EventListener<QuerySnapshot> { value, e ->

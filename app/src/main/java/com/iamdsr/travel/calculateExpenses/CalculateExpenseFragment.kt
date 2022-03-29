@@ -18,16 +18,14 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.iamdsr.travel.R
 import com.iamdsr.travel.customRecyclerViewAdapters.ExpenseGroupRecyclerAdapter
-import com.iamdsr.travel.customRecyclerViewAdapters.PlannedTripRecyclerAdapter
 import com.iamdsr.travel.interfaces.RecyclerViewActionsInterface
 import com.iamdsr.travel.models.ExpenseGroupModel
-import com.iamdsr.travel.models.TripModel
 import com.iamdsr.travel.repositories.FirestoreRepository
 import com.iamdsr.travel.viewModels.CalculateExpenseViewModel
-import com.iamdsr.travel.viewModels.PlanTripFragmentViewModel
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 
 class CalculateExpenseFragment : Fragment(), RecyclerViewActionsInterface{
@@ -85,6 +83,13 @@ class CalculateExpenseFragment : Fragment(), RecyclerViewActionsInterface{
                     val groupID: String = firebaseRepository.getNewExpenseGroupID()
                     val memberList =ArrayList<String>()
                     memberList.add(FirebaseAuth.getInstance().currentUser!!.displayName!!)
+
+                    val memberIDNameMap : MutableMap<String, Any> = mutableMapOf()
+                    memberIDNameMap[FirebaseAuth.getInstance().currentUser!!.uid] = FirebaseAuth.getInstance().currentUser!!.displayName!!
+
+                    val memberPayStatusMap : MutableMap<String, Any> = mutableMapOf()
+                    memberPayStatusMap[FirebaseAuth.getInstance().currentUser!!.displayName!!] = ""
+
                     Log.d("TAG", "setupAlertDialog: Display name ${FirebaseAuth.getInstance().currentUser!!.displayName!!}")
                     val expenseGroupModel = ExpenseGroupModel(
                         groupID,
@@ -93,6 +98,8 @@ class CalculateExpenseFragment : Fragment(), RecyclerViewActionsInterface{
                         1,
                         FirebaseAuth.getInstance().currentUser!!.uid,
                         memberList,
+                        memberIDNameMap,
+                        memberPayStatusMap,
                         getTimestamp()
                     )
                     Log.d("TAG", "setupAlertDialog: Model $expenseGroupModel")
@@ -120,7 +127,7 @@ class CalculateExpenseFragment : Fragment(), RecyclerViewActionsInterface{
         bundle.putString("EXPENSE_GROUP_ID",  expenseGroupList[position].id)
         bundle.putString("EXPENSE_GROUP_NAME",  expenseGroupList[position].name)
         bundle.putString("EXPENSE_GROUP_IMAGE_URL",expenseGroupList[position].group_image_url)
-        bundle.putStringArrayList("EXPENSE_GROUP_MEMBERS",  expenseGroupList[position].members)
+        bundle.putStringArrayList("EXPENSE_GROUP_MEMBERS",  expenseGroupList[position].members_name)
         bundle.putLong("EXPENSE_GROUP_MEMBER_COUNT",  expenseGroupList[position].member_count)
         bundle.putString("GROUP_CREATED_BY", expenseGroupList[position].created_by_id)
         findNavController().navigate(R.id.action_calculateExpenseFragment_to_expensesFragment, bundle)
