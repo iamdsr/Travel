@@ -20,6 +20,7 @@ import com.iamdsr.travel.R
 import com.iamdsr.travel.customRecyclerViewAdapters.ExpenseGroupRecyclerAdapter
 import com.iamdsr.travel.interfaces.RecyclerViewActionsInterface
 import com.iamdsr.travel.models.ExpenseGroupModel
+import com.iamdsr.travel.repositories.CalculateExpenseFirebaseRepository
 import com.iamdsr.travel.repositories.FirestoreRepository
 import com.iamdsr.travel.viewModels.CalculateExpenseViewModel
 import java.text.SimpleDateFormat
@@ -76,7 +77,7 @@ class CalculateExpenseFragment : Fragment(), RecyclerViewActionsInterface{
             }
             .setPositiveButton(resources.getString(R.string.create)) { dialog, which ->
                 val calculateExpenseViewModel = ViewModelProvider(this)[CalculateExpenseViewModel::class.java]
-                val firebaseRepository = FirestoreRepository()
+                val firebaseRepository = CalculateExpenseFirebaseRepository()
                 val mGroupName = dialogView.findViewById<View>(R.id.group_name) as TextInputEditText
                 val groupName: String = mGroupName.text.toString().trim()
                 if (!TextUtils.isEmpty(groupName)){
@@ -124,12 +125,7 @@ class CalculateExpenseFragment : Fragment(), RecyclerViewActionsInterface{
 
     override fun onItemClick(view: View, position: Int) {
         val bundle = Bundle()
-        bundle.putString("EXPENSE_GROUP_ID",  expenseGroupList[position].id)
-        bundle.putString("EXPENSE_GROUP_NAME",  expenseGroupList[position].name)
-        bundle.putString("EXPENSE_GROUP_IMAGE_URL",expenseGroupList[position].group_image_url)
-        bundle.putStringArrayList("EXPENSE_GROUP_MEMBERS",  expenseGroupList[position].members_name)
-        bundle.putLong("EXPENSE_GROUP_MEMBER_COUNT",  expenseGroupList[position].member_count)
-        bundle.putString("GROUP_CREATED_BY", expenseGroupList[position].created_by_id)
+        bundle.putSerializable("EXPENSE_GROUP_MODEL", expenseGroupList[position])
         findNavController().navigate(R.id.action_calculateExpenseFragment_to_expensesFragment, bundle)
     }
 }

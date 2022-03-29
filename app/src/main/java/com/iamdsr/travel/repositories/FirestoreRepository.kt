@@ -16,38 +16,7 @@ class FirestoreRepository {
     var firebaseFirestore = FirebaseFirestore.getInstance()
     var user = FirebaseAuth.getInstance().currentUser
 
-    // EXPENSES ----------------------------------------------------------------------------------------------------------------------------------------
-    //add new expense group
-    fun addNewExpenseGroupToFirebaseFirestore(expenseGroupModel: ExpenseGroupModel) : Task<Void>{
-        val documentReference = user?.let {
-            firebaseFirestore.collection("expense_groups")
-                .document(expenseGroupModel.id)
-        }
-        return documentReference!!.set(expenseGroupModel)
-    }
-
-    fun getNewExpenseGroupID(): String{
-        val documentReference = user?.let {
-            firebaseFirestore.collection("expense_groups")
-                .document()
-        }
-        return documentReference!!.id
-    }
-
-    fun getAllSavedExpenseGroupsFromFirebaseFirestore(): CollectionReference {
-        return firebaseFirestore.collection("expense_groups")
-    }
-
-    fun getSearchedUsersFromFirebaseFirestore(): CollectionReference {
-        return firebaseFirestore.collection("users")
-    }
-
-    fun addMemberToExpenseGroupFirebaseFirestore(groupID: String) : DocumentReference{
-        return firebaseFirestore.collection("expense_groups").document(groupID)
-    }
-
-
-    // ITINERARIES --------------------------------------------------------------------------------------------------------------------------------------
+// ITINERARIES --------------------------------------------------------------------------------------------------------------------------------------
     // save new itinerary to firebase
     fun addNewItineraryToFirebaseFirestore(itineraryModel: ItineraryModel) : Task<Void>{
         val documentReference = user?.let {

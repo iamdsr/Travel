@@ -22,10 +22,18 @@
         <action
             android:id="@+id/action_expensesFragment_to_searchMemberFragment"
             app:destination="@id/searchMemberFragment" />
+        <action
+            android:id="@+id/action_expensesFragment_to_addExpenseFragment"
+            app:destination="@id/addExpenseFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchMemberFragment"
         android:name="com.iamdsr.travel.calculateExpenses.SearchMemberFragment"
         android:label="fragment_search_member"
         tools:layout="@layout/fragment_search_member" />
+    <fragment
+        android:id="@+id/addExpenseFragment"
+        android:name="com.iamdsr.travel.calculateExpenses.AddExpenseFragment"
+        android:label="fragment_add_expense"
+        tools:layout="@layout/fragment_add_expense" />
 </navigation>

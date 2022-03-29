@@ -12,7 +12,7 @@ data class ExpenseModel(
     var split_among_members_count: Int,
     var expense_create_date: String,
     var expense_update_date: String,
-    var expense_calculation_map : MutableMap<String, Double>,
+    var expense_calculation_map : MutableMap<String, String>,
     var update_comments: MutableMap<String, Any>,
     var paid_by_ID: String,
     var group_name: String,

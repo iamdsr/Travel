@@ -1,5 +1,7 @@
 package com.iamdsr.travel.models
 
+import java.io.Serializable
+
 data class ExpenseGroupModel(
     var id: String,
     var name: String,
@@ -10,7 +12,7 @@ data class ExpenseGroupModel(
     var members_id_name_map: MutableMap<String, Any>,
     var members_payment_status: MutableMap<String, Any>,
     var timestamp: String
-) {
+) : Serializable {
     constructor() : this("", "", "", 0, "", arrayListOf(), mutableMapOf(), mutableMapOf(),"")
 
     override fun toString(): String {

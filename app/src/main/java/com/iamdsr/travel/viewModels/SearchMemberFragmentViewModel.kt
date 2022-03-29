@@ -10,11 +10,12 @@ import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.SetOptions
 import com.iamdsr.travel.models.UserModel
+import com.iamdsr.travel.repositories.CalculateExpenseFirebaseRepository
 import com.iamdsr.travel.repositories.FirestoreRepository
 
 class SearchMemberFragmentViewModel: ViewModel() {
 
-    var firebaseRepository = FirestoreRepository()
+    var firebaseRepository = CalculateExpenseFirebaseRepository()
     var users : MutableLiveData<List<UserModel>> = MutableLiveData()
 
     fun _addMemberToExpenseGroupFirebaseFirestore(groupID: String,
