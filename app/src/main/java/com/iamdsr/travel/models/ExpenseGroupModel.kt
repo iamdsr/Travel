@@ -10,7 +10,7 @@ data class ExpenseGroupModel(
     var created_by_id: String,
     var members_name: ArrayList<String>,
     var members_id_name_map: MutableMap<String, Any>,
-    var members_payment_status: MutableMap<String, Any>,
+    var members_payment_status: MutableMap<String, Double>,
     var timestamp: String
 ) : Serializable {
     constructor() : this("", "", "", 0, "", arrayListOf(), mutableMapOf(), mutableMapOf(),"")

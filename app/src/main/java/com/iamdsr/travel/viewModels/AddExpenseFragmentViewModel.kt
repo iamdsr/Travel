@@ -5,9 +5,8 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.google.firebase.firestore.EventListener
-import com.google.firebase.firestore.Query
-import com.google.firebase.firestore.QuerySnapshot
+import com.google.firebase.firestore.*
+import com.iamdsr.travel.interfaces.MyFirestoreInterface
 import com.iamdsr.travel.models.ExpenseGroupModel
 import com.iamdsr.travel.models.ExpenseModel
 import com.iamdsr.travel.repositories.CalculateExpenseFirebaseRepository
@@ -16,6 +15,31 @@ class AddExpenseFragmentViewModel: ViewModel(){
 
     var firebaseRepository = CalculateExpenseFirebaseRepository()
     var savedExpenses : MutableLiveData<List<ExpenseModel>> = MutableLiveData()
+    var expenseGroupModel = ExpenseGroupModel()
+
+    // get member pay status
+    fun _getMembersPayStatusFromGroup(groupID: String, myFirestoreInterface: MyFirestoreInterface){
+        firebaseRepository.getMembersPayStatusFromGroup(groupID)
+            .get()
+            .addOnCompleteListener{ task ->
+                if (task.isSuccessful) {
+                    val model = task.result.toObject(ExpenseGroupModel::class.java)
+                    if (model!=null){
+                        myFirestoreInterface.onExpenseGroupModelUpdateCallback(model)
+                    }
+                }
+            }
+    }
+
+    // update members payment status
+    fun _updateMemberPaymentsToFirebaseFirestore(expenseGroupModel: ExpenseGroupModel,
+                                                 addMemberPayStatusMap: MutableMap<String, MutableMap<String, Double>>){
+
+        firebaseRepository.updateMemberPaymentsToFirebaseFirestore(expenseGroupModel).
+        set(addMemberPayStatusMap as Map<String, Any>, SetOptions.merge()).addOnFailureListener {
+            Log.e(ContentValues.TAG,"Failed to add user!")
+        }
+    }
 
     // Add new Expense to Firebase Database
     fun _addNewExpenseToFirebaseFirestore(expenseModel: ExpenseModel){

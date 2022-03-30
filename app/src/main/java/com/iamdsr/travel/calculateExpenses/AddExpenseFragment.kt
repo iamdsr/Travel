@@ -11,14 +11,13 @@ import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.MultiAutoCompleteTextView
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputEditText
 import com.iamdsr.travel.R
+import com.iamdsr.travel.interfaces.MyFirestoreInterface
 import com.iamdsr.travel.models.ExpenseGroupModel
 import com.iamdsr.travel.models.ExpenseModel
 import com.iamdsr.travel.repositories.CalculateExpenseFirebaseRepository
 import com.iamdsr.travel.viewModels.AddExpenseFragmentViewModel
-import com.iamdsr.travel.viewModels.PlanTripFragmentViewModel
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -67,7 +66,7 @@ class AddExpenseFragment : Fragment() {
         val expenseAmount = mExpenseAmount.text.toString().trim().toDouble()
         val memberCount = divideAmong.split(",").size-1
         val paidByID = expenseGroupModel.members_id_name_map.filterValues { it == paidBy.trim() }.keys.iterator().next()
-        val splitAmongMembersMap = mutableMapOf<String, Any>()
+        val splitAmongMembersMap = mutableMapOf<String, String>()
         for (member in divideAmong.split(",")){
             if (expenseGroupModel.members_id_name_map.filterValues { it == member.trim() }.keys.iterator().hasNext()){
                 val memberID = expenseGroupModel.members_id_name_map.filterValues { it == member.trim() }.keys.iterator().next()
@@ -75,15 +74,15 @@ class AddExpenseFragment : Fragment() {
             }
         }
 
-        val memberPaymentCalcMap = mutableMapOf<String, String>()
+        val memberPaymentCalcMap = mutableMapOf<String, Double>()
         for (member in divideAmong.split(",")){
             if (expenseGroupModel.members_id_name_map.filterValues { it == member.trim() }.keys.iterator().hasNext()){
                 val memberID = expenseGroupModel.members_id_name_map.filterValues { it == member.trim() }.keys.iterator().next()
                 if (memberID == paidByID){
-                    memberPaymentCalcMap[member] = "Lent ₹"+expenseAmount/memberCount
+                    memberPaymentCalcMap["$memberID-Lent"] = (expenseAmount/memberCount)
                 }
                 else{
-                    memberPaymentCalcMap[member] = "Borrowed ₹"+expenseAmount/memberCount
+                    memberPaymentCalcMap["$memberID-Borrowed"] = (expenseAmount/memberCount)
                 }
             }
         }
@@ -108,7 +107,54 @@ class AddExpenseFragment : Fragment() {
         )
         val addExpenseFragmentViewModel = ViewModelProvider(this)[AddExpenseFragmentViewModel::class.java]
         addExpenseFragmentViewModel._addNewExpenseToFirebaseFirestore(expenseModel)
-        findNavController().navigateUp()
+        updateExpenseGroup(memberPaymentCalcMap, paidByID)
+    }
+
+    private fun updateExpenseGroup(memberPaymentCalcMap: MutableMap<String, Double>, paidByID: String){
+
+        val addExpenseFragmentViewModel = ViewModelProvider(this)[AddExpenseFragmentViewModel::class.java]
+        val groupPayStatusMap : MutableMap<String, MutableMap<String, Double>> = mutableMapOf()
+        val tempMap: MutableMap<String, Double> = mutableMapOf()
+        addExpenseFragmentViewModel._getMembersPayStatusFromGroup(expenseGroupModel.id,
+            object : MyFirestoreInterface {
+                override fun onExpenseGroupModelUpdateCallback(model: ExpenseGroupModel) {
+
+                    for ((memberIDDB, payStatusDB) in model.members_payment_status) {
+                        for ((memberIDCurr, payStatusCurr) in memberPaymentCalcMap){
+
+                            if (memberIDCurr == memberIDDB){
+
+                                if (memberIDDB.trim().split("-")[0] == paidByID){
+
+                                    if (payStatusDB != 0.0){
+
+                                        val amt = (payStatusDB + payStatusCurr)
+                                        tempMap[memberIDDB] = amt
+                                    }
+                                    else {
+                                        tempMap[memberIDDB] = payStatusCurr
+                                    }
+                                }
+                                else {
+
+                                    if (payStatusDB != 0.0){
+
+                                        val amt = (payStatusDB + payStatusCurr)
+                                        tempMap[memberIDDB] = amt
+                                    }
+                                    else {
+                                        tempMap[memberIDDB] = payStatusCurr
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    groupPayStatusMap["members_payment_status"] = tempMap
+                    Log.d("TAG", "onExpenseGroupModelUpdateCallback: groupPayStatusMap $groupPayStatusMap")
+                    addExpenseFragmentViewModel._updateMemberPaymentsToFirebaseFirestore(expenseGroupModel, groupPayStatusMap)
+                }
+            })
+        //findNavController().navigateUp()
     }
 
     private fun getTimestamp(): String {

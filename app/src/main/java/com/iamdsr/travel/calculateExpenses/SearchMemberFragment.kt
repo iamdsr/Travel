@@ -115,13 +115,14 @@ class SearchMemberFragment : Fragment(), RecyclerViewActionsInterface{
         mDialogConfirmBtn.setOnClickListener(View.OnClickListener {
             val addMemberMap: MutableMap<String, Any> = HashMap()
             val addIDMemberMap: MutableMap<String, MutableMap<String, Any>> = HashMap()
-            val addMemberPayStatusMap: MutableMap<String, MutableMap<String, Any>> = HashMap()
+            val addMemberPayStatusMap: MutableMap<String, MutableMap<String, Double>> = HashMap()
             val iDNameMap:  MutableMap<String, Any> = HashMap()
-            val namePayStatMap:  MutableMap<String, Any> = HashMap()
+            val namePayStatMap:  MutableMap<String, Double> = HashMap()
             val searchMemberFragmentViewModel = ViewModelProvider(requireActivity())[SearchMemberFragmentViewModel::class.java]
             addMemberMap["members_name"] = FieldValue.arrayUnion(userModel.full_name)
             iDNameMap[userModel.id] = userModel.full_name
-            namePayStatMap[userModel.full_name] = ""
+            namePayStatMap[userModel.id+"-Borrowed"] = 0.0
+            namePayStatMap[userModel.id+"-Lent"] = 0.0
             addIDMemberMap["members_id_name_map"] = iDNameMap
             addMemberPayStatusMap["members_payment_status"] = namePayStatMap
             searchMemberFragmentViewModel._addMemberToExpenseGroupFirebaseFirestore(groupID, addMemberMap, addIDMemberMap, addMemberPayStatusMap)

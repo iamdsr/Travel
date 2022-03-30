@@ -3,6 +3,7 @@ package com.iamdsr.travel.repositories
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.CollectionReference
+import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.iamdsr.travel.models.ExpenseGroupModel
@@ -13,6 +14,22 @@ class CalculateExpenseFirebaseRepository {
     var user = FirebaseAuth.getInstance().currentUser
 
     // Expense firebase methods -----------------------------------------------------------------------------------------------------
+
+    fun updateMemberPaymentsToFirebaseFirestore(expenseGroupModel: ExpenseGroupModel) :DocumentReference {
+        val documentReference = user?.let {
+            firebaseFirestore.collection("expense_groups")
+                .document(expenseGroupModel.id)
+        }
+        return documentReference!!
+    }
+
+    fun getMembersPayStatusFromGroup(groupID: String) : DocumentReference{
+        val documentReference = user?.let {
+            firebaseFirestore.collection("expense_groups")
+                .document(groupID)
+        }
+        return documentReference!!
+    }
 
     fun addNewExpenseToFirebaseFirestore(expenseModel: ExpenseModel) : Task<Void> {
         val documentReference = user?.let {

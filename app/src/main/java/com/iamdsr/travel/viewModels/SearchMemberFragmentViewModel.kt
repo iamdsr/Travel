@@ -21,7 +21,7 @@ class SearchMemberFragmentViewModel: ViewModel() {
     fun _addMemberToExpenseGroupFirebaseFirestore(groupID: String,
                                                   memberListMap: MutableMap<String, Any>,
                                                   addIDMemberMap: MutableMap<String, MutableMap<String, Any>>,
-                                                  addMemberPayStatusMap: MutableMap<String, MutableMap<String, Any>>){
+                                                  addMemberPayStatusMap: MutableMap<String, MutableMap<String, Double>>){
 
         firebaseRepository.addMemberToExpenseGroupFirebaseFirestore(groupID).update(memberListMap).addOnFailureListener {
             Log.e(ContentValues.TAG,"Failed to add user!")

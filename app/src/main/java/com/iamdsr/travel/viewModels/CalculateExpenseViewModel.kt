@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
+import com.google.firebase.firestore.SetOptions
 import com.iamdsr.travel.models.ExpenseGroupModel
 import com.iamdsr.travel.models.ItineraryModel
 import com.iamdsr.travel.repositories.CalculateExpenseFirebaseRepository
@@ -17,7 +18,6 @@ class CalculateExpenseViewModel: ViewModel()  {
 
     var firebaseRepository = CalculateExpenseFirebaseRepository()
     var savedExpenseGroups : MutableLiveData<List<ExpenseGroupModel>> = MutableLiveData()
-
     // Add new Expense group to Firebase Database
     fun _addNewExpenseGroupToFirebaseFirestore(expenseGroupModel: ExpenseGroupModel){
         firebaseRepository.addNewExpenseGroupToFirebaseFirestore(expenseGroupModel).addOnFailureListener {

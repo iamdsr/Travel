@@ -43,6 +43,7 @@ class ExpensesFragment : Fragment() {
         mAddMember.setOnClickListener(View.OnClickListener {
             val bundle = Bundle()
             bundle.putString("EXPENSE_GROUP_ID",  groupID)
+            bundle.putString("GROUP_CREATED_BY",expenseGroupModel.created_by_id)
             findNavController().navigate(R.id.action_expensesFragment_to_searchMemberFragment, bundle)
         })
     }
