@@ -2,6 +2,9 @@ package com.iamdsr.travel.utils
 
 class AppConstants {
     companion object {
+        const val SYSTEM_DEFAULT_THEME: Int = 2
+        const val DARK_THEME: Int = 1
+        const val LIGHT_THEME: Int = 0
         const val HOTEL_CHECK_IN_FIRST_ITEM: Int= 1
         const val HOTEL_CHECK_IN_ITEM: Int= 2
         const val HOTEL_CHECK_IN_LAST_ITEM: Int= 3

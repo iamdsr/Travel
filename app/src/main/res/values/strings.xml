@@ -95,5 +95,8 @@
     <string name="add_member_to_group">Add to group</string>
     <string name="search_members_by_name">Search members by name</string>
     <string name="add_member_desc">Adding a member to this group will include the member in all transactions henceforth.</string>
+    <string name="light_theme">Light Theme</string>
+    <string name="dark_theme">Dark Theme</string>
+    <string name="system_default_theme">System Default Theme</string>
 
 </resources>

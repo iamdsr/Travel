@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.MultiAutoCompleteTextView
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.textfield.TextInputEditText
 import com.iamdsr.travel.R
@@ -152,6 +153,10 @@ class AddExpenseFragment : Fragment() {
                     groupPayStatusMap["members_payment_status"] = tempMap
                     Log.d("TAG", "onExpenseGroupModelUpdateCallback: groupPayStatusMap $groupPayStatusMap")
                     addExpenseFragmentViewModel._updateMemberPaymentsToFirebaseFirestore(expenseGroupModel, groupPayStatusMap)
+                }
+
+                override fun onExpenseGroupModelUpdateLiveDataCallback(liveData: MutableLiveData<ExpenseGroupModel?>) {
+
                 }
             })
         //findNavController().navigateUp()

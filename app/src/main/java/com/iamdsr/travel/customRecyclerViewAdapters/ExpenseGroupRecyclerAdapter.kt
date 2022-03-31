@@ -12,9 +12,12 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.google.firebase.auth.FirebaseAuth
 import com.iamdsr.travel.R
 import com.iamdsr.travel.interfaces.RecyclerViewActionsInterface
 import com.iamdsr.travel.models.ExpenseGroupModel
+import java.math.RoundingMode
+import java.text.DecimalFormat
 
 class ExpenseGroupRecyclerAdapter(private val itemClickListener: RecyclerViewActionsInterface) : ListAdapter<ExpenseGroupModel, ExpenseGroupRecyclerAdapter.ExpenseGroupViewHolder>(ExpenseGroupDiffUtilCallback()){
 
@@ -48,25 +51,32 @@ class ExpenseGroupRecyclerAdapter(private val itemClickListener: RecyclerViewAct
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(mGroupImage)
             }
-
             mGroupName.text = model.name
 
-            var memberPayStatusList: String = ""
-            var index = 0
-            for ((key, value) in model.members_payment_status) {
-                if (index <= 2) {
-                    Log.d("TAG", "bindView: $key = $value")
-                    memberPayStatusList = memberPayStatusList + key.split(" ")[0]+ " " + value + "\n"
+            // set highlight message
+            var msg = ""
+            for ((memberID, amt) in model.members_payment_status){
+                if (memberID.split("-")[0] == FirebaseAuth.getInstance().currentUser!!.uid) {
+                    msg += if (memberID.split("-")[1] == "Borrowed"){
+                        "You borrowed ₹${roundOffDecimal(amt)} in total\n"
+                    } else{
+                        "You lent ₹${roundOffDecimal(amt)} in total\n"
+                    }
                 }
-                else
-                    break
-                index++
             }
-            mMemberList.text = memberPayStatusList
+            mHighlightMessage.text = msg
+
+
 
             itemView.setOnClickListener(View.OnClickListener {
                 itemClickListener.onItemClick(it, absoluteAdapterPosition)
             })
+        }
+
+        private fun roundOffDecimal(number: Double): Double {
+            val df = DecimalFormat("#.##")
+            df.roundingMode = RoundingMode.CEILING
+            return df.format(number).toDouble()
         }
 
     }

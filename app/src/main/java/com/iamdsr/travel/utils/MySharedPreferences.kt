@@ -24,4 +24,14 @@ open class MySharedPreferences(context: Context) {
         val json: String? = sharedPreferences.getString("TRIP_MODEL", "")
         return gson.fromJson(json, TripModel::class.java)
     }
+
+    open fun setAppTheme(state: Int) {
+        val editor: SharedPreferences.Editor = sharedPreferences.edit()
+        editor.putInt("NightMode", state)
+        editor.apply()
+    }
+
+    open fun getAppTheme(): Int {
+        return sharedPreferences.getInt("NightMode", AppConstants.SYSTEM_DEFAULT_THEME)
+    }
 }

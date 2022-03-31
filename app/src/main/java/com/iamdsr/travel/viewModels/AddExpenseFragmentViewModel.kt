@@ -16,8 +16,22 @@ class AddExpenseFragmentViewModel: ViewModel(){
     var firebaseRepository = CalculateExpenseFirebaseRepository()
     var savedExpenses : MutableLiveData<List<ExpenseModel>> = MutableLiveData()
     var expenseGroupModel = ExpenseGroupModel()
+    var liveDataExpenseGroupModel: MutableLiveData<ExpenseGroupModel?> = MutableLiveData()
 
     // get member pay status
+    fun _getMembersPayStatusLiveDataFromGroup(groupID: String, myFirestoreInterface: MyFirestoreInterface){
+        firebaseRepository.getMembersPayStatusFromGroup(groupID)
+            .get()
+            .addOnCompleteListener{ task ->
+                if (task.isSuccessful) {
+                    val model = task.result.toObject(ExpenseGroupModel::class.java)
+                    if (model!=null){
+                        liveDataExpenseGroupModel.value = model
+                        myFirestoreInterface.onExpenseGroupModelUpdateLiveDataCallback(liveDataExpenseGroupModel)
+                    }
+                }
+            }
+    }
     fun _getMembersPayStatusFromGroup(groupID: String, myFirestoreInterface: MyFirestoreInterface){
         firebaseRepository.getMembersPayStatusFromGroup(groupID)
             .get()
