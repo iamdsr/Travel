@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.iamdsr.travel.R
 import com.iamdsr.travel.customRecyclerViewAdapters.ItineraryRecyclerAdapter
@@ -59,7 +60,7 @@ class TimelineFragment : Fragment() {
     }
 
     private fun setupDialog() {
-        val builder = AlertDialog.Builder(context)
+        val builder = MaterialAlertDialogBuilder(context!!)
         builder.setTitle("Select Itinerary Type")
 
         val animals = arrayOf("Travel to Destination", "Hotel Check-In", "Roam nearby/ Sightseeing ")

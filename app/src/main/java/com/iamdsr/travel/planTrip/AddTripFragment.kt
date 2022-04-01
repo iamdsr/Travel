@@ -82,7 +82,7 @@ class AddTripFragment : Fragment() {
                 && !TextUtils.isEmpty(to) && !TextUtils.isEmpty(jDate) && !TextUtils.isEmpty(rDate) && !TextUtils.isEmpty(totalPerson) && !TextUtils.isEmpty(journeyMode)) {
 
                 progressBar?.visibility = View.VISIBLE
-                var firebaseRepository = FirestoreRepository()
+                val firebaseRepository = FirestoreRepository()
                 val tripModel = TripModel(
                     firebaseRepository.getNewTripID(),
                     title,
