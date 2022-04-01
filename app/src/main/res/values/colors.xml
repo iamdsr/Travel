@@ -14,7 +14,7 @@
 
     <color name="tertiary">#725472</color>
     <color name="onTertiary">#FFFFFF</color>
-    <color name="tertiaryContainer">#FDD6FA</color>
+    <color name="tertiaryContainer">#DBBBD9</color>
     <color name="onTertiaryContainer">#2A122C</color>
 
     <!-- Neutral colors -->

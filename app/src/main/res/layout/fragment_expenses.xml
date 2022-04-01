@@ -99,7 +99,7 @@
 
                         <Button
                             android:id="@+id/add_group_member"
-                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                            style="@style/Widget.Material3.Button"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -109,12 +109,9 @@
                             android:gravity="center"
                             android:padding="16dp"
                             android:text="Add Member"
-                            app:cornerRadius="16dp"
-                            app:icon="@drawable/ic_round_group_add"
-                            app:strokeColor="@color/primary"
-                            app:strokeWidth="2dp" />
+                            app:icon="@drawable/ic_round_group_add"/>
 
-                        <Button
+                        <com.google.android.material.button.MaterialButton
                             android:id="@+id/update_group_details"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -124,11 +121,8 @@
                             android:fontFamily="@font/roboto_bold"
                             android:gravity="center"
                             android:padding="16dp"
-                            app:strokeWidth="2dp"
-                            app:strokeColor="@color/primary"
-                            app:cornerRadius="16dp"
                             app:icon="@drawable/ic_outline_edit"
-                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                            style="@style/Widget.Material3.Button.ElevatedButton.Icon"
                             android:text="Update Group" />
 
                     </LinearLayout>
@@ -138,7 +132,7 @@
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/collapsing_toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="wrap_content"
                 app:layout_collapseMode="parallax"/>
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>

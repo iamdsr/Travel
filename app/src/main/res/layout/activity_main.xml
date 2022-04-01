@@ -21,6 +21,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:menu="@menu/bottom_nav_menu"
+        app:itemRippleColor="@null"
+        style="@style/Widget.Material3.BottomNavigationView.ActiveIndicator"
         android:layout_gravity="bottom"
         app:labelVisibilityMode="labeled"/>
 

@@ -186,18 +186,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/container">
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/update"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_margin="4dp"
-                    android:drawablePadding="8dp"
-                    style="@style/Widget.Material3.Button.OutlinedButton.Icon"
-                    app:icon="@drawable/ic_update"
-                    android:padding="16dp"
-                    android:text="@string/update_plan" />
-
-                <com.google.android.material.button.MaterialButton
                     android:id="@+id/addItinerary"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -205,8 +193,23 @@
                     android:layout_margin="4dp"
                     android:drawablePadding="8dp"
                     app:icon="@drawable/ic_backpack"
+                    style="@style/Widget.Material3.Button.OutlinedButton.Icon"
                     android:padding="16dp"
                     android:text="@string/add_itinerary"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/update"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_margin="4dp"
+                    android:drawablePadding="8dp"
+                    style="@style/Widget.Material3.Button.TextButton"
+                    app:icon="@drawable/ic_update"
+                    android:padding="16dp"
+                    android:text="@string/update_plan" />
+
+
 
             </LinearLayout>
 
