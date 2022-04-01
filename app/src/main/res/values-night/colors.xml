@@ -1,29 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="primary">#1976d2</color>
-    <color name="primary_dark">#004ba0</color>
-    <color name="primary_light">#BED7FA</color>
 
-    <color name="secondary">#1976d2</color>
-    <color name="secondary_dark">#004ba0</color>
-    <color name="secondary_light">#BED7FA</color>
+    <!-- Key colors -->
+    <color name="primary">#AFC6FF</color>
+    <color name="onPrimary">#002C72</color>
+    <color name="primaryContainer">#0F4296</color>
+    <color name="onPrimaryContainer">#D8E2FF</color>
 
-    <color name="surface">#1C2225</color>
-    <color name="background">#181F22</color>
-    <color name="onSurface">#ffffff</color>
-    <color name="onBackground">#ffffff</color>
+    <color name="secondary">#C0C6DC</color>
+    <color name="onSecondary">#293042</color>
+    <color name="secondaryContainer">#404659</color>
+    <color name="onSecondaryContainer">#DCE2F9</color>
 
-    <color name="error">#D50000</color>
+    <color name="tertiary">#E0BBDE</color>
+    <color name="onTertiary">#412842</color>
+    <color name="tertiaryContainer">#593D59</color>
+    <color name="onTertiaryContainer">#FDD6FA</color>
+
+    <!-- Neutral colors -->
+    <color name="surface">#1B1B1E</color>
+    <color name="onSurface">#E4E2E6</color>
+    <color name="surfaceVariant">#44464E</color>
+    <color name="onSurfaceVariant">#C5C6D0</color>
+    <color name="background">#1B1B1E</color>
+    <color name="OnBackground">#E4E2E6</color>
+    <color name="outline">#8E9099</color>
+
+    <!-- Additional colors -->
+    <color name="error">#FFB4A9</color>
+    <color name="onError">#680003</color>
+    <color name="errorContainer">#930006</color>
+    <color name="onErrorContainer">#FFDAD4</color>
+
+    <color name="inverseOnSurface">#1B1B1E</color>
+    <color name="inverseSurface">#E4E2E6</color>
+    <color name="inversePrimary">#325BAF</color>
+    <color name="shadow">#000000</color>
+    <color name="primaryInverse">#325BAF</color>
+
     <color name="acceptance_colour">#107B49</color>
 
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="gray">#C2C6C8</color>
-    <color name="inverse_dark">#FFFFFF</color>
-    <color name="blue_gray_light">#DFE4E9</color>
-
-    <color name="day_night_gray">#C2C6C8</color>
-    <color name="primary_day_night">#63a4ff</color>
 
     <!-- Itinerary colors -->
     <color name="sight_seeing_bg">#00695c</color>

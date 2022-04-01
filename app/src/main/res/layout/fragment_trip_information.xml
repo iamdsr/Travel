@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_black"
             android:padding="4dp"
-            android:textColor="@color/primary_day_night"
+            android:textColor="@color/primary"
             android:textSize="32sp" />
 
         <TextView

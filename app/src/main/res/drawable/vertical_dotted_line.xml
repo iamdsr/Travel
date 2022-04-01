@@ -8,7 +8,7 @@
             <solid android:color="@android:color/transparent"/>
             <stroke
                 android:width="4dp"
-                android:color="@color/primary_day_night"
+                android:color="@color/outline"
                 android:dashGap="4dp"
                 android:dashWidth="16dp"/>
         </shape>

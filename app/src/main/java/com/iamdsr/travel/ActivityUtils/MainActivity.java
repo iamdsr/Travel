@@ -1,21 +1,16 @@
 package com.iamdsr.travel.ActivityUtils;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
+
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.iamdsr.travel.AppLaunchSetup.LoginActivity;
-import com.iamdsr.travel.AppLaunchSetup.SignUpActivity;
 import com.iamdsr.travel.R;
 
 public class MainActivity extends AppCompatActivity {

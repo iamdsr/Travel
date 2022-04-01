@@ -14,6 +14,8 @@
         android:layout_margin="8dp"
         app:cardElevation="4dp"
         app:cardCornerRadius="8dp"
+        android:backgroundTint="@color/surfaceVariant"
+        style="@style/Widget.Material3.CardView.Elevated"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,7 +30,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:textColor="@color/primary_day_night"
+                android:textColor="@color/primary"
                 android:fontFamily="@font/roboto_bold"
                 android:maxLines="2"
                 android:textSize="32sp"
@@ -183,43 +185,28 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/container">
 
-                <TextView
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/update"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_margin="4dp"
                     android:drawablePadding="8dp"
-                    android:background="@drawable/round_corner_gray_border_bg"
-                    android:fontFamily="@font/roboto_bold"
-                    android:gravity="center_vertical"
-                    android:padding="8dp"
-                    android:text="@string/update_plan"
-                    android:textSize="16sp"
-                    android:textColor="@color/primary_day_night"
-                    app:drawableStartCompat="@drawable/ic_update"
-                    app:drawableTint="@color/primary_day_night"
-                    tools:layout_editor_absoluteX="16dp"
-                    tools:layout_editor_absoluteY="94dp" />
+                    style="@style/Widget.Material3.Button.OutlinedButton.Icon"
+                    app:icon="@drawable/ic_update"
+                    android:padding="16dp"
+                    android:text="@string/update_plan" />
 
-                <TextView
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/addItinerary"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@drawable/round_corner_gray_border_bg"
-                    android:drawablePadding="8dp"
-                    android:fontFamily="@font/roboto_bold"
-                    android:gravity="center_vertical"
                     android:layout_margin="4dp"
-                    android:padding="8dp"
-                    android:text="@string/add_itinerary"
-                    app:drawableTint="@color/primary_day_night"
-                    android:textColor="@color/primary_day_night"
-                    android:textSize="16sp"
-                    app:drawableStartCompat="@drawable/ic_backpack"
-                    tools:layout_editor_absoluteX="313dp"
-                    tools:layout_editor_absoluteY="94dp" />
+                    android:drawablePadding="8dp"
+                    app:icon="@drawable/ic_backpack"
+                    android:padding="16dp"
+                    android:text="@string/add_itinerary"/>
 
             </LinearLayout>
 

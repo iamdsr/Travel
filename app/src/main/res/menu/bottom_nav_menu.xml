@@ -4,18 +4,22 @@
     <item
         android:id="@+id/stories"
         android:icon="@drawable/selector_stories"
+        android:enabled="true"
         android:title="@string/action_stories"/>
     <item
         android:id="@+id/plan"
         android:icon="@drawable/selector_plan_trip"
+        android:enabled="true"
         android:title="@string/action_plan"/>
 
     <item
         android:id="@+id/calculate"
         android:icon="@drawable/selector_calculate_expenses"
+        android:enabled="true"
         android:title="@string/action_calculate"/>
     <item
         android:id="@+id/profile"
         android:icon="@drawable/selector_profile"
+        android:enabled="true"
         android:title="@string/profile" />
 </menu>

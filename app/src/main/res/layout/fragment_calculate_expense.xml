@@ -33,7 +33,7 @@
             app:strokeWidth="2dp"
             android:padding="16dp"
             android:fontFamily="@font/roboto_medium"
-            app:strokeColor="@color/primary_day_night"
+            app:strokeColor="@color/primary"
             android:text="@string/create_new_group"
             app:icon="@drawable/ic_group"
             app:layout_constraintBottom_toBottomOf="parent"

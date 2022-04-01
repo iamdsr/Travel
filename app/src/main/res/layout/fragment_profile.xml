@@ -53,7 +53,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_bold"
                         android:text="@string/hint_username"
-                        android:textColor="@color/primary_day_night"
+                        android:textColor="@color/primary"
                         android:textSize="20sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toEndOf="@+id/user_image"
@@ -112,7 +112,7 @@
                         android:padding="16sp"
                         android:text="a.b@gmail.com"
                         app:drawableStartCompat="@drawable/ic_email"
-                        app:drawableTint="@color/primary_day_night" />
+                        app:drawableTint="@color/primary" />
 
                     <TextView
                         android:id="@+id/user_phone_number"
@@ -127,7 +127,7 @@
                         android:padding="16dp"
                         android:text="+91 9856510236"
                         app:drawableStartCompat="@drawable/ic_phone_outlined"
-                        app:drawableTint="@color/primary_day_night" />
+                        app:drawableTint="@color/primary" />
 
                     <TextView
                         android:id="@+id/sign_out"
@@ -142,7 +142,7 @@
                         android:padding="16dp"
                         android:text="Signout"
                         app:drawableStartCompat="@drawable/ic_sign_out"
-                        app:drawableTint="@color/primary_day_night" />
+                        app:drawableTint="@color/primary" />
                 </LinearLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -172,7 +172,7 @@
             android:padding="16sp"
             android:text="@string/my_stories"
             app:drawableStartCompat="@drawable/ic_stories_outlined"
-            app:drawableTint="@color/primary_day_night" />
+            app:drawableTint="@color/primary" />
 
         <TextView
             android:id="@+id/app_theme"
@@ -186,7 +186,7 @@
             android:gravity="center_vertical"
             android:padding="16dp"
             android:text="@string/app_theme"
-            app:drawableTint="@color/primary_day_night"
+            app:drawableTint="@color/primary"
             app:drawableStartCompat="@drawable/ic_app_theme" />
 
         <TextView
@@ -201,7 +201,7 @@
             android:gravity="center_vertical"
             android:padding="16dp"
             android:text="@string/app_language"
-            app:drawableTint="@color/primary_day_night"
+            app:drawableTint="@color/primary"
             app:drawableStartCompat="@drawable/ic_language" />
 
         <TextView
@@ -215,7 +215,7 @@
             android:fontFamily="@font/roboto_medium"
             android:gravity="center_vertical"
             android:padding="16dp"
-            app:drawableTint="@color/primary_day_night"
+            app:drawableTint="@color/primary"
             android:text="@string/settings_ask_a_question"
             app:drawableStartCompat="@drawable/ic_question" />
 
@@ -230,7 +230,7 @@
             android:fontFamily="@font/roboto_medium"
             android:gravity="center_vertical"
             android:padding="16dp"
-            app:drawableTint="@color/primary_day_night"
+            app:drawableTint="@color/primary"
             android:text="@string/settings_faq"
             app:drawableStartCompat="@drawable/ic_help" />
 
@@ -245,7 +245,7 @@
             android:foreground="?android:attr/selectableItemBackground"
             android:gravity="center_vertical"
             android:padding="16dp"
-            app:drawableTint="@color/primary_day_night"
+            app:drawableTint="@color/primary"
             android:text="@string/settings_privacy_policy"
             app:drawableStartCompat="@drawable/ic_privacy_policy" />
 

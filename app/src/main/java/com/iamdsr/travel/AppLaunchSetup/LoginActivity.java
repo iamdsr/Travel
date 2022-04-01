@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.iamdsr.travel.AppLaunchSetup.AuthUtils.EmailPasswordAuth;
 import com.iamdsr.travel.R;
@@ -21,7 +22,7 @@ public class LoginActivity extends AppCompatActivity {
     //Widgets variables
     private TextView toSignUpActivity, mErrorText;
     private ImageButton phoneNumberVerification;
-    private EditText mUserEmail, mUserPassword;
+    private TextInputEditText mUserEmail, mUserPassword;
     private Button mLoginBtn;
     //Firebase
     private FirebaseAuth mAuth;

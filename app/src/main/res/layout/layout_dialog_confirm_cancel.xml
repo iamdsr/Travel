@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/surface"
+    android:background="@color/surfaceVariant"
     android:padding="16dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -14,7 +14,7 @@
         android:fontFamily="@font/roboto_black"
         android:gravity="center"
         android:padding="16dp"
-        android:textColor="@color/primary_day_night"
+        android:textColor="@color/primary"
         android:text="@string/lorem_3_words"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -52,6 +52,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_margin="8dp"
+            android:textColor="@color/onError"
             android:textAllCaps="false"
             android:backgroundTint="@color/error"
             android:text="@string/cancel" />
@@ -62,6 +63,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_margin="8dp"
+            android:textColor="@color/white"
             android:textAllCaps="false"
             android:backgroundTint="@color/acceptance_colour"
             android:text="@string/confirm" />

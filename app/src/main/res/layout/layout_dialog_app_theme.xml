@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="16dp"
+    android:background="@color/surfaceVariant"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
@@ -12,7 +13,7 @@
         android:fontFamily="@font/roboto_black"
         android:gravity="center"
         android:padding="16dp"
-        android:textColor="@color/primary_day_night"
+        android:textColor="@color/primary"
         android:text="Set App Theme"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -72,6 +73,7 @@
             android:layout_weight="1"
             android:layout_margin="8dp"
             android:textAllCaps="false"
+            android:textColor="@color/onError"
             android:backgroundTint="@color/error"
             android:text="@string/cancel" />
 
@@ -82,6 +84,7 @@
             android:layout_weight="1"
             android:layout_margin="8dp"
             android:textAllCaps="false"
+            android:textColor="@color/white"
             android:backgroundTint="@color/acceptance_colour"
             android:text="@string/confirm" />
 

@@ -15,7 +15,7 @@
         android:gravity="center"
         android:text="Add Expense Details"
         android:textSize="32sp"
-        android:textColor="@color/primary_day_night"
+        android:textColor="@color/primary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -38,6 +38,8 @@
             android:layout_gravity="center_vertical"
             android:layout_marginEnd="8dp"
             android:layout_weight="2"
+            app:boxCornerRadiusTopStart="16dp"
+            app:boxCornerRadiusBottomStart="16dp"
             android:gravity="center_vertical"
             android:hint="Split mode"
             app:endIconMode="dropdown_menu">
@@ -59,6 +61,8 @@
             android:layout_gravity="center_vertical"
             android:layout_marginStart="8dp"
             android:layout_weight="2"
+            app:boxCornerRadiusBottomEnd="16dp"
+            app:boxCornerRadiusTopEnd="16dp"
             android:gravity="center_vertical"
             android:hint="Paid by"
             app:endIconMode="dropdown_menu">
@@ -83,6 +87,10 @@
         android:layout_gravity="center_vertical"
         android:gravity="center_vertical"
         android:layout_marginTop="16dp"
+        app:boxCornerRadiusTopStart="16dp"
+        app:boxCornerRadiusBottomEnd="16dp"
+        app:boxCornerRadiusBottomStart="16dp"
+        app:boxCornerRadiusTopEnd="16dp"
         android:hint="Divide among (person1, person2, ..)"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -112,6 +120,10 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:boxCornerRadiusTopStart="16dp"
+            app:boxCornerRadiusBottomEnd="16dp"
+            app:boxCornerRadiusBottomStart="16dp"
+            app:boxCornerRadiusTopEnd="16dp"
             android:hint="Enter description"
             app:endIconMode="clear_text"
             app:startIconDrawable="@drawable/ic_round_text_snippet">
@@ -132,6 +144,10 @@
             android:layout_marginTop="16dp"
             android:hint="Enter the amount paid"
             app:endIconMode="clear_text"
+            app:boxCornerRadiusTopStart="16dp"
+            app:boxCornerRadiusBottomEnd="16dp"
+            app:boxCornerRadiusBottomStart="16dp"
+            app:boxCornerRadiusTopEnd="16dp"
             app:startIconDrawable="@drawable/ic_round_currency_rupee">
 
             <com.google.android.material.textfield.TextInputEditText

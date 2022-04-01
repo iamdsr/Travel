@@ -52,7 +52,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="You owe Rs. 9347 in total"
-                android:textColor="@color/primary_day_night"
+                android:textColor="@color/primary"
                 android:maxLines="2"
                 android:textSize="16sp"
                 android:paddingTop="4dp"
