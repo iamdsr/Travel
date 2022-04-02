@@ -12,6 +12,7 @@ import android.widget.Button
 import android.widget.MultiAutoCompleteTextView
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputEditText
 import com.iamdsr.travel.R
 import com.iamdsr.travel.interfaces.MyFirestoreInterface
@@ -159,7 +160,7 @@ class AddExpenseFragment : Fragment() {
 
                 }
             })
-        //findNavController().navigateUp()
+        findNavController().navigateUp()
     }
 
     private fun getTimestamp(): String {
