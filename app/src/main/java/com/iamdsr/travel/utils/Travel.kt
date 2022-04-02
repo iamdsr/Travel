@@ -1,8 +1,10 @@
 package com.iamdsr.travel.utils
 
 import android.app.Application
-import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.FirebaseFirestoreSettings
+
 
 class Travel: Application() {
 
@@ -11,6 +13,10 @@ class Travel: Application() {
         super.onCreate()
         sharedPreferenceHelper = MySharedPreferences(applicationContext);
         setUpAppTheme()
+        val settings = FirebaseFirestoreSettings.Builder()
+            .setPersistenceEnabled(true)
+            .build()
+        FirebaseFirestore.getInstance().firestoreSettings = settings
     }
     private fun setUpAppTheme() {
         if (sharedPreferenceHelper.getAppTheme() == AppConstants.DARK_THEME) {

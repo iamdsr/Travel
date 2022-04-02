@@ -1,5 +1,6 @@
 package com.iamdsr.travel.repositories
 
+import android.util.Log
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.CollectionReference
@@ -52,6 +53,7 @@ class CalculateExpenseFirebaseRepository {
     }
 
     fun getAllSavedExpensesFromFirebaseFirestore(expenseGroupId: String): CollectionReference {
+        Log.d("TAG", "getAllSavedExpensesFromFirebaseFirestore: Firestore called")
         return firebaseFirestore.collection("expense_groups")
             .document(expenseGroupId)
             .collection("expenses")

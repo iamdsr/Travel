@@ -21,10 +21,13 @@ class AddExpenseFragmentViewModel: ViewModel(){
     // get member pay status
     fun _getMembersPayStatusLiveDataFromGroup(groupID: String, myFirestoreInterface: MyFirestoreInterface){
         firebaseRepository.getMembersPayStatusFromGroup(groupID)
-            .get()
-            .addOnCompleteListener{ task ->
-                if (task.isSuccessful) {
-                    val model = task.result.toObject(ExpenseGroupModel::class.java)
+            .addSnapshotListener { snapshot, e ->
+                if (e != null) {
+                    return@addSnapshotListener
+                }
+
+                if (snapshot != null && snapshot.exists()) {
+                    val model = snapshot.toObject(ExpenseGroupModel::class.java)
                     if (model!=null){
                         liveDataExpenseGroupModel.value = model
                         myFirestoreInterface.onExpenseGroupModelUpdateLiveDataCallback(liveDataExpenseGroupModel)
@@ -78,6 +81,11 @@ class AddExpenseFragmentViewModel: ViewModel(){
                         val expItem = doc.toObject(ExpenseModel::class.java)
                         savedExpList.add(expItem)
                     }
+                    val source = if (value.metadata.isFromCache)
+                        "local cache"
+                    else
+                        "server"
+                    Log.d("TAG", "Data fetched from $source")
                     savedExpenses.value = savedExpList
                 })
         return savedExpenses
