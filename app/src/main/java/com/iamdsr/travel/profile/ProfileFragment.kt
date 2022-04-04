@@ -8,11 +8,19 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.iamdsr.travel.R
+import com.iamdsr.travel.interfaces.UsersFirestoreInterface
+import com.iamdsr.travel.models.UserModel
 import com.iamdsr.travel.utils.AppConstants
 import com.iamdsr.travel.utils.MySharedPreferences
+import com.iamdsr.travel.viewModels.UserProfileViewModel
+import de.hdodenhof.circleimageview.CircleImageView
 
 
 class ProfileFragment: Fragment(){
@@ -21,6 +29,10 @@ class ProfileFragment: Fragment(){
     private lateinit var mSignOutButton: TextView
     private lateinit var mAppTheme: TextView
     private lateinit var mUpdateProfile: ImageView
+    private lateinit var mUsername: TextView
+    private lateinit var mFullName: TextView
+    private lateinit var mUserEmail: TextView
+    private lateinit var mUserImage: CircleImageView
 
     //Utils
     private lateinit var sharedPreferenceHelper: MySharedPreferences
@@ -32,6 +44,7 @@ class ProfileFragment: Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupWidgets()
+        prepareUserDataToDisplay()
         sharedPreferenceHelper = MySharedPreferences(context!!)
 
         mSignOutButton.setOnClickListener(View.OnClickListener {
@@ -44,6 +57,33 @@ class ProfileFragment: Fragment(){
             findNavController().navigate(R.id.action_profileFragment_to_updateProfileFragment)
         })
     }
+    private fun prepareUserDataToDisplay() {
+
+        val userProfileViewModel = ViewModelProvider(requireActivity())[UserProfileViewModel::class.java]
+        userProfileViewModel._getUserDetails(FirebaseAuth.getInstance().currentUser!!.uid, object :
+            UsersFirestoreInterface {
+            override fun onUserDataAdded(model: UserModel) {
+
+            }
+
+            override fun onUserDataUpdated(model: UserModel) {
+                if (context != null){
+                    Glide
+                        .with(context!!)
+                        .load(model.user_profile_image_url)
+                        .placeholder(R.drawable.placeholder_image)
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .into(mUserImage)
+                }
+                mUsername.text = model.username
+                mFullName.text = model.full_name
+                mUserEmail.text = model.email
+            }
+
+        })
+
+    }
+
 
     private fun setUpThemeDialog() {
         val inflater = this.layoutInflater
@@ -121,6 +161,10 @@ class ProfileFragment: Fragment(){
             mSignOutButton = view!!.findViewById(R.id.sign_out)
             mAppTheme = view!!.findViewById(R.id.app_theme)
             mUpdateProfile = view!!.findViewById(R.id.edit_account_details)
+            mUsername = view!!.findViewById(R.id.username)
+            mFullName = view!!.findViewById(R.id.full_name)
+            mUserEmail = view!!.findViewById(R.id.user_email)
+            mUserImage = view!!.findViewById(R.id.user_image)
         }
     }
 }

@@ -99,7 +99,7 @@ class UpdateProfileFragment : Fragment() {
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .into(mUserImage)
                 }
-                mUsername.setText( model.username)
+                mUsername.setText(model.username)
                 mFullName.setText(model.full_name)
             }
 
