@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.firestore.*
-import com.iamdsr.travel.interfaces.MyFirestoreInterface
+import com.iamdsr.travel.interfaces.ExpenseGroupFirestoreInterface
 import com.iamdsr.travel.models.ExpenseGroupModel
 import com.iamdsr.travel.models.ExpenseModel
 import com.iamdsr.travel.repositories.CalculateExpenseFirebaseRepository
@@ -19,7 +19,7 @@ class AddExpenseFragmentViewModel: ViewModel(){
     var liveDataExpenseGroupModel: MutableLiveData<ExpenseGroupModel?> = MutableLiveData()
 
     // get member pay status
-    fun _getMembersPayStatusLiveDataFromGroup(groupID: String, myFirestoreInterface: MyFirestoreInterface){
+    fun _getMembersPayStatusLiveDataFromGroup(groupID: String, expenseGroupFirestoreInterface: ExpenseGroupFirestoreInterface){
         firebaseRepository.getMembersPayStatusFromGroup(groupID)
             .addSnapshotListener { snapshot, e ->
                 if (e != null) {
@@ -30,19 +30,19 @@ class AddExpenseFragmentViewModel: ViewModel(){
                     val model = snapshot.toObject(ExpenseGroupModel::class.java)
                     if (model!=null){
                         liveDataExpenseGroupModel.value = model
-                        myFirestoreInterface.onExpenseGroupModelUpdateLiveDataCallback(liveDataExpenseGroupModel)
+                        expenseGroupFirestoreInterface.onExpenseGroupModelUpdateLiveDataCallback(liveDataExpenseGroupModel)
                     }
                 }
             }
     }
-    fun _getMembersPayStatusFromGroup(groupID: String, myFirestoreInterface: MyFirestoreInterface){
+    fun _getMembersPayStatusFromGroup(groupID: String, expenseGroupFirestoreInterface: ExpenseGroupFirestoreInterface){
         firebaseRepository.getMembersPayStatusFromGroup(groupID)
             .get()
             .addOnCompleteListener{ task ->
                 if (task.isSuccessful) {
                     val model = task.result.toObject(ExpenseGroupModel::class.java)
                     if (model!=null){
-                        myFirestoreInterface.onExpenseGroupModelUpdateCallback(model)
+                        expenseGroupFirestoreInterface.onExpenseGroupModelUpdateCallback(model)
                     }
                 }
             }

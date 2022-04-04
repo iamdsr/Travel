@@ -41,7 +41,7 @@ public class EmailPasswordAuth {
     }
 
     public void addUserToDB(String id,String username, String fullName, String email){
-        UserModel users = new UserModel(id,fullName, username, email, fullName.toLowerCase(Locale.getDefault()));
+        UserModel users = new UserModel(id,fullName, username, email, fullName.toLowerCase(Locale.getDefault()), "");
         firebaseFirestore = FirebaseFirestore.getInstance();
         firebaseFirestore
                 .collection("users")

@@ -15,7 +15,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputEditText
 import com.iamdsr.travel.R
-import com.iamdsr.travel.interfaces.MyFirestoreInterface
+import com.iamdsr.travel.interfaces.ExpenseGroupFirestoreInterface
 import com.iamdsr.travel.models.ExpenseGroupModel
 import com.iamdsr.travel.models.ExpenseModel
 import com.iamdsr.travel.repositories.CalculateExpenseFirebaseRepository
@@ -118,7 +118,7 @@ class AddExpenseFragment : Fragment() {
         val groupPayStatusMap : MutableMap<String, MutableMap<String, Double>> = mutableMapOf()
         val tempMap: MutableMap<String, Double> = mutableMapOf()
         addExpenseFragmentViewModel._getMembersPayStatusFromGroup(expenseGroupModel.id,
-            object : MyFirestoreInterface {
+            object : ExpenseGroupFirestoreInterface {
                 override fun onExpenseGroupModelUpdateCallback(model: ExpenseGroupModel) {
 
                     for ((memberIDDB, payStatusDB) in model.members_payment_status) {

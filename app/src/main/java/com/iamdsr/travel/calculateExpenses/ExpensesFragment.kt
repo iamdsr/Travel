@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
@@ -19,8 +18,7 @@ import com.google.android.material.floatingactionbutton.ExtendedFloatingActionBu
 import com.google.firebase.auth.FirebaseAuth
 import com.iamdsr.travel.R
 import com.iamdsr.travel.customRecyclerViewAdapters.AddExpenseFragmentRecyclerAdapter
-import com.iamdsr.travel.customRecyclerViewAdapters.SearchMemberRecyclerAdapter
-import com.iamdsr.travel.interfaces.MyFirestoreInterface
+import com.iamdsr.travel.interfaces.ExpenseGroupFirestoreInterface
 import com.iamdsr.travel.interfaces.RecyclerViewActionsInterface
 import com.iamdsr.travel.models.ExpenseGroupModel
 import com.iamdsr.travel.viewModels.AddExpenseFragmentViewModel
@@ -59,7 +57,7 @@ class ExpensesFragment : Fragment(), RecyclerViewActionsInterface {
             Log.d("TAG", "_getAllSavedExpenseFromFirebaseFirestore: $it")
             addExpenseFragmentRecyclerAdapter.submitList(it)
         })
-        addExpenseFragmentViewModel._getMembersPayStatusLiveDataFromGroup(expenseGroupModel.id, object : MyFirestoreInterface{
+        addExpenseFragmentViewModel._getMembersPayStatusLiveDataFromGroup(expenseGroupModel.id, object : ExpenseGroupFirestoreInterface{
             override fun onExpenseGroupModelUpdateCallback(model: ExpenseGroupModel) {
 
             }
@@ -85,7 +83,7 @@ class ExpensesFragment : Fragment(), RecyclerViewActionsInterface {
         })
 
         mAddExpense.setOnClickListener(View.OnClickListener {
-            addExpenseFragmentViewModel._getMembersPayStatusFromGroup(expenseGroupModel.id, object : MyFirestoreInterface{
+            addExpenseFragmentViewModel._getMembersPayStatusFromGroup(expenseGroupModel.id, object : ExpenseGroupFirestoreInterface{
                 override fun onExpenseGroupModelUpdateCallback(model: ExpenseGroupModel) {
                     val bundle = Bundle()
                     bundle.putSerializable("EXPENSE_GROUP_MODEL",  model)
@@ -99,7 +97,7 @@ class ExpensesFragment : Fragment(), RecyclerViewActionsInterface {
 
         })
         mAddMember.setOnClickListener(View.OnClickListener {
-            addExpenseFragmentViewModel._getMembersPayStatusFromGroup(expenseGroupModel.id, object : MyFirestoreInterface{
+            addExpenseFragmentViewModel._getMembersPayStatusFromGroup(expenseGroupModel.id, object : ExpenseGroupFirestoreInterface{
                 override fun onExpenseGroupModelUpdateCallback(model: ExpenseGroupModel) {
                     val bundle = Bundle()
                     bundle.putString("EXPENSE_GROUP_ID",  model.id)
