@@ -14,6 +14,7 @@ import com.iamdsr.travel.R
 import com.iamdsr.travel.interfaces.RecyclerViewActionsInterface
 import com.iamdsr.travel.models.ExpenseGroupModel
 import com.iamdsr.travel.models.UserModel
+import de.hdodenhof.circleimageview.CircleImageView
 
 class SearchMemberRecyclerAdapter(private val itemClickListener: RecyclerViewActionsInterface): ListAdapter<UserModel, SearchMemberRecyclerAdapter.UsersViewHolder>(UsersDiffUtilCallback()) {
 
@@ -32,15 +33,17 @@ class SearchMemberRecyclerAdapter(private val itemClickListener: RecyclerViewAct
 
     class UsersViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val mUsername: TextView = itemView.findViewById(R.id.user_name)
+        private val mUserImage: CircleImageView = itemView.findViewById(R.id.user_image)
+
         fun bindView(model: UserModel, context: Context, itemClickListener: RecyclerViewActionsInterface) {
-//            if (context != null){
-//                Glide
-//                    .with(context)
-//                    .load(model.group_image_url)
-//                    .placeholder(R.drawable.placeholder_image)
-//                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-//                    .into(mGroupImage)
-//            }
+            if (context != null){
+                Glide
+                    .with(context)
+                    .load(model.user_profile_image_url)
+                    .placeholder(R.drawable.user_placeholder)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(mUserImage)
+            }
 
             mUsername.text = model.full_name
             itemView.setOnClickListener(View.OnClickListener {

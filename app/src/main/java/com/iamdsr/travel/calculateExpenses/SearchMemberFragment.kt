@@ -15,6 +15,7 @@ import android.widget.TextView
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -125,8 +126,13 @@ class SearchMemberFragment : Fragment(), RecyclerViewActionsInterface{
             namePayStatMap[userModel.id+"-Lent"] = 0.0
             addIDMemberMap["members_id_name_map"] = iDNameMap
             addMemberPayStatusMap["members_payment_status"] = namePayStatMap
-            searchMemberFragmentViewModel._addMemberToExpenseGroupFirebaseFirestore(groupID, addMemberMap, addIDMemberMap, addMemberPayStatusMap)
+            val memberExpensesMapVal : MutableMap<String, Double> = mutableMapOf()
+            memberExpensesMapVal[userModel.id] = 0.0
+            val memberExpensesMap : MutableMap<String, MutableMap<String, Double>> = mutableMapOf()
+            memberExpensesMap["members_expense_status"] = memberExpensesMapVal
+            searchMemberFragmentViewModel._addMemberToExpenseGroupFirebaseFirestore(groupID, addMemberMap, addIDMemberMap, addMemberPayStatusMap, memberExpensesMap)
             dialog.dismiss()
+            findNavController().navigateUp()
         })
 
     }

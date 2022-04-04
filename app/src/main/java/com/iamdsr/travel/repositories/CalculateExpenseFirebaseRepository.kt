@@ -59,6 +59,16 @@ class CalculateExpenseFirebaseRepository {
             .collection("expenses")
     }
 
+    fun deleteExpense(item: ExpenseModel): Task<Void> {
+        var documentReference =  firebaseFirestore
+            .collection("expense_groups")
+            .document(item.group_id)
+            .collection("expenses")
+            .document(item.id)
+
+        return documentReference.delete()
+    }
+
     // Expense Group firebase methods -----------------------------------------------------------------------------------------------------
 
     fun addNewExpenseGroupToFirebaseFirestore(expenseGroupModel: ExpenseGroupModel) : Task<Void> {

@@ -58,6 +58,15 @@ class AddExpenseFragmentViewModel: ViewModel(){
         }
     }
 
+    fun _updateMemberExpensesToFirebaseFirestore(expenseGroupModel: ExpenseGroupModel,
+                                                memberExpensesMap: MutableMap<String, MutableMap<String, Double>>){
+
+        firebaseRepository.updateMemberPaymentsToFirebaseFirestore(expenseGroupModel).
+        set(memberExpensesMap as Map<String, Any>, SetOptions.merge()).addOnFailureListener {
+            Log.e(ContentValues.TAG,"Failed to add user!")
+        }
+    }
+
     // Add new Expense to Firebase Database
     fun _addNewExpenseToFirebaseFirestore(expenseModel: ExpenseModel){
         firebaseRepository.addNewExpenseToFirebaseFirestore(expenseModel).addOnFailureListener {
@@ -89,5 +98,11 @@ class AddExpenseFragmentViewModel: ViewModel(){
                     savedExpenses.value = savedExpList
                 })
         return savedExpenses
+    }
+
+    fun _deleteExpense(item: ExpenseModel){
+        firebaseRepository.deleteExpense(item).addOnFailureListener {
+            Log.e("TAG","Failed to delete Address")
+        }
     }
 }

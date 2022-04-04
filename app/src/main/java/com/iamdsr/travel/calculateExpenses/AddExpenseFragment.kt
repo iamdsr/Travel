@@ -77,14 +77,18 @@ class AddExpenseFragment : Fragment() {
         }
 
         val memberPaymentCalcMap = mutableMapOf<String, Double>()
+        var lent: Double = 0.0
+        var borrowed: Double = 0.0
         for (member in divideAmong.split(",")){
             if (expenseGroupModel.members_id_name_map.filterValues { it == member.trim() }.keys.iterator().hasNext()){
                 val memberID = expenseGroupModel.members_id_name_map.filterValues { it == member.trim() }.keys.iterator().next()
                 if (memberID == paidByID){
                     memberPaymentCalcMap["$memberID-Lent"] = (expenseAmount/memberCount)
+                    lent = expenseAmount/memberCount
                 }
                 else{
                     memberPaymentCalcMap["$memberID-Borrowed"] = (expenseAmount/memberCount)
+                    borrowed = expenseAmount/memberCount
                 }
             }
         }
@@ -94,8 +98,8 @@ class AddExpenseFragment : Fragment() {
             expenseDesc,
             expenseAmount,
             paidBy,
-            0.0,
-            0.0,
+            lent,
+            borrowed,
             splitMode,
             splitAmongMembersMap,
             memberCount,
@@ -109,17 +113,30 @@ class AddExpenseFragment : Fragment() {
         )
         val addExpenseFragmentViewModel = ViewModelProvider(this)[AddExpenseFragmentViewModel::class.java]
         addExpenseFragmentViewModel._addNewExpenseToFirebaseFirestore(expenseModel)
-        updateExpenseGroup(memberPaymentCalcMap, paidByID)
+        updateExpenseGroup(memberPaymentCalcMap, paidByID, expenseAmount)
     }
 
-    private fun updateExpenseGroup(memberPaymentCalcMap: MutableMap<String, Double>, paidByID: String){
+    private fun updateExpenseGroup(memberPaymentCalcMap: MutableMap<String, Double>, paidByID: String, paidAmount: Double){
 
         val addExpenseFragmentViewModel = ViewModelProvider(this)[AddExpenseFragmentViewModel::class.java]
         val groupPayStatusMap : MutableMap<String, MutableMap<String, Double>> = mutableMapOf()
         val tempMap: MutableMap<String, Double> = mutableMapOf()
+
+        val memberExpensesMapVal : MutableMap<String, Double> = mutableMapOf()
+        val memberExpensesMap : MutableMap<String, MutableMap<String, Double>> = mutableMapOf()
+
         addExpenseFragmentViewModel._getMembersPayStatusFromGroup(expenseGroupModel.id,
             object : ExpenseGroupFirestoreInterface {
                 override fun onExpenseGroupModelUpdateCallback(model: ExpenseGroupModel) {
+
+                    for ((memberIDDB, expenseDB) in model.members_expense_status){
+                        if (memberIDDB == paidByID){
+                            val updateAmount = expenseDB + paidAmount
+                            memberExpensesMapVal[memberIDDB] = updateAmount
+                            memberExpensesMap["members_expense_status"] = memberExpensesMapVal
+                        }
+                    }
+                    addExpenseFragmentViewModel._updateMemberExpensesToFirebaseFirestore(expenseGroupModel, memberExpensesMap)
 
                     for ((memberIDDB, payStatusDB) in model.members_payment_status) {
                         for ((memberIDCurr, payStatusCurr) in memberPaymentCalcMap){

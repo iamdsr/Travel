@@ -92,6 +92,9 @@ class CalculateExpenseFragment : Fragment(), RecyclerViewActionsInterface{
                     memberPayStatusMap[FirebaseAuth.getInstance().currentUser!!.uid+"-Borrowed"] = 0.0
                     memberPayStatusMap[FirebaseAuth.getInstance().currentUser!!.uid+"-Lent"] = 0.0
 
+                    val memberExpensesMap : MutableMap<String, Double> = mutableMapOf()
+                    memberExpensesMap[FirebaseAuth.getInstance().currentUser!!.uid] = 0.0
+
                     Log.d("TAG", "setupAlertDialog: Display name ${FirebaseAuth.getInstance().currentUser!!.displayName!!}")
                     val expenseGroupModel = ExpenseGroupModel(
                         groupID,
@@ -102,6 +105,7 @@ class CalculateExpenseFragment : Fragment(), RecyclerViewActionsInterface{
                         memberList,
                         memberIDNameMap,
                         memberPayStatusMap,
+                        memberExpensesMap,
                         getTimestamp()
                     )
                     Log.d("TAG", "setupAlertDialog: Model $expenseGroupModel")

@@ -95,7 +95,7 @@ class UpdateProfileFragment : Fragment() {
                     Glide
                         .with(context!!)
                         .load(model.user_profile_image_url)
-                        .placeholder(R.drawable.placeholder_image)
+                        .placeholder(R.drawable.user_placeholder)
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .into(mUserImage)
                 }
