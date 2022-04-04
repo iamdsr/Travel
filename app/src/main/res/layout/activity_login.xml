@@ -28,7 +28,7 @@
         android:fontFamily="@font/roboto_bold"
         android:text="@string/label_login"
         android:textColor="@color/primary"
-        android:textSize="40sp"
+        style="@style/TextAppearance.Material3.DisplayLarge"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/animation_view" />
@@ -114,6 +114,7 @@
         android:gravity="center"
         android:layout_marginTop="32dp"
         android:text="@string/or_login_with"
+        style="@style/TextAppearance.Material3.BodyMedium"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/error_text" />
@@ -145,8 +146,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:textColor="@color/onPrimary"
                 android:fontFamily="@font/roboto_regular"
+                style="@style/TextAppearance.Material3.BodyMedium"
                 android:inputType="textEmailAddress"
                 android:padding="16dp"/>
         </com.google.android.material.textfield.TextInputLayout>
@@ -159,7 +160,7 @@
             app:boxCornerRadiusBottomEnd="32dp"
             app:startIconTint="@color/secondary"
             app:startIconDrawable="@drawable/ic_lock"
-            app:endIconMode="clear_text"
+            app:endIconMode="password_toggle"
             app:errorEnabled="true">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/user_password"
@@ -167,6 +168,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:fontFamily="@font/roboto_regular"
+                style="@style/TextAppearance.Material3.BodyMedium"
                 android:inputType="textPassword"
                 android:padding="16dp"/>
         </com.google.android.material.textfield.TextInputLayout>
@@ -202,6 +204,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_regular"
+            style="@style/TextAppearance.Material3.BodyMedium"
             android:text="@string/don_t_have_an_account" />
 
         <TextView
@@ -211,6 +214,7 @@
             android:layout_marginStart="8dp"
             android:fontFamily="@font/roboto_black"
             android:text="@string/sign_up"
+            style="@style/TextAppearance.Material3.BodyMedium"
             android:textColor="@color/primary" />
 
     </LinearLayout>

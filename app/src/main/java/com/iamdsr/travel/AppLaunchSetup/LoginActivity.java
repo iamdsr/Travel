@@ -21,7 +21,7 @@ public class LoginActivity extends AppCompatActivity {
 
     //Widgets variables
     private TextView toSignUpActivity, mErrorText;
-    private ImageButton phoneNumberVerification;
+    private Button phoneNumberVerification;
     private TextInputEditText mUserEmail, mUserPassword;
     private Button mLoginBtn;
     //Firebase

@@ -51,4 +51,10 @@
     <color name="hotel_bg">#7b5e57</color>
     <color name="all_text_color">#FFFFFF</color>
 
+    <!-- uCrop Palette -->
+    <color name="ucrop_color_blaze_orange">#325BAF</color>
+
+    <!--uCrop Activity-->
+    <color name="ucrop_color_statusbar">#27272B</color>
+
 </resources>

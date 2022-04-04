@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.iamdsr.travel.R
 import com.iamdsr.travel.utils.AppConstants
@@ -19,6 +20,7 @@ class ProfileFragment: Fragment(){
     // Widgets
     private lateinit var mSignOutButton: TextView
     private lateinit var mAppTheme: TextView
+    private lateinit var mUpdateProfile: ImageView
 
     //Utils
     private lateinit var sharedPreferenceHelper: MySharedPreferences
@@ -37,6 +39,9 @@ class ProfileFragment: Fragment(){
         })
         mAppTheme.setOnClickListener(View.OnClickListener {
             setUpThemeDialog()
+        })
+        mUpdateProfile.setOnClickListener(View.OnClickListener {
+            findNavController().navigate(R.id.action_profileFragment_to_updateProfileFragment)
         })
     }
 
@@ -115,6 +120,7 @@ class ProfileFragment: Fragment(){
         if (view != null){
             mSignOutButton = view!!.findViewById(R.id.sign_out)
             mAppTheme = view!!.findViewById(R.id.app_theme)
+            mUpdateProfile = view!!.findViewById(R.id.edit_account_details)
         }
     }
 }
