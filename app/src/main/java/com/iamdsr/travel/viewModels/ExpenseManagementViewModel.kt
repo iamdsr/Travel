@@ -110,14 +110,20 @@ class ExpenseManagementViewModel: ViewModel(){
     }
 
     fun getMemberPaymentsStatusInGroups(groupID: String, expenseManagementFirestoreInterface: ExpenseManagementFirestoreInterface){
-        firebaseRepository.getMemberPaymentsStatusInGroupsFromFirebaseFirestore(groupID).get().addOnCompleteListener{ task ->
-                if (task.isSuccessful) {
-                    val model = task.result.toObject(ExpenseGroupModel::class.java)
-                    if (model!=null){
-                        expenseManagementFirestoreInterface.onExpenseGroupModelUpdateCallback(model)
-                    }
-                }
+        firebaseRepository.getMemberPaymentsStatusInGroupsFromFirebaseFirestore(groupID).addSnapshotListener { snapshot, e ->
+            if (e != null) {
+                Log.w("TAG", "Listen failed.", e)
+                return@addSnapshotListener
             }
+            if (snapshot != null && snapshot.exists()) {
+                val model = snapshot.toObject(ExpenseGroupModel::class.java)
+                if (model != null) {
+                    expenseManagementFirestoreInterface.onExpenseGroupModelUpdateCallback(model)
+                }
+            } else {
+                Log.d("TAG", "Current data: null")
+            }
+        }
     }
 
     /*

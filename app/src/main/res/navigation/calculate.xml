@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_expensesFragment_to_addExpenseFragment"
             app:destination="@id/addExpenseFragment" />
+        <action
+            android:id="@+id/action_expensesFragment_to_expenseGroupSettingsFragment"
+            app:destination="@id/expenseGroupSettingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchMemberFragment"
@@ -36,4 +39,9 @@
         android:name="com.iamdsr.travel.calculateExpenses.AddExpenseFragment"
         android:label="fragment_add_expense"
         tools:layout="@layout/fragment_add_expense" />
+    <fragment
+        android:id="@+id/expenseGroupSettingsFragment"
+        android:name="com.iamdsr.travel.calculateExpenses.ExpenseGroupSettingsFragment"
+        android:label="fragment_expense_group_settings"
+        tools:layout="@layout/fragment_expense_group_settings" />
 </navigation>

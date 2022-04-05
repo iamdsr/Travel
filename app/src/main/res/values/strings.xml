@@ -101,5 +101,6 @@
     <string name="place_address">Place address</string>
     <string name="update_profile">Update Profile</string>
     <string name="add_update_profile_photo">Add/Update Profile Photo</string>
+    <string name="group_members">Group Members</string>
 
 </resources>

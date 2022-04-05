@@ -13,7 +13,7 @@ import com.iamdsr.travel.interfaces.RecyclerViewActionsInterface
 import com.iamdsr.travel.R
 import com.iamdsr.travel.models.TripModel
 
-class PlannedTripRecyclerAdapter(val itemClickListener: RecyclerViewActionsInterface) : ListAdapter<TripModel, PlannedTripRecyclerAdapter.TripsViewHolder>(TripsDiffUtilCallback()){
+class PlannedTripRecyclerAdapter(private val itemClickListener: RecyclerViewActionsInterface) : ListAdapter<TripModel, PlannedTripRecyclerAdapter.TripsViewHolder>(TripsDiffUtilCallback()){
 
     var context: Context?= null
 

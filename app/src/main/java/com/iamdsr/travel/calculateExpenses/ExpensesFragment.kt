@@ -32,6 +32,7 @@ class ExpensesFragment : Fragment(), RecyclerViewActionsInterface {
 
     // Widgets
     private lateinit var mAddMember: Button
+    private lateinit var mUpdateExpenseGroup: Button
     private lateinit var mGroupName: TextView
     private lateinit var mHighlightMessage: TextView
     private lateinit var mExpenseInfo: TextView
@@ -99,7 +100,9 @@ class ExpensesFragment : Fragment(), RecyclerViewActionsInterface {
                     findNavController().navigate(R.id.action_expensesFragment_to_searchMemberFragment, bundle)
                 }
             })
-
+        })
+        mUpdateExpenseGroup.setOnClickListener(View.OnClickListener {
+            findNavController().navigate(R.id.action_expensesFragment_to_expenseGroupSettingsFragment)
         })
     }
 
@@ -129,6 +132,7 @@ class ExpensesFragment : Fragment(), RecyclerViewActionsInterface {
     private fun setupWidgets() {
         if (view != null){
             mAddMember = view!!.findViewById(R.id.add_group_member)
+            mUpdateExpenseGroup = view!!.findViewById(R.id.update_group_details)
             mAddExpense = view!!.findViewById(R.id.add_expense)
             mGroupName = view!!.findViewById(R.id.group_name)
             mHighlightMessage = view!!.findViewById(R.id.borrowed_lent)
