@@ -14,22 +14,22 @@ class CalculateExpenseFirebaseRepository {
     var firebaseFirestore = FirebaseFirestore.getInstance()
     var user = FirebaseAuth.getInstance().currentUser
 
-    // Expense firebase methods -----------------------------------------------------------------------------------------------------
+    /*
+     * ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+     * Manage Expenses Repositories methods
+     * Used in View Models -> ExpenseManagementViewModel.kt
+     * Contains methods -> 1. getNewExpenseID 2. addNewExpenseToFirebaseFirestore 3. getAllSavedExpensesFromFirebaseFirestore 4. deleteExpense
+     * ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+     */
 
-    fun updateMemberPaymentsToFirebaseFirestore(expenseGroupModel: ExpenseGroupModel) :DocumentReference {
+    fun getNewExpenseID(expenseGroupId: String): String{
         val documentReference = user?.let {
             firebaseFirestore.collection("expense_groups")
-                .document(expenseGroupModel.id)
+                .document(expenseGroupId)
+                .collection("expenses")
+                .document()
         }
-        return documentReference!!
-    }
-
-    fun getMembersPayStatusFromGroup(groupID: String) : DocumentReference{
-        val documentReference = user?.let {
-            firebaseFirestore.collection("expense_groups")
-                .document(groupID)
-        }
-        return documentReference!!
+        return documentReference!!.id
     }
 
     fun addNewExpenseToFirebaseFirestore(expenseModel: ExpenseModel) : Task<Void> {
@@ -42,16 +42,6 @@ class CalculateExpenseFirebaseRepository {
         return documentReference!!.set(expenseModel)
     }
 
-    fun getNewExpenseID(expenseGroupId: String): String{
-        val documentReference = user?.let {
-            firebaseFirestore.collection("expense_groups")
-                .document(expenseGroupId)
-                .collection("expenses")
-                .document()
-        }
-        return documentReference!!.id
-    }
-
     fun getAllSavedExpensesFromFirebaseFirestore(expenseGroupId: String): CollectionReference {
         Log.d("TAG", "getAllSavedExpensesFromFirebaseFirestore: Firestore called")
         return firebaseFirestore.collection("expense_groups")
@@ -60,7 +50,7 @@ class CalculateExpenseFirebaseRepository {
     }
 
     fun deleteExpense(item: ExpenseModel): Task<Void> {
-        var documentReference =  firebaseFirestore
+        val documentReference =  firebaseFirestore
             .collection("expense_groups")
             .document(item.group_id)
             .collection("expenses")
@@ -69,15 +59,14 @@ class CalculateExpenseFirebaseRepository {
         return documentReference.delete()
     }
 
-    // Expense Group firebase methods -----------------------------------------------------------------------------------------------------
-
-    fun addNewExpenseGroupToFirebaseFirestore(expenseGroupModel: ExpenseGroupModel) : Task<Void> {
-        val documentReference = user?.let {
-            firebaseFirestore.collection("expense_groups")
-                .document(expenseGroupModel.id)
-        }
-        return documentReference!!.set(expenseGroupModel)
-    }
+    /*
+     * ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+     * Manage Expense Groups Repositories methods
+     * Used in View Models -> ExpenseManagementViewModel.kt
+     * Contains methods -> 1. getNewExpenseGroupID 2. getAllSavedExpenseGroupsFromFirebaseFirestore 3. updateMemberPaymentsToFirebaseFirestore
+     * 4. getMembersPayStatusFromGroup 5. addNewExpenseGroupToFirebaseFirestore
+     * ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+     */
 
     fun getNewExpenseGroupID(): String{
         val documentReference = user?.let {
@@ -87,15 +76,47 @@ class CalculateExpenseFirebaseRepository {
         return documentReference!!.id
     }
 
+    fun addNewExpenseGroupToFirebaseFirestore(expenseGroupModel: ExpenseGroupModel) : Task<Void> {
+        val documentReference = user?.let {
+            firebaseFirestore.collection("expense_groups")
+                .document(expenseGroupModel.id)
+        }
+        return documentReference!!.set(expenseGroupModel)
+    }
+
     fun getAllSavedExpenseGroupsFromFirebaseFirestore(): CollectionReference {
         return firebaseFirestore.collection("expense_groups")
     }
+
+    fun updateMemberPaymentsStatusInGroupsToFirebaseFirestore(expenseGroupModel: ExpenseGroupModel) :DocumentReference {
+        val documentReference = user?.let {
+            firebaseFirestore.collection("expense_groups")
+                .document(expenseGroupModel.id)
+        }
+        return documentReference!!
+    }
+
+    fun getMemberPaymentsStatusInGroupsFromFirebaseFirestore(groupID: String) : DocumentReference{
+        val documentReference = user?.let {
+            firebaseFirestore.collection("expense_groups")
+                .document(groupID)
+        }
+        return documentReference!!
+    }
+
+    /*
+     * ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+     * Manage Search user to add in expense group Repositories methods
+     * Used in Fragments -> ExpenseManagementViewModel.kt
+     * Contains methods -> 1. getSearchedUsersFromFirebaseFirestore 2. addMemberToExpenseGroupFirebaseFirestore
+     * ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+     */
 
     fun getSearchedUsersFromFirebaseFirestore(): CollectionReference {
         return firebaseFirestore.collection("users")
     }
 
-    fun addMemberToExpenseGroupFirebaseFirestore(groupID: String) : DocumentReference {
+    fun addAndUpdateSearchedMemberToExpenseGroupFirebaseFirestore(groupID: String) : DocumentReference {
         return firebaseFirestore.collection("expense_groups").document(groupID)
     }
 

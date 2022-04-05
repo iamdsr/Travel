@@ -21,12 +21,10 @@ import com.iamdsr.travel.customRecyclerViewAdapters.ExpenseGroupRecyclerAdapter
 import com.iamdsr.travel.interfaces.RecyclerViewActionsInterface
 import com.iamdsr.travel.models.ExpenseGroupModel
 import com.iamdsr.travel.repositories.CalculateExpenseFirebaseRepository
-import com.iamdsr.travel.repositories.FirestoreRepository
-import com.iamdsr.travel.viewModels.CalculateExpenseViewModel
+import com.iamdsr.travel.viewModels.ExpenseManagementViewModel
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
-import kotlin.collections.HashMap
 
 
 class CalculateExpenseFragment : Fragment(), RecyclerViewActionsInterface{
@@ -47,8 +45,8 @@ class CalculateExpenseFragment : Fragment(), RecyclerViewActionsInterface{
         super.onViewCreated(view, savedInstanceState)
         setupWidgets()
         initRecyclerView()
-        val calculateExpenseViewModel = ViewModelProvider(requireActivity())[CalculateExpenseViewModel::class.java]
-        calculateExpenseViewModel._getAllSavedExpenseGroupsFromFirebaseFirestore(FirebaseAuth.getInstance().currentUser!!.displayName.toString()).observe(this, Observer { it->
+        val expenseManagementViewModel = ViewModelProvider(requireActivity())[ExpenseManagementViewModel::class.java]
+        expenseManagementViewModel.getAllSavedExpenseGroups(FirebaseAuth.getInstance().currentUser!!.displayName.toString()).observe(this, Observer { it->
             expenseGroupList = it
             Log.d("TAG", "onViewCreated: IT $it")
             expenseGroupRecyclerAdapter.submitList(it)
@@ -76,7 +74,7 @@ class CalculateExpenseFragment : Fragment(), RecyclerViewActionsInterface{
                 // Respond to negative button press
             }
             .setPositiveButton(resources.getString(R.string.create)) { dialog, which ->
-                val calculateExpenseViewModel = ViewModelProvider(this)[CalculateExpenseViewModel::class.java]
+                val expenseManagementViewModel = ViewModelProvider(this)[ExpenseManagementViewModel::class.java]
                 val firebaseRepository = CalculateExpenseFirebaseRepository()
                 val mGroupName = dialogView.findViewById<View>(R.id.group_name) as TextInputEditText
                 val groupName: String = mGroupName.text.toString().trim()
@@ -109,7 +107,7 @@ class CalculateExpenseFragment : Fragment(), RecyclerViewActionsInterface{
                         getTimestamp()
                     )
                     Log.d("TAG", "setupAlertDialog: Model $expenseGroupModel")
-                    calculateExpenseViewModel._addNewExpenseGroupToFirebaseFirestore(expenseGroupModel)
+                    expenseManagementViewModel.addNewExpenseGroup(expenseGroupModel)
                 }
             }
             .show()

@@ -18,7 +18,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
@@ -26,7 +25,7 @@ import com.iamdsr.travel.R
 import com.iamdsr.travel.customRecyclerViewAdapters.SearchMemberRecyclerAdapter
 import com.iamdsr.travel.interfaces.RecyclerViewActionsInterface
 import com.iamdsr.travel.models.UserModel
-import com.iamdsr.travel.viewModels.SearchMemberFragmentViewModel
+import com.iamdsr.travel.viewModels.ExpenseManagementViewModel
 import java.util.*
 
 
@@ -71,11 +70,10 @@ class SearchMemberFragment : Fragment(), RecyclerViewActionsInterface{
     private fun searchUsers(searchText: String) {
         if (!TextUtils.isEmpty(searchText)){
             Log.d("TAG", "searchUsers: Search text : $searchText")
-            val searchMemberFragmentViewModel = ViewModelProvider(requireActivity())[SearchMemberFragmentViewModel::class.java]
-            searchMemberFragmentViewModel._getSearchedUsersFromFirebaseFirestore(searchText).observe(requireActivity(), androidx.lifecycle.Observer {
+            val expenseManagementViewModel = ViewModelProvider(requireActivity())[ExpenseManagementViewModel::class.java]
+            expenseManagementViewModel.getSearchedUsers(searchText).observe(requireActivity(), androidx.lifecycle.Observer {
                 searchedUserList = it
                 searchMemberRecyclerAdapter.submitList(it)
-                Log.d("TAG", "searchUsers: Submit ist $it")
             })
         }
         else {
@@ -119,7 +117,7 @@ class SearchMemberFragment : Fragment(), RecyclerViewActionsInterface{
             val addMemberPayStatusMap: MutableMap<String, MutableMap<String, Double>> = HashMap()
             val iDNameMap:  MutableMap<String, Any> = HashMap()
             val namePayStatMap:  MutableMap<String, Double> = HashMap()
-            val searchMemberFragmentViewModel = ViewModelProvider(requireActivity())[SearchMemberFragmentViewModel::class.java]
+            val expenseManagementViewModel = ViewModelProvider(requireActivity())[ExpenseManagementViewModel::class.java]
             addMemberMap["members_name"] = FieldValue.arrayUnion(userModel.full_name)
             iDNameMap[userModel.id] = userModel.full_name
             namePayStatMap[userModel.id+"-Borrowed"] = 0.0
@@ -130,7 +128,7 @@ class SearchMemberFragment : Fragment(), RecyclerViewActionsInterface{
             memberExpensesMapVal[userModel.id] = 0.0
             val memberExpensesMap : MutableMap<String, MutableMap<String, Double>> = mutableMapOf()
             memberExpensesMap["members_expense_status"] = memberExpensesMapVal
-            searchMemberFragmentViewModel._addMemberToExpenseGroupFirebaseFirestore(groupID, addMemberMap, addIDMemberMap, addMemberPayStatusMap, memberExpensesMap)
+            expenseManagementViewModel.addAndUpdateSearchedMemberToExpenseGroup(groupID, addMemberMap, addIDMemberMap, addMemberPayStatusMap, memberExpensesMap)
             dialog.dismiss()
             findNavController().navigateUp()
         })

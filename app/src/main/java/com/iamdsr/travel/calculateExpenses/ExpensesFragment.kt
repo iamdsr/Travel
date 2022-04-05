@@ -7,10 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.SimpleAdapter
 import android.widget.TextView
 import android.widget.Toast
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -21,12 +19,12 @@ import com.google.android.material.floatingactionbutton.ExtendedFloatingActionBu
 import com.google.firebase.auth.FirebaseAuth
 import com.iamdsr.travel.R
 import com.iamdsr.travel.customRecyclerViewAdapters.AddExpenseFragmentRecyclerAdapter
-import com.iamdsr.travel.interfaces.ExpenseGroupFirestoreInterface
+import com.iamdsr.travel.interfaces.ExpenseManagementFirestoreInterface
 import com.iamdsr.travel.interfaces.RecyclerViewActionsInterface
 import com.iamdsr.travel.models.ExpenseGroupModel
 import com.iamdsr.travel.models.ExpenseModel
 import com.iamdsr.travel.utils.SwipeToDeleteCallback
-import com.iamdsr.travel.viewModels.AddExpenseFragmentViewModel
+import com.iamdsr.travel.viewModels.ExpenseManagementViewModel
 import java.math.RoundingMode
 import java.text.DecimalFormat
 
@@ -59,62 +57,46 @@ class ExpensesFragment : Fragment(), RecyclerViewActionsInterface {
             expenseGroupModel = arguments!!.getSerializable("EXPENSE_GROUP_MODEL") as ExpenseGroupModel
             groupID = expenseGroupModel.id
         }
-        val addExpenseFragmentViewModel = ViewModelProvider(this)[AddExpenseFragmentViewModel::class.java]
-        addExpenseFragmentViewModel._getAllSavedExpenseFromFirebaseFirestore(groupID).observe(requireActivity(), Observer {
+        val expenseManagementViewModel = ViewModelProvider(this)[ExpenseManagementViewModel::class.java]
+        expenseManagementViewModel.getAllSavedExpenses(groupID).observe(requireActivity(), Observer {
             Log.d("TAG", "_getAllSavedExpenseFromFirebaseFirestore: $it")
             expenseList = it
             addExpenseFragmentRecyclerAdapter.submitList(it)
         })
-        addExpenseFragmentViewModel._getMembersPayStatusLiveDataFromGroup(expenseGroupModel.id, object : ExpenseGroupFirestoreInterface{
+        expenseManagementViewModel.getMemberPaymentsStatusInGroups(expenseGroupModel.id, object : ExpenseManagementFirestoreInterface{
             override fun onExpenseGroupModelUpdateCallback(model: ExpenseGroupModel) {
-
-            }
-            override fun onExpenseGroupModelUpdateLiveDataCallback(liveData: MutableLiveData<ExpenseGroupModel?>) {
-                liveData.observe(requireActivity(), Observer {
-                    val model: ExpenseGroupModel? = it
-                    if (model!=null){
-                        mGroupName.text = model.name
-                        var msg = ""
-                        for ((memberID, amt) in model.members_payment_status){
-                            if (memberID.split("-")[0] == FirebaseAuth.getInstance().currentUser!!.uid) {
-                                msg += if (memberID.split("-")[1] == "Borrowed"){
-                                    "You borrowed ₹${roundOffDecimal(amt)} in total\n"
-                                } else{
-                                    "You lent ₹${roundOffDecimal(amt)} in total\n"
-                                }
-                            }
+                mGroupName.text = model.name
+                var msg = ""
+                for ((memberID, amt) in model.members_payment_status){
+                    if (memberID.split("-")[0] == FirebaseAuth.getInstance().currentUser!!.uid) {
+                        msg += if (memberID.split("-")[1] == "Borrowed"){
+                            "You borrowed ₹${roundOffDecimal(amt)} in total\n"
+                        } else{
+                            "You lent ₹${roundOffDecimal(amt)} in total\n"
                         }
-                        mHighlightMessage.text = msg
                     }
-                })
+                }
+                mHighlightMessage.text = msg
             }
         })
 
         mAddExpense.setOnClickListener(View.OnClickListener {
-            addExpenseFragmentViewModel._getMembersPayStatusFromGroup(expenseGroupModel.id, object : ExpenseGroupFirestoreInterface{
+            expenseManagementViewModel.getMemberPaymentsStatusInGroups(expenseGroupModel.id, object : ExpenseManagementFirestoreInterface{
                 override fun onExpenseGroupModelUpdateCallback(model: ExpenseGroupModel) {
                     val bundle = Bundle()
                     bundle.putSerializable("EXPENSE_GROUP_MODEL",  model)
                     findNavController().navigate(R.id.action_expensesFragment_to_addExpenseFragment, bundle)
                 }
-
-                override fun onExpenseGroupModelUpdateLiveDataCallback(liveData: MutableLiveData<ExpenseGroupModel?>) {
-
-                }
             })
 
         })
         mAddMember.setOnClickListener(View.OnClickListener {
-            addExpenseFragmentViewModel._getMembersPayStatusFromGroup(expenseGroupModel.id, object : ExpenseGroupFirestoreInterface{
+            expenseManagementViewModel.getMemberPaymentsStatusInGroups(expenseGroupModel.id, object : ExpenseManagementFirestoreInterface{
                 override fun onExpenseGroupModelUpdateCallback(model: ExpenseGroupModel) {
                     val bundle = Bundle()
                     bundle.putString("EXPENSE_GROUP_ID",  model.id)
                     bundle.putString("GROUP_CREATED_BY",model.created_by_id)
                     findNavController().navigate(R.id.action_expensesFragment_to_searchMemberFragment, bundle)
-                }
-
-                override fun onExpenseGroupModelUpdateLiveDataCallback(liveData: MutableLiveData<ExpenseGroupModel?>) {
-
                 }
             })
 
@@ -129,8 +111,8 @@ class ExpensesFragment : Fragment(), RecyclerViewActionsInterface {
         val swipeHandler = object : SwipeToDeleteCallback(context) {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val expenseItem = expenseList[viewHolder.absoluteAdapterPosition]
-                val addExpenseFragmentViewModel = ViewModelProvider(requireActivity())[AddExpenseFragmentViewModel::class.java]
-                addExpenseFragmentViewModel._deleteExpense(expenseItem)
+                val expenseManagementViewModel = ViewModelProvider(requireActivity())[ExpenseManagementViewModel::class.java]
+                expenseManagementViewModel.deleteExpense(expenseItem)
                 Toast.makeText(context, expenseItem.name+" deleted successfully.", Toast.LENGTH_SHORT).show()
             }
         }

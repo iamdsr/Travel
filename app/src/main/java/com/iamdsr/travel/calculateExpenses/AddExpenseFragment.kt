@@ -10,16 +10,15 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.MultiAutoCompleteTextView
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputEditText
 import com.iamdsr.travel.R
-import com.iamdsr.travel.interfaces.ExpenseGroupFirestoreInterface
+import com.iamdsr.travel.interfaces.ExpenseManagementFirestoreInterface
 import com.iamdsr.travel.models.ExpenseGroupModel
 import com.iamdsr.travel.models.ExpenseModel
 import com.iamdsr.travel.repositories.CalculateExpenseFirebaseRepository
-import com.iamdsr.travel.viewModels.AddExpenseFragmentViewModel
+import com.iamdsr.travel.viewModels.ExpenseManagementViewModel
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -111,22 +110,22 @@ class AddExpenseFragment : Fragment() {
             expenseGroupModel.name,
             expenseGroupModel.id
         )
-        val addExpenseFragmentViewModel = ViewModelProvider(this)[AddExpenseFragmentViewModel::class.java]
-        addExpenseFragmentViewModel._addNewExpenseToFirebaseFirestore(expenseModel)
+        val addExpenseFragmentViewModel = ViewModelProvider(this)[ExpenseManagementViewModel::class.java]
+        addExpenseFragmentViewModel.addNewExpense(expenseModel)
         updateExpenseGroup(memberPaymentCalcMap, paidByID, expenseAmount)
     }
 
     private fun updateExpenseGroup(memberPaymentCalcMap: MutableMap<String, Double>, paidByID: String, paidAmount: Double){
 
-        val addExpenseFragmentViewModel = ViewModelProvider(this)[AddExpenseFragmentViewModel::class.java]
+        val addExpenseFragmentViewModel = ViewModelProvider(this)[ExpenseManagementViewModel::class.java]
         val groupPayStatusMap : MutableMap<String, MutableMap<String, Double>> = mutableMapOf()
         val tempMap: MutableMap<String, Double> = mutableMapOf()
 
         val memberExpensesMapVal : MutableMap<String, Double> = mutableMapOf()
         val memberExpensesMap : MutableMap<String, MutableMap<String, Double>> = mutableMapOf()
 
-        addExpenseFragmentViewModel._getMembersPayStatusFromGroup(expenseGroupModel.id,
-            object : ExpenseGroupFirestoreInterface {
+        addExpenseFragmentViewModel.getMemberPaymentsStatusInGroups(expenseGroupModel.id,
+            object : ExpenseManagementFirestoreInterface {
                 override fun onExpenseGroupModelUpdateCallback(model: ExpenseGroupModel) {
 
                     for ((memberIDDB, expenseDB) in model.members_expense_status){
@@ -136,7 +135,7 @@ class AddExpenseFragment : Fragment() {
                             memberExpensesMap["members_expense_status"] = memberExpensesMapVal
                         }
                     }
-                    addExpenseFragmentViewModel._updateMemberExpensesToFirebaseFirestore(expenseGroupModel, memberExpensesMap)
+                    addExpenseFragmentViewModel.updateTotalIndividualMemberExpenses(expenseGroupModel, memberExpensesMap)
 
                     for ((memberIDDB, payStatusDB) in model.members_payment_status) {
                         for ((memberIDCurr, payStatusCurr) in memberPaymentCalcMap){
@@ -170,11 +169,7 @@ class AddExpenseFragment : Fragment() {
                     }
                     groupPayStatusMap["members_payment_status"] = tempMap
                     Log.d("TAG", "onExpenseGroupModelUpdateCallback: groupPayStatusMap $groupPayStatusMap")
-                    addExpenseFragmentViewModel._updateMemberPaymentsToFirebaseFirestore(expenseGroupModel, groupPayStatusMap)
-                }
-
-                override fun onExpenseGroupModelUpdateLiveDataCallback(liveData: MutableLiveData<ExpenseGroupModel?>) {
-
+                    addExpenseFragmentViewModel.updateMemberPaymentsStatusInGroups(expenseGroupModel, groupPayStatusMap)
                 }
             })
         findNavController().navigateUp()
