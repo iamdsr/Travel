@@ -33,15 +33,13 @@ class AddSightseeingFragment : Fragment() {
     private lateinit var mVisitTime: TextInputEditText
     private lateinit var mPlaceName: TextInputEditText
     private lateinit var mPlaceAddress: TextInputEditText
+    private lateinit var mDayOfTrip: TextInputEditText
     private lateinit var mAddItineraryButton: Button
 
     // Utils
     private val myCalendar: Calendar? = Calendar.getInstance()
     private var tripID: String=""
     private var tripTitle: String=""
-    private var lastDate: String? = null
-    private var listSize: Long = -1
-    private var lastDay: Long = -1
     private var firebaseRepository = FirestoreRepository()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -52,11 +50,6 @@ class AddSightseeingFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupWidgets()
         setUpDateDialogs()
-        if (arguments!=null){
-            listSize = arguments!!.getLong("LIST_SIZE")
-            lastDay = arguments!!.getLong("LAST_DAY")
-            lastDate = arguments!!.getString("LAST_DATE")
-        }
         val mySharedPreferences = MySharedPreferences(context!!)
         tripID = mySharedPreferences.getTripModel().trip_id
         tripTitle = mySharedPreferences.getTripModel().trip_title
@@ -75,14 +68,17 @@ class AddSightseeingFragment : Fragment() {
         val visitTime: String = mVisitTime.text.toString().trim()
         val placeName: String = mPlaceName.text.toString().trim()
         val placeAddress: String = mPlaceAddress.text.toString().trim()
-        if (!TextUtils.isEmpty(title) && !TextUtils.isEmpty(desc) && !TextUtils.isEmpty(visitDate) && !TextUtils.isEmpty(visitTime) &&
-            !TextUtils.isEmpty(placeName) && !TextUtils.isEmpty(placeAddress)) {
+        val dayOfTrip: String = mDayOfTrip.text.toString().trim()
 
-            val day = if (lastDate == visitDate){
-                lastDay
-            } else{
-                listSize+1
-            }
+        if (!TextUtils.isEmpty(title) && !TextUtils.isEmpty(desc) && !TextUtils.isEmpty(visitDate) && !TextUtils.isEmpty(visitTime) &&
+            !TextUtils.isEmpty(placeName) && !TextUtils.isEmpty(placeAddress) && !TextUtils.isEmpty(dayOfTrip)) {
+
+            val calendar = Calendar.getInstance()
+            val techTime = myCalendar!!.timeInMillis
+            calendar.timeInMillis = techTime
+            val timeObj = calendar.time
+
+
             val itineraryModel = ItineraryModel(
                 firebaseRepository.getNewItineraryID(tripID),
                 title,
@@ -102,7 +98,8 @@ class AddSightseeingFragment : Fragment() {
                 tripTitle,
                 FirebaseAuth.getInstance().currentUser!!.uid,
                 false,
-                day
+                dayOfTrip.toLong(),
+                timeObj
             )
             Log.d("TAG", "addNewItinerary: Itinerary Model : $itineraryModel")
             val itineraryTimelineViewModel = ViewModelProvider(this)[ItineraryTimelineViewModel::class.java]
@@ -123,6 +120,8 @@ class AddSightseeingFragment : Fragment() {
 
             val pickedHour: Int = materialTimePicker.hour
             val pickedMinute: Int = materialTimePicker.minute
+            myCalendar!![Calendar.HOUR_OF_DAY] = pickedHour
+            myCalendar[Calendar.MINUTE] = pickedMinute
             val formattedTime: String = when {
                 pickedHour > 12 -> {
                     if (pickedMinute < 10) {
@@ -194,6 +193,7 @@ class AddSightseeingFragment : Fragment() {
             mPlaceName = view!!.findViewById(R.id.place_name)
             mPlaceAddress = view!!.findViewById(R.id.place_address)
             mAddItineraryButton = view!!.findViewById(R.id.add_new_itinerary_btn)
+            mDayOfTrip = view!!.findViewById(R.id.day)
         }
     }
 }

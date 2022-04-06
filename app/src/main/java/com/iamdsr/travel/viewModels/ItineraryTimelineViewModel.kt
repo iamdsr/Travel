@@ -29,8 +29,9 @@ class ItineraryTimelineViewModel: ViewModel() {
     // get realtime updates from firebase regarding saved addresses
     fun _getAllSavedItinerariesFromFirebaseFirestore(tripID: String): LiveData<List<ItineraryModel>> {
         firebaseRepository.getAllSavedItinerariesFromFirebaseFirestore(tripID)
-            ?.orderBy("timestamp", Query.Direction.DESCENDING)
-            ?.addSnapshotListener(
+            .orderBy("day", Query.Direction.DESCENDING)
+            .orderBy("technical_time", Query.Direction.DESCENDING)
+            .addSnapshotListener(
                 EventListener<QuerySnapshot> { value, e ->
                     if (e != null) {
                         //Log.w(TAG, "Listen failed.", e)

@@ -67,31 +67,13 @@ class TimelineFragment : Fragment() {
         builder.setItems(animals) { _, which ->
             when (which) {
                 0 -> {
-                    val bundle = Bundle()
-                    bundle.putLong("LIST_SIZE", itineraryList.size.toLong())
-                    if (itineraryList.isNotEmpty()){
-                        bundle.putLong("LAST_DAY", itineraryList[0].day)
-                        bundle.putString("LAST_DATE", itineraryList[0].date)
-                    }
-                    findNavController().navigate(R.id.action_myItinerariesFragment_to_journeyFragment, bundle)
+                    findNavController().navigate(R.id.action_myItinerariesFragment_to_journeyFragment)
                 }
                 1 -> {
-                    val bundle = Bundle()
-                    if (itineraryList.isNotEmpty()){
-                        bundle.putLong("LAST_DAY", itineraryList[0].day)
-                        bundle.putString("LAST_DATE", itineraryList[0].date)
-                    }
-                    bundle.putLong("LIST_SIZE", itineraryList.size.toLong())
-                    findNavController().navigate(R.id.action_myItinerariesFragment_to_addHotelCheckInFragment, bundle)
+                    findNavController().navigate(R.id.action_myItinerariesFragment_to_addHotelCheckInFragment)
                 }
                 2 -> {
-                    val bundle = Bundle()
-                    if (itineraryList.isNotEmpty()){
-                        bundle.putLong("LAST_DAY", itineraryList[0].day)
-                        bundle.putString("LAST_DATE", itineraryList[0].date)
-                    }
-                    bundle.putLong("LIST_SIZE", itineraryList.size.toLong())
-                    findNavController().navigate(R.id.action_myItinerariesFragment_to_addSightseeingFragment, bundle)
+                    findNavController().navigate(R.id.action_myItinerariesFragment_to_addSightseeingFragment)
                 }
             }
         }

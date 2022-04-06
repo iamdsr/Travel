@@ -49,7 +49,6 @@
     <string name="add_trip">Add Trip</string>
     <string name="update_trip">Update</string>
     <string name="fab_add_stories">Add Stories</string>
-    <string name="update_plan">Update Plan</string>
     <string name="add_itinerary">Add Itinerary</string>
     <string name="persons_count">%d Persons</string>
     <string name="duration_count">%d Days</string>
@@ -104,5 +103,6 @@
     <string name="group_members">Group Members</string>
     <string name="update_plan">Update Plan</string>
     <string name="update_itinerary">Update Itinerary</string>
+    <string name="day_of_trip_1_2_3">Day of trip (eg: 1, 2, 3..)</string>
 
 </resources>

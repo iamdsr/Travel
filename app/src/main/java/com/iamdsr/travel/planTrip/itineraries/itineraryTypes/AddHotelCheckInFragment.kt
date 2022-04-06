@@ -1,26 +1,27 @@
 package com.iamdsr.travel.planTrip.itineraries.itineraryTypes
 
 import android.app.DatePickerDialog
+import android.os.Build
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import com.google.firebase.auth.FirebaseAuth
-import com.iamdsr.travel.utils.MySharedPreferences
 import com.iamdsr.travel.R
 import com.iamdsr.travel.models.ItineraryModel
 import com.iamdsr.travel.repositories.FirestoreRepository
+import com.iamdsr.travel.utils.MySharedPreferences
 import com.iamdsr.travel.viewModels.ItineraryTimelineViewModel
 import java.text.SimpleDateFormat
 import java.util.*
@@ -34,15 +35,13 @@ class AddHotelCheckInFragment : Fragment() {
     private lateinit var mChekInTime: TextInputEditText
     private lateinit var mHotelName: TextInputEditText
     private lateinit var mHotelLocation: TextInputEditText
+    private lateinit var mDayOfTrip: TextInputEditText
     private lateinit var mAddItineraryButton: Button
 
     // Utils
     private val myCalendar: Calendar? = Calendar.getInstance()
     private var tripID: String=""
     private var tripTitle: String=""
-    private var lastDate: String? = null
-    private var listSize: Long = -1
-    private var lastDay: Long = -1
     private var firebaseRepository = FirestoreRepository()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -53,11 +52,6 @@ class AddHotelCheckInFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupWidgets()
         setUpDateDialogs()
-        if (arguments!=null){
-            listSize = arguments!!.getLong("LIST_SIZE")
-            lastDay = arguments!!.getLong("LAST_DAY")
-            lastDate = arguments!!.getString("LAST_DATE")
-        }
         val mySharedPreferences = MySharedPreferences(context!!)
         tripID = mySharedPreferences.getTripModel().trip_id
         tripTitle = mySharedPreferences.getTripModel().trip_title
@@ -75,13 +69,16 @@ class AddHotelCheckInFragment : Fragment() {
         val checkInTime: String = mChekInTime.text.toString().trim()
         val hotelName: String = mHotelName.text.toString().trim()
         val hotelAddress: String = mHotelLocation.text.toString().trim()
+        val dayOfTrip: String = mDayOfTrip.text.toString().trim()
+
         if (!TextUtils.isEmpty(title) && !TextUtils.isEmpty(desc) && !TextUtils.isEmpty(checkInDate) && !TextUtils.isEmpty(checkInTime) &&
-            !TextUtils.isEmpty(hotelName) && !TextUtils.isEmpty(hotelAddress)) {
-            val day = if (lastDate == checkInDate){
-                lastDay
-            } else{
-                listSize+1
-            }
+            !TextUtils.isEmpty(hotelName) && !TextUtils.isEmpty(hotelAddress) && !TextUtils.isEmpty(dayOfTrip)) {
+
+            val calendar = Calendar.getInstance()
+            val techTime = myCalendar!!.timeInMillis
+            calendar.timeInMillis = techTime
+            val timeObj = calendar.time
+
             val itineraryModel = ItineraryModel(
                 firebaseRepository.getNewItineraryID(tripID),
                 title,
@@ -101,7 +98,8 @@ class AddHotelCheckInFragment : Fragment() {
                 tripTitle,
                 FirebaseAuth.getInstance().currentUser!!.uid,
                 false,
-                day
+                dayOfTrip.toLong(),
+                timeObj
             )
             Log.d("TAG", "addNewItinerary: Itinerary Model : $itineraryModel")
             val itineraryTimelineViewModel = ViewModelProvider(this)[ItineraryTimelineViewModel::class.java]
@@ -122,6 +120,9 @@ class AddHotelCheckInFragment : Fragment() {
 
             val pickedHour: Int = materialTimePicker.hour
             val pickedMinute: Int = materialTimePicker.minute
+            myCalendar!![Calendar.HOUR_OF_DAY] = pickedHour
+            myCalendar[Calendar.MINUTE] = pickedMinute
+            Log.d("TAG", "setUpTimeDialogs: Calendar called")
             val formattedTime: String = when {
                 pickedHour > 12 -> {
                     if (pickedMinute < 10) {
@@ -152,6 +153,7 @@ class AddHotelCheckInFragment : Fragment() {
                     }
                 }
             }
+
             mChekInTime.setText(formattedTime)
         }
     }
@@ -160,6 +162,7 @@ class AddHotelCheckInFragment : Fragment() {
             myCalendar!![Calendar.YEAR] = year
             myCalendar[Calendar.MONTH] = monthOfYear
             myCalendar[Calendar.DAY_OF_MONTH] = dayOfMonth
+            Log.d("TAG", "setUpDateDialogs: Calendar called")
             updateLabel(mChekInDate)
         }
         mChekInDate.setOnClickListener {
@@ -193,6 +196,7 @@ class AddHotelCheckInFragment : Fragment() {
             mHotelName = view!!.findViewById(R.id.hotel_name)
             mHotelLocation = view!!.findViewById(R.id.hotel_address)
             mAddItineraryButton = view!!.findViewById(R.id.add_new_itinerary_btn)
+            mDayOfTrip = view!!.findViewById(R.id.day)
         }
     }
 }
