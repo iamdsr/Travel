@@ -64,7 +64,7 @@ class ExpensesFragment : Fragment(), RecyclerViewActionsInterface {
             expenseList = it
             addExpenseFragmentRecyclerAdapter.submitList(it)
         })
-        expenseManagementViewModel.getMemberPaymentsStatusInGroups(expenseGroupModel.id, object : ExpenseManagementFirestoreInterface{
+        expenseManagementViewModel.getMemberPaymentsStatusInGroupsRT(expenseGroupModel.id, object : ExpenseManagementFirestoreInterface{
             override fun onExpenseGroupModelUpdateCallback(model: ExpenseGroupModel) {
                 mGroupName.text = model.name
                 var msg = ""
@@ -82,7 +82,7 @@ class ExpensesFragment : Fragment(), RecyclerViewActionsInterface {
         })
 
         mAddExpense.setOnClickListener(View.OnClickListener {
-            expenseManagementViewModel.getMemberPaymentsStatusInGroups(expenseGroupModel.id, object : ExpenseManagementFirestoreInterface{
+            expenseManagementViewModel.getMemberPaymentsStatusInGroupsOnce(expenseGroupModel.id, object : ExpenseManagementFirestoreInterface{
                 override fun onExpenseGroupModelUpdateCallback(model: ExpenseGroupModel) {
                     val bundle = Bundle()
                     bundle.putSerializable("EXPENSE_GROUP_MODEL",  model)
@@ -92,7 +92,7 @@ class ExpensesFragment : Fragment(), RecyclerViewActionsInterface {
 
         })
         mAddMember.setOnClickListener(View.OnClickListener {
-            expenseManagementViewModel.getMemberPaymentsStatusInGroups(expenseGroupModel.id, object : ExpenseManagementFirestoreInterface{
+            expenseManagementViewModel.getMemberPaymentsStatusInGroupsOnce(expenseGroupModel.id, object : ExpenseManagementFirestoreInterface{
                 override fun onExpenseGroupModelUpdateCallback(model: ExpenseGroupModel) {
                     val bundle = Bundle()
                     bundle.putString("EXPENSE_GROUP_ID",  model.id)
@@ -116,12 +116,50 @@ class ExpensesFragment : Fragment(), RecyclerViewActionsInterface {
                 val expenseItem = expenseList[viewHolder.absoluteAdapterPosition]
                 val expenseManagementViewModel = ViewModelProvider(requireActivity())[ExpenseManagementViewModel::class.java]
                 expenseManagementViewModel.deleteExpense(expenseItem)
+                /*expenseManagementViewModel.getMemberPaymentsStatusInGroupsRT(expenseItem.group_id, object : ExpenseManagementFirestoreInterface{
+                    override fun onExpenseGroupModelUpdateCallback(model: ExpenseGroupModel) {
+                        updateExpenseGroupOnDelete(expenseItem, model)
+                    }
+                })*/
                 Toast.makeText(context, expenseItem.name+" deleted successfully.", Toast.LENGTH_SHORT).show()
+
             }
         }
         val itemTouchHelper = ItemTouchHelper(swipeHandler)
         itemTouchHelper.attachToRecyclerView(mExpensesRecyclerView)
     }
+
+    /*private fun updateExpenseGroupOnDelete(expenseModel: ExpenseModel, expenseGroupModel: ExpenseGroupModel) {
+
+        val paidByID = expenseModel.paid_by_ID
+        val memberPaymentStatusMap : MutableMap<String, MutableMap<String, Double>> = mutableMapOf()
+        val memberPaymentStatusMapVal : MutableMap<String, Double> = mutableMapOf()
+        for ((memberID, amount) in expenseModel.expense_calculation_map){
+            for ((memberIDEG, amountEG) in expenseGroupModel.members_payment_status){
+                if (memberID == memberIDEG){
+                    memberPaymentStatusMapVal[memberIDEG] = amountEG - amount
+                }
+            }
+        }
+        memberPaymentStatusMap["members_payment_status"] = memberPaymentStatusMapVal
+
+        val memberExpenseStatusMap : MutableMap<String, MutableMap<String, Double>> = mutableMapOf()
+        val memberExpenseStatusMapVal : MutableMap<String, Double> = mutableMapOf()
+        for ((memberIDEG, amountEG) in expenseGroupModel.members_expense_status){
+            if (memberIDEG == paidByID){
+                memberExpenseStatusMapVal[memberIDEG] = amountEG - expenseModel.amount_paid
+            }
+        }
+        memberExpenseStatusMap["members_expense_status"] = memberExpenseStatusMapVal
+
+        Log.d("TAG", "updateExpenseGroupOnDelete: memberPaymentStatusMap : $memberPaymentStatusMap")
+        Log.d("TAG", "updateExpenseGroupOnDelete: memberExpenseStatusMap : $memberExpenseStatusMap")
+
+        val expenseManagementViewModel = ViewModelProvider(requireActivity())[ExpenseManagementViewModel::class.java]
+        expenseManagementViewModel.updateTotalIndividualMemberExpenses(expenseGroupModel, memberExpenseStatusMap)
+        expenseManagementViewModel.updateMemberPaymentsStatusInGroups(expenseGroupModel, memberPaymentStatusMap)
+
+    }*/
 
     private fun roundOffDecimal(number: Double): Double {
         val df = DecimalFormat("#.##")

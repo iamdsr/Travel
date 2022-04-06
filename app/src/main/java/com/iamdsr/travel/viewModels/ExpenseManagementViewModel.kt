@@ -109,8 +109,23 @@ class ExpenseManagementViewModel: ViewModel(){
         }
     }
 
-    fun getMemberPaymentsStatusInGroups(groupID: String, expenseManagementFirestoreInterface: ExpenseManagementFirestoreInterface){
-        firebaseRepository.getMemberPaymentsStatusInGroupsFromFirebaseFirestore(groupID).addSnapshotListener { snapshot, e ->
+    fun getMemberPaymentsStatusInGroupsOnce(groupID: String, expenseManagementFirestoreInterface: ExpenseManagementFirestoreInterface){
+        firebaseRepository.getMemberPaymentsStatusInGroupsFromFirebaseFirestore(groupID)
+            .get().addOnSuccessListener { document ->
+            if (document != null) {
+                val model = document.toObject(ExpenseGroupModel::class.java)
+                if (model != null) {
+                    expenseManagementFirestoreInterface.onExpenseGroupModelUpdateCallback(model)
+                }
+            } else {
+                Log.d("TAG", "No such document")
+            }
+        }
+    }
+
+    fun getMemberPaymentsStatusInGroupsRT(groupID: String, expenseManagementFirestoreInterface: ExpenseManagementFirestoreInterface){
+        firebaseRepository.getMemberPaymentsStatusInGroupsFromFirebaseFirestore(groupID)
+            .addSnapshotListener { snapshot, e ->
             if (e != null) {
                 Log.w("TAG", "Listen failed.", e)
                 return@addSnapshotListener

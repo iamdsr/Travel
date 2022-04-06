@@ -124,7 +124,7 @@ class AddExpenseFragment : Fragment() {
         val memberExpensesMapVal : MutableMap<String, Double> = mutableMapOf()
         val memberExpensesMap : MutableMap<String, MutableMap<String, Double>> = mutableMapOf()
 
-        addExpenseFragmentViewModel.getMemberPaymentsStatusInGroups(expenseGroupModel.id,
+        addExpenseFragmentViewModel.getMemberPaymentsStatusInGroupsOnce(expenseGroupModel.id,
             object : ExpenseManagementFirestoreInterface {
                 override fun onExpenseGroupModelUpdateCallback(model: ExpenseGroupModel) {
 
