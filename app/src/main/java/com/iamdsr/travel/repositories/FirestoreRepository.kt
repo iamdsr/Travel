@@ -86,4 +86,15 @@ class FirestoreRepository {
     fun getAllSavedTripFromFirebaseFirestore(): CollectionReference {
         return firebaseFirestore.collection("users/${user?.uid}/trips")
     }
+
+    fun updateItineraryToFirebaseFirestore(map: MutableMap<String, Any>, itineraryModel: ItineraryModel): Task<Void> {
+        val documentRef = firebaseFirestore
+            .collection("users")
+            .document(user!!.uid)
+            .collection("trips")
+            .document(itineraryModel.trip_id)
+            .collection("itineraries")
+            .document(itineraryModel.itinerary_id)
+        return documentRef.update(map)
+    }
 }

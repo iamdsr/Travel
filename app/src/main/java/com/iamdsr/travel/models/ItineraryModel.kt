@@ -1,5 +1,6 @@
 package com.iamdsr.travel.models
 
+import java.io.Serializable
 import java.time.LocalDate
 import java.util.*
 
@@ -24,7 +25,7 @@ data class ItineraryModel (
     val completed: Boolean,
     val day: Long,
     val technical_time: Date
-){
+): Serializable{
     constructor() : this("","","","","","","","",
         "","","","","","","", "", "",false, -1, Date())
 

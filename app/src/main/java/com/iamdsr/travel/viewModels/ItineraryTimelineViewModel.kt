@@ -26,6 +26,12 @@ class ItineraryTimelineViewModel: ViewModel() {
         }
     }
 
+    fun updateItinerary(map: MutableMap<String, Any>, itineraryModel: ItineraryModel){
+        firebaseRepository.updateItineraryToFirebaseFirestore(map, itineraryModel).addOnFailureListener {
+            Log.e(ContentValues.TAG,"Failed to update Trip!")
+        }
+    }
+
     // get realtime updates from firebase regarding saved addresses
     fun _getAllSavedItinerariesFromFirebaseFirestore(tripID: String): LiveData<List<ItineraryModel>> {
         firebaseRepository.getAllSavedItinerariesFromFirebaseFirestore(tripID)

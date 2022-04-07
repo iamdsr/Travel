@@ -92,4 +92,26 @@
             android:id="@+id/action_journeyFragment_to_myItinerariesFragment"
             app:destination="@id/myItinerariesFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/updateJourneyFragment"
+        android:name="com.iamdsr.travel.planTrip.itineraries.itineraryTypes.UpdateJourneyFragment"
+        android:label="fragment_update_journey"
+        tools:layout="@layout/fragment_update_journey" />
+    <fragment
+        android:id="@+id/updateSightseeingFragment"
+        android:name="com.iamdsr.travel.planTrip.itineraries.itineraryTypes.UpdateSightseeingFragment"
+        android:label="fragment_update_sightseeing"
+        tools:layout="@layout/fragment_update_sightseeing" />
+    <fragment
+        android:id="@+id/updateHotelCheckInFragment"
+        android:name="com.iamdsr.travel.planTrip.itineraries.itineraryTypes.UpdateHotelCheckInFragment"
+        android:label="fragment_update_hotel_check_in"
+        tools:layout="@layout/fragment_update_hotel_check_in" />
+
+    <action android:id="@+id/action_global_updateHotelCheckInFragment"
+        app:destination="@id/updateHotelCheckInFragment"/>
+    <action android:id="@+id/action_global_updateJourneyFragment"
+        app:destination="@id/updateJourneyFragment"/>
+    <action android:id="@+id/action_global_updateSightseeingFragment"
+        app:destination="@id/updateSightseeingFragment"/>
 </navigation>

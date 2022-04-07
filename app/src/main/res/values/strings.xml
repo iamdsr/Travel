@@ -103,6 +103,6 @@
     <string name="group_members">Group Members</string>
     <string name="update_plan">Update Plan</string>
     <string name="update_itinerary">Update Itinerary</string>
-    <string name="day_of_trip_1_2_3">Day of trip (eg: 1, 2, 3..)</string>
+    <string name="day_of_trip">Day number</string>
 
 </resources>

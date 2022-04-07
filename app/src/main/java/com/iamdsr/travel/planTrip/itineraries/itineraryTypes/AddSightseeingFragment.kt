@@ -22,6 +22,9 @@ import com.iamdsr.travel.utils.AppConstants
 import com.iamdsr.travel.utils.MySharedPreferences
 import com.iamdsr.travel.viewModels.ItineraryTimelineViewModel
 import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 class AddSightseeingFragment : Fragment() {
@@ -73,10 +76,7 @@ class AddSightseeingFragment : Fragment() {
         if (!TextUtils.isEmpty(title) && !TextUtils.isEmpty(desc) && !TextUtils.isEmpty(visitDate) && !TextUtils.isEmpty(visitTime) &&
             !TextUtils.isEmpty(placeName) && !TextUtils.isEmpty(placeAddress) && !TextUtils.isEmpty(dayOfTrip)) {
 
-            val calendar = Calendar.getInstance()
-            val techTime = myCalendar!!.timeInMillis
-            calendar.timeInMillis = techTime
-            val timeObj = calendar.time
+            val timeObj = parseStringDateTime("$visitDate $visitTime")
 
 
             val itineraryModel = ItineraryModel(
@@ -183,7 +183,11 @@ class AddSightseeingFragment : Fragment() {
         format.timeZone = TimeZone.getDefault()
         return format.format(Date())
     }
-
+    private fun parseStringDateTime(stringDateTime: String): Date {
+        val pattern = DateTimeFormatter.ofPattern("EEE, MMM d, yyyy h:mm a")
+        val localDateTime = LocalDateTime.parse(stringDateTime, pattern)
+        return Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant())
+    }
     private fun setupWidgets() {
         if (view != null){
             mTitle = view!!.findViewById(R.id.title)

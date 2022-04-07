@@ -21,6 +21,9 @@ import com.iamdsr.travel.repositories.FirestoreRepository
 import com.iamdsr.travel.utils.MySharedPreferences
 import com.iamdsr.travel.viewModels.ItineraryTimelineViewModel
 import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 
@@ -77,10 +80,7 @@ class JourneyFragment : Fragment() {
         if (!TextUtils.isEmpty(title) && !TextUtils.isEmpty(desc) && !TextUtils.isEmpty(startDate) && !TextUtils.isEmpty(startTime) &&
             !TextUtils.isEmpty(placeFrom) && !TextUtils.isEmpty(placeTo) && !TextUtils.isEmpty(journeyMode) && !TextUtils.isEmpty(dayOfTrip)) {
 
-            val calendar = Calendar.getInstance()
-            val techTime = myCalendar!!.timeInMillis
-            calendar.timeInMillis = techTime
-            val timeObj = calendar.time
+            val timeObj = parseStringDateTime("$startDate $startDate")
 
             val itineraryModel = ItineraryModel(
                 firebaseRepository.getNewItineraryID(tripID),
@@ -180,7 +180,11 @@ class JourneyFragment : Fragment() {
         val dateFormat = SimpleDateFormat(myFormat, Locale.getDefault())
         view.setText(dateFormat.format(myCalendar!!.time))
     }
-
+    private fun parseStringDateTime(stringDateTime: String): Date {
+        val pattern = DateTimeFormatter.ofPattern("EEE, MMM d, yyyy h:mm a")
+        val localDateTime = LocalDateTime.parse(stringDateTime, pattern)
+        return Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant())
+    }
     private fun getTimestamp(): String {
         val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US)
         format.timeZone = TimeZone.getDefault()

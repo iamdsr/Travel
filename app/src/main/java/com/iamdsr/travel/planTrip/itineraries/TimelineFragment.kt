@@ -17,13 +17,15 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.iamdsr.travel.R
 import com.iamdsr.travel.customRecyclerViewAdapters.ItineraryRecyclerAdapter
+import com.iamdsr.travel.interfaces.RecyclerViewActionsInterface
 import com.iamdsr.travel.models.ItineraryModel
+import com.iamdsr.travel.utils.AppConstants
 import com.iamdsr.travel.utils.MySharedPreferences
 import com.iamdsr.travel.viewModels.ItineraryTimelineViewModel
 import java.util.*
 
 
-class TimelineFragment : Fragment() {
+class TimelineFragment : Fragment(), RecyclerViewActionsInterface {
 
     // Widgets
     private lateinit var mTitle: TextView
@@ -85,7 +87,7 @@ class TimelineFragment : Fragment() {
         val linearLayoutManager = LinearLayoutManager(context)
         mItineraryRecyclerView?.layoutManager = linearLayoutManager
         mItineraryRecyclerView?.setHasFixedSize(true)
-        itineraryRecyclerAdapter = ItineraryRecyclerAdapter()
+        itineraryRecyclerAdapter = ItineraryRecyclerAdapter(this)
         mItineraryRecyclerView?.adapter = itineraryRecyclerAdapter
     }
 
@@ -95,6 +97,27 @@ class TimelineFragment : Fragment() {
             addNewItinerary = view!!.findViewById(R.id.add_new_itinerary)
             mTitle =  view!!.findViewById(R.id.trip_title)
             mItineraryRecyclerView = view!!.findViewById(R.id.itinerary_recycler_view)
+        }
+    }
+
+    override fun onItemClick(view: View, position: Int) {
+        val itineraryItem = itineraryList[position]
+        when (itineraryItem.type) {
+            AppConstants.HOTEL_CHECK_IN_ITINERARY_TYPE -> {
+                val bundle = Bundle()
+                bundle.putSerializable("OBJ", itineraryItem)
+                findNavController().navigate(R.id.action_global_updateHotelCheckInFragment, bundle)
+            }
+            AppConstants.JOURNEY_ITINERARY_TYPE -> {
+                val bundle = Bundle()
+                bundle.putSerializable("OBJ", itineraryItem)
+                findNavController().navigate(R.id.action_global_updateJourneyFragment, bundle)
+            }
+            AppConstants.SIGHT_SEEING_ITINERARY_TYPE -> {
+                val bundle = Bundle()
+                bundle.putSerializable("OBJ", itineraryItem)
+                findNavController().navigate(R.id.action_global_updateSightseeingFragment, bundle)
+            }
         }
     }
 }

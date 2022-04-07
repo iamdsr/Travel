@@ -24,6 +24,9 @@ import com.iamdsr.travel.repositories.FirestoreRepository
 import com.iamdsr.travel.utils.MySharedPreferences
 import com.iamdsr.travel.viewModels.ItineraryTimelineViewModel
 import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 class AddHotelCheckInFragment : Fragment() {
@@ -77,7 +80,7 @@ class AddHotelCheckInFragment : Fragment() {
             val calendar = Calendar.getInstance()
             val techTime = myCalendar!!.timeInMillis
             calendar.timeInMillis = techTime
-            val timeObj = calendar.time
+            val timeObj = parseStringDateTime("$checkInDate $checkInTime")
 
             val itineraryModel = ItineraryModel(
                 firebaseRepository.getNewItineraryID(tripID),
@@ -180,7 +183,11 @@ class AddHotelCheckInFragment : Fragment() {
         val dateFormat = SimpleDateFormat(myFormat, Locale.getDefault())
         view.setText(dateFormat.format(myCalendar!!.time))
     }
-
+    private fun parseStringDateTime(stringDateTime: String): Date {
+        val pattern = DateTimeFormatter.ofPattern("EEE, MMM d, yyyy h:mm a")
+        val localDateTime = LocalDateTime.parse(stringDateTime, pattern)
+        return Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant())
+    }
     private fun getTimestamp(): String {
         val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US)
         format.timeZone = TimeZone.getDefault()
@@ -195,7 +202,7 @@ class AddHotelCheckInFragment : Fragment() {
             mChekInTime = view!!.findViewById(R.id.check_in_time)
             mHotelName = view!!.findViewById(R.id.hotel_name)
             mHotelLocation = view!!.findViewById(R.id.hotel_address)
-            mAddItineraryButton = view!!.findViewById(R.id.add_new_itinerary_btn)
+            mAddItineraryButton = view!!.findViewById(R.id.update_itinerary_btn)
             mDayOfTrip = view!!.findViewById(R.id.day)
         }
     }
