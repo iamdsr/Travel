@@ -104,5 +104,7 @@
     <string name="update_plan">Update Plan</string>
     <string name="update_itinerary">Update Itinerary</string>
     <string name="day_of_trip">Day number</string>
+    <string name="mark_trip_as_complete">Mark item as complete</string>
+    <string name="mark_complete_message">Are you sure to mark this item as completed? It cannot be update or undone further</string>
 
 </resources>

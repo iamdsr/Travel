@@ -34,24 +34,13 @@
             android:layout_width="2dp"
             android:layout_height="0dp"
             android:background="@drawable/vertical_dotted_line"
-            app:layout_constraintBottom_toTopOf="@+id/checked"
+            app:layout_constraintBottom_toTopOf="@+id/completed"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/checked"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_radio_filled"
-            android:visibility="invisible"
-            android:padding="4dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-        <ImageView
-            android:id="@+id/not_checked"
+            android:id="@+id/completed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_radio_outlined"
@@ -70,7 +59,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/checked" />
+            app:layout_constraintTop_toBottomOf="@+id/completed" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

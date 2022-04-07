@@ -232,7 +232,7 @@ class UpdateHotelCheckInFragment : Fragment() {
             mChekInTime = view!!.findViewById(R.id.check_in_time)
             mHotelName = view!!.findViewById(R.id.hotel_name)
             mHotelLocation = view!!.findViewById(R.id.hotel_address)
-            mUpdateItineraryButton = view!!.findViewById(R.id.add_new_itinerary_btn)
+            mUpdateItineraryButton = view!!.findViewById(R.id.update_itinerary_btn)
             mDayOfTrip = view!!.findViewById(R.id.day)
         }
     }

@@ -58,12 +58,22 @@ class ItineraryRecyclerAdapter(private val itemClickListener: RecyclerViewAction
             val mDayDate: TextView = itemView.findViewById(R.id.day_and_date)
             val mCheckIn: TextView = itemView.findViewById(R.id.check_in_time)
             val mEdit: ImageView = itemView.findViewById(R.id.edit)
+            val mComplete: ImageView = itemView.findViewById(R.id.completed)
 
             mTitle.text = item.title
             mDesc.text = item.description
             mDayDate.text = context.getString(R.string.day_date, (item.day), item.date)
             mHotelDetails.text = context.getString(R.string.hotel_details, item.hotel_name, item.hotel_address)
             mCheckIn.text = context.getString(R.string.check_in_details, item.time)
+            if (item.completed){
+                mComplete.setImageResource(R.drawable.ic_radio_checked_filled)
+            }
+            else {
+                mComplete.setImageResource(R.drawable.ic_radio_outlined)
+            }
+            mComplete.setOnClickListener(View.OnClickListener {
+                itemClickListener.onItemClick(it, absoluteAdapterPosition)
+            })
 
             mEdit.setOnClickListener(View.OnClickListener {
                 itemClickListener.onItemClick(it, absoluteAdapterPosition)
@@ -76,12 +86,22 @@ class ItineraryRecyclerAdapter(private val itemClickListener: RecyclerViewAction
             val mDayDate: TextView = itemView.findViewById(R.id.day_and_date)
             val mStartTime: TextView = itemView.findViewById(R.id.start_time)
             val mEdit: ImageView = itemView.findViewById(R.id.edit)
+            val mComplete: ImageView = itemView.findViewById(R.id.completed)
 
             mTitle.text = item.title
             mDesc.text = item.description
             mDayDate.text = context.getString(R.string.day_date, (item.day), item.date)
             mFromTo.text = context.getString(R.string.from_to_details, item.from, item.to)
             mStartTime.text = context.getString(R.string.start_at_details, item.time)
+            if (item.completed){
+                mComplete.setImageResource(R.drawable.ic_radio_checked_filled)
+            }
+            else {
+                mComplete.setImageResource(R.drawable.ic_radio_outlined)
+            }
+            mComplete.setOnClickListener(View.OnClickListener {
+                itemClickListener.onItemClick(it, absoluteAdapterPosition)
+            })
 
             mEdit.setOnClickListener(View.OnClickListener {
                 itemClickListener.onItemClick(it, absoluteAdapterPosition)
@@ -94,12 +114,24 @@ class ItineraryRecyclerAdapter(private val itemClickListener: RecyclerViewAction
             val mDayDate: TextView = itemView.findViewById(R.id.day_and_date)
             val mVisitTime: TextView = itemView.findViewById(R.id.visit_time)
             val mEdit: ImageView = itemView.findViewById(R.id.edit)
+            val mComplete: ImageView = itemView.findViewById(R.id.completed)
 
             mTitle.text = item.title
             mDesc.text = item.description
             mDayDate.text = context.getString(R.string.day_date, (item.day), item.date)
             mSightDetails.text = context.getString(R.string.sight_details, item.sight_name, item.sight_address)
             mVisitTime.text = context.getString(R.string.visit_details, item.time)
+
+            if (item.completed){
+                mComplete.setImageResource(R.drawable.ic_radio_checked_filled)
+            }
+            else {
+                mComplete.setImageResource(R.drawable.ic_radio_outlined)
+            }
+
+            mComplete.setOnClickListener(View.OnClickListener {
+                itemClickListener.onItemClick(it, absoluteAdapterPosition)
+            })
 
             mEdit.setOnClickListener(View.OnClickListener {
                 itemClickListener.onItemClick(it, absoluteAdapterPosition)
