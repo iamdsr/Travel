@@ -20,7 +20,7 @@
             android:gravity="center"
             android:padding="16dp"
             android:text="@string/manage_all_your_expenses_here"
-            android:textSize="20sp"
+            style="@style/TextAppearance.Material3.TitleMedium"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -29,10 +29,7 @@
             android:id="@+id/create_new_group"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="?attr/materialButtonOutlinedStyle"
-            app:strokeWidth="2dp"
-            android:padding="16dp"
-            android:fontFamily="@font/roboto_medium"
+            style="@style/Widget.Material3.Button.OutlinedButton"
             app:strokeColor="@color/primary"
             android:text="@string/create_new_group"
             app:icon="@drawable/ic_group"
@@ -47,6 +44,6 @@
         android:id="@+id/group_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="128dp"/>
+        android:layout_marginTop="110dp"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

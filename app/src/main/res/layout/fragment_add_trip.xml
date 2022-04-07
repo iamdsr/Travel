@@ -27,7 +27,7 @@
         android:fontFamily="@font/roboto_bold"
         android:padding="8dp"
         android:text="@string/start_planning_add_trip"
-        android:textSize="32sp"
+        style="@style/TextAppearance.Material3.DisplaySmall"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/progress_horizontal" />
@@ -55,7 +55,7 @@
             app:counterEnabled="true"
             app:counterMaxLength="35"
             app:errorEnabled="true"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/trip_title"
@@ -78,7 +78,7 @@
             app:errorEnabled="true"
             app:counterEnabled="true"
             app:counterMaxLength="100"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/trip_desc"
@@ -107,7 +107,7 @@
                 app:startIconDrawable="@drawable/ic_calendar"
                 app:endIconMode="clear_text"
                 app:errorEnabled="true"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/journey_date"
@@ -136,7 +136,7 @@
                 android:cursorVisible="false"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/return_date"
@@ -171,7 +171,7 @@
                 app:errorEnabled="true"
                 app:counterEnabled="true"
                 app:counterMaxLength="20"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/place_from"
@@ -194,7 +194,7 @@
                 app:errorEnabled="true"
                 app:counterEnabled="true"
                 app:counterMaxLength="20"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/place_to"
@@ -227,7 +227,7 @@
                 app:errorEnabled="true"
                 app:counterEnabled="true"
                 app:counterMaxLength="2"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/total_person"
@@ -248,7 +248,7 @@
                 app:endIconMode="dropdown_menu"
                 app:errorEnabled="true"
                 android:layout_marginStart="4dp"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.MaterialAutoCompleteTextView
                     android:id="@+id/journey_mode"
@@ -267,7 +267,7 @@
     <Button
         android:id="@+id/add_trip_btn"
         android:layout_width="match_parent"
-        android:layout_height="64dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
         android:fontFamily="@font/roboto_bold"

@@ -106,5 +106,20 @@
     <string name="day_of_trip">Day number</string>
     <string name="mark_trip_as_complete">Mark item as complete</string>
     <string name="mark_complete_message">Are you sure to mark this item as completed? It cannot be update or undone further</string>
+    <string name="resend_code">Resend code</string>
+    <string name="google">Google</string>
+    <string name="facebook">Facebook</string>
+    <string name="phone">Phone</string>
+    <string name="otp_info">We will send you an one time SMS to verify and continue\nCarrier rates may apply.</string>
+    <string name="add_expense_details">Add Expense Details</string>
+    <string name="split_mode">Split mode</string>
+    <string name="paid_by">Paid by</string>
+    <string name="divide_among_person1_person2">Divide among (person1, person2, ..)</string>
+    <string name="enter_description">Enter description</string>
+    <string name="enter_the_amount_paid">Enter the amount paid</string>
+    <string name="add_expense">Add Expense</string>
+    <string name="route_details">Route Details</string>
+    <string name="set_app_theme">Set App Theme</string>
+    <string name="simplify_group_debts">Simplify group debts</string>
 
 </resources>

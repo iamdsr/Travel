@@ -42,4 +42,5 @@
         <item name="shapeAppearance">@style/ShapeAppearance.Material3.NavigationBarView.ActiveIndicator</item>
         <item name="android:color">@color/inversePrimary</item>
     </style>
+
 </resources>

@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:padding="12dp"
         android:maxLines="2"
-        android:fontFamily="@font/roboto_bold"
+        style="@style/TextAppearance.Material3.TitleMedium"
         android:textSize="20sp"/>
 
     <androidx.recyclerview.widget.RecyclerView

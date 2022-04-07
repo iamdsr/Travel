@@ -20,7 +20,7 @@ import com.iamdsr.travel.R;
 public class LoginActivity extends AppCompatActivity {
 
     //Widgets variables
-    private TextView toSignUpActivity, mErrorText;
+    private TextView toSignUpActivity;
     private Button phoneNumberVerification;
     private TextInputEditText mUserEmail, mUserPassword;
     private Button mLoginBtn;
@@ -56,17 +56,15 @@ public class LoginActivity extends AppCompatActivity {
                 String userEmail = mUserEmail.getText().toString().trim();
                 String userPassword = mUserPassword.getText().toString().trim();
                 if (!TextUtils.isEmpty(userEmail) && !TextUtils.isEmpty(userPassword)){
-                    mErrorText.setVisibility(View.INVISIBLE);
                     ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this);
                     progressDialog.setMessage("Signing in...");
                     progressDialog.show();
                     progressDialog.setCancelable(false);
                     progressDialog.setCanceledOnTouchOutside(false);
-                    emailPasswordAuth.loginWithEmailAndPassword(userEmail, userPassword, progressDialog, mErrorText, mUserPassword);
+                    emailPasswordAuth.loginWithEmailAndPassword(userEmail, userPassword, progressDialog, mUserPassword);
                 }
                 else {
-                    mErrorText.setVisibility(View.VISIBLE);
-                    mErrorText.setText(R.string.error_text_empty_fields);
+
                 }
             }
         });
@@ -82,6 +80,5 @@ public class LoginActivity extends AppCompatActivity {
         mUserEmail = findViewById(R.id.user_email);
         mUserPassword = findViewById(R.id.user_password);
         mLoginBtn = findViewById(R.id.login_button);
-        mErrorText = findViewById(R.id.error_text);
     }
 }

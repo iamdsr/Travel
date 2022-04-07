@@ -13,7 +13,7 @@
         android:layout_margin="16dp"
         android:padding="8dp"
         android:text="@string/add_sightseeing_details"
-        android:textSize="32sp"
+        style="@style/TextAppearance.Material3.DisplaySmall"
         android:fontFamily="@font/roboto_bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -42,7 +42,7 @@
             app:counterEnabled="true"
             app:counterMaxLength="30"
             app:endIconMode="clear_text"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/title"
                 android:layout_width="match_parent"
@@ -63,7 +63,7 @@
             app:counterEnabled="true"
             app:counterMaxLength="100"
             app:endIconMode="clear_text"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/desc"
@@ -89,7 +89,7 @@
                 app:boxCornerRadiusTopStart="16dp"
                 android:layout_marginEnd="4dp"
                 app:errorEnabled="true"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/date"
                     android:layout_width="match_parent"
@@ -108,7 +108,7 @@
                 app:boxCornerRadiusTopEnd="16dp"
                 android:layout_marginStart="4dp"
                 app:errorEnabled="true"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/time"
                     android:layout_width="match_parent"
@@ -131,7 +131,7 @@
             app:counterEnabled="true"
             app:counterMaxLength="20"
             app:endIconMode="clear_text"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/place_name"
                 android:layout_width="match_parent"
@@ -151,7 +151,7 @@
             app:counterEnabled="true"
             app:counterMaxLength="40"
             app:endIconMode="clear_text"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/place_address"
@@ -187,12 +187,11 @@
     <Button
         android:id="@+id/add_new_itinerary_btn"
         android:layout_width="match_parent"
-        android:layout_height="64dp"
+        android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:fontFamily="@font/roboto_bold"
         android:text="@string/add_itinerary"
         android:textAllCaps="false"
-        app:cornerRadius="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

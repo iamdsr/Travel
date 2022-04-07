@@ -11,10 +11,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:fontFamily="@font/roboto_bold"
+        style="@style/TextAppearance.Material3.DisplaySmall"
         android:padding="8dp"
         android:text="@string/update_plan"
-        android:textSize="32sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -42,7 +41,7 @@
             app:counterEnabled="true"
             app:counterMaxLength="30"
             app:endIconMode="clear_text"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/title"
                 android:layout_width="match_parent"
@@ -63,14 +62,13 @@
             app:boxCornerRadiusBottomStart="16dp"
             app:boxCornerRadiusTopEnd="16dp"
             app:endIconMode="clear_text"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/desc"
                 android:layout_width="match_parent"
                 android:layout_height="128dp"
-                android:maxHeight="256dp"
-                android:fontFamily="@font/roboto_regular"/>
+                android:maxHeight="256dp"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -90,7 +88,7 @@
                 app:boxCornerRadiusBottomStart="16dp"
                 android:layout_marginEnd="4dp"
                 app:errorEnabled="true"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/check_in_date"
                     android:layout_width="match_parent"
@@ -98,8 +96,7 @@
                     android:clickable="false"
                     android:cursorVisible="false"
                     android:focusable="false"
-                    android:focusableInTouchMode="false"
-                    android:fontFamily="@font/roboto_regular"/>
+                    android:focusableInTouchMode="false"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -111,7 +108,7 @@
                 app:boxCornerRadiusTopEnd="16dp"
                 android:layout_marginStart="4dp"
                 app:errorEnabled="true"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/check_in_time"
                     android:layout_width="match_parent"
@@ -119,8 +116,7 @@
                     android:clickable="false"
                     android:cursorVisible="false"
                     android:focusable="false"
-                    android:focusableInTouchMode="false"
-                    android:fontFamily="@font/roboto_regular"/>
+                    android:focusableInTouchMode="false"/>
             </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
@@ -137,13 +133,12 @@
             app:boxCornerRadiusBottomStart="16dp"
             app:boxCornerRadiusTopEnd="16dp"
             app:endIconMode="clear_text"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/hotel_name"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_regular"/>
+                android:layout_height="wrap_content"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -158,13 +153,12 @@
             app:boxCornerRadiusTopEnd="16dp"
             app:counterMaxLength="40"
             app:endIconMode="clear_text"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/hotel_address"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_regular"/>
+                android:layout_height="wrap_content"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -183,8 +177,7 @@
                 android:id="@+id/day"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number"
-                android:fontFamily="@font/roboto_regular"/>
+                android:inputType="number"/>
         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -193,12 +186,11 @@
     <Button
         android:id="@+id/update_itinerary_btn"
         android:layout_width="match_parent"
-        android:layout_height="64dp"
+        android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:fontFamily="@font/roboto_bold"
         android:text="@string/update_itinerary"
         android:textAllCaps="false"
-        app:cornerRadius="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

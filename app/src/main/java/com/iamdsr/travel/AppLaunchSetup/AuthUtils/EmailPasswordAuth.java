@@ -90,7 +90,7 @@ public class EmailPasswordAuth {
         });
     }
 
-    public void loginWithEmailAndPassword(String email, String password, ProgressDialog progressDialog, TextView mUserPassword, TextView mErrorText){
+    public void loginWithEmailAndPassword(String email, String password, ProgressDialog progressDialog, TextView mUserPassword){
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -102,8 +102,6 @@ public class EmailPasswordAuth {
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "signInWithEmail:failure", task.getException());
-                    mErrorText.setText(R.string.auth_failed);
-                    mErrorText.setVisibility(View.VISIBLE);
                     mUserPassword.setText(null);
                 }
             }
