@@ -9,13 +9,19 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import com.iamdsr.travel.R
 import com.iamdsr.travel.viewModels.PlanTripFragmentViewModel
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.math.abs
 
 class UpdateTripFragment : Fragment() {
 
@@ -30,11 +36,19 @@ class UpdateTripFragment : Fragment() {
     private lateinit var mNumberOfPerson: EditText
     private lateinit var mJourneyMode: AutoCompleteTextView
     private lateinit var mUpdateTripBtn: Button
-    private lateinit var clickedEditText: EditText
-    private lateinit var progressBar: ProgressBar
+
+    private lateinit var snack_layout: CoordinatorLayout
+
+    private lateinit var mJourneyDateContainer: TextInputLayout
+    private lateinit var mReturnDateContainer: TextInputLayout
+    private lateinit var mAddTitleContainer: TextInputLayout
+    private lateinit var mAddDescContainer: TextInputLayout
+    private lateinit var mWhereFromContainer: TextInputLayout
+    private lateinit var mWhereToContainer: TextInputLayout
+    private lateinit var mNumberOfPersonContainer: TextInputLayout
+    private lateinit var mJourneyModeContainer: TextInputLayout
 
     // Utils
-    private val myCalendar: Calendar? = Calendar.getInstance()
     private var titleBundle: String = ""
     private var descBundle: String = ""
     private var jDateBundle: String = ""
@@ -64,60 +78,67 @@ class UpdateTripFragment : Fragment() {
             totalHeadsBundle = arguments!!.getLong("TOTAL_PAX",-1)
         }
         setUpWidgets()
-        setUpDateDialogs()
-        mJourneyMode!!.setOnTouchListener(object : View.OnTouchListener {
-            override fun onTouch(v: View?, event: MotionEvent?): Boolean {
-                when (event?.action) {
-                    MotionEvent.ACTION_DOWN -> mJourneyMode!!.showDropDown()
-                }
-
-                return v?.onTouchEvent(event) ?: true
-            }
+        setValuesToFields()
+        mJourneyDate.setOnClickListener(View.OnClickListener {
+            setUpDateDialogs(it as TextInputEditText)
         })
+        mReturnDate.setOnClickListener(View.OnClickListener {
+            setUpDateDialogs(it as TextInputEditText)
+        })
+
         mUpdateTripBtn.setOnClickListener(View.OnClickListener {
             updateTrip()
-            findNavController().navigate(R.id.action_updateTripFragment_to_planTripFragment)
-            Toast.makeText(context, "Congrats! Trip Update Successfully.", Toast.LENGTH_SHORT).show()
         })
     }
 
     private fun updateTrip() {
-        val titleField = mAddTitle!!.text.toString().trim { it <= ' ' }
-        val descField = mAddDesc!!.text.toString().trim { it <= ' ' }
-        val fromField = mWhereFrom!!.text.toString().trim { it <= ' ' }
-        val toField = mWhereTo!!.text.toString().trim { it <= ' ' }
-        val jDateField = mJourneyDate!!.text.toString().trim { it <= ' ' }
-        val rDateField = mReturnDate!!.text.toString().trim { it <= ' ' }
-        val totalPersonField = mNumberOfPerson!!.text.toString().trim { it <= ' ' }
-        val journeyModeField = mJourneyMode!!.text.toString().trim { it <= ' ' }
+        val titleField = mAddTitle.text.toString().trim()
+        val descField = mAddDesc.text.toString().trim()
+        val fromField = mWhereFrom.text.toString().trim()
+        val toField = mWhereTo.text.toString().trim()
+        val jDateField = mJourneyDate.text.toString().trim()
+        val rDateField = mReturnDate.text.toString().trim()
+        val totalPersonField = mNumberOfPerson.text.toString().trim()
+        val journeyModeField = mJourneyMode.text.toString().trim()
 
         if (!TextUtils.isEmpty(titleField) && !TextUtils.isEmpty(descField) && !TextUtils.isEmpty(fromField)
-            && !TextUtils.isEmpty(toField) && !TextUtils.isEmpty(jDateField) && !TextUtils.isEmpty(rDateField) && !TextUtils.isEmpty(
-                totalPersonField)  && !TextUtils.isEmpty(journeyModeField)) {
-            if (titleBundle != titleField){
-                updateAndPushTrip(titleField,null,null,null,null,null, null,-1)
-            }
-            if (descBundle != descField) {
-                updateAndPushTrip(null, descField, null, null, null, null, null, -1)
-            }
-            if (fromBundle != fromField) {
-                updateAndPushTrip(null, null, null, null, fromField, null, null, -1)
-            }
-            if (toBundle != toField) {
-                updateAndPushTrip(null, null, null, null, null, toField, null, -1)
-            }
-            if (toBundle != toField) {
-                updateAndPushTrip(null, null, null, null, null, toField, null, -1)
-            }
-            if (jDateBundle != jDateField || rDateBundle != rDateField) {
-                updateAndPushTrip(null, null, jDateField, rDateField, null, null, null, -1)
-            }
-            if (totalHeadsBundle != totalPersonField.toLong()) {
-                updateAndPushTrip(null, null, null, null, null, null, null, totalPersonField.toLong())
-            }
-            if (journeyModeBundle != journeyModeField) {
-                updateAndPushTrip(null, null, null, null, null, null, journeyModeField, -1)
-            }
+            && !TextUtils.isEmpty(toField) && !TextUtils.isEmpty(jDateField) && !TextUtils.isEmpty(rDateField)
+            && !TextUtils.isEmpty(totalPersonField)  && !TextUtils.isEmpty(journeyModeField)) {
+
+                val error = checkDataOfInputFields(titleField, descField, fromField, toField, jDateField, rDateField, totalPersonField, journeyModeField)
+                Log.d("TAG", "addNewTrip: Error $error")
+
+                if (!error){
+                    if (titleBundle != titleField){
+                        updateAndPushTrip(titleField,null,null,null,null,null, null,-1)
+                    }
+                    if (descBundle != descField) {
+                        updateAndPushTrip(null, descField, null, null, null, null, null, -1)
+                    }
+                    if (fromBundle != fromField) {
+                        updateAndPushTrip(null, null, null, null, fromField, null, null, -1)
+                    }
+                    if (toBundle != toField) {
+                        updateAndPushTrip(null, null, null, null, null, toField, null, -1)
+                    }
+                    if (toBundle != toField) {
+                        updateAndPushTrip(null, null, null, null, null, toField, null, -1)
+                    }
+                    if (jDateBundle != jDateField || rDateBundle != rDateField) {
+                        updateAndPushTrip(null, null, jDateField, rDateField, null, null, null, -1)
+                    }
+                    if (totalHeadsBundle != totalPersonField.toLong()) {
+                        updateAndPushTrip(null, null, null, null, null, null, null, totalPersonField.toLong())
+                    }
+                    if (journeyModeBundle != journeyModeField) {
+                        updateAndPushTrip(null, null, null, null, null, null, journeyModeField, -1)
+                    }
+                    Toast.makeText(context, "Congrats! Trip Update Successfully.", Toast.LENGTH_SHORT).show()
+                    findNavController().navigateUp()
+                }
+        }
+        else {
+            Snackbar.make(snack_layout, context!!.resources.getString(R.string.empty_fields_msg), Snackbar.LENGTH_LONG).show()
         }
     }
 
@@ -170,72 +191,113 @@ class UpdateTripFragment : Fragment() {
             planTripFragmentViewModel._updateTripToFirebaseFirestore(tripMap, tripIDBundle)
         }
     }
-
-
-    private fun setUpDateDialogs() {
-        val date = DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
-            myCalendar!![Calendar.YEAR] = year
-            myCalendar[Calendar.MONTH] = monthOfYear
-            myCalendar[Calendar.DAY_OF_MONTH] = dayOfMonth
-            clickedEditText?.let { updateLabel(it) }
+    private fun checkDataOfInputFields(title: String, desc: String, from: String, to: String, jDate: String, rDate: String, pax: String, jMode: String): Boolean{
+        var errorFound = false
+        if (title.length > 75){
+            errorFound = true
+            mAddTitleContainer.error = context!!.getString(R.string.length_exceeds_error, 75)
         }
-        mJourneyDate!!.setOnClickListener { view ->
-            clickedEditText = view as EditText
-            myCalendar?.let {
-                DatePickerDialog(
-                    context!!, date, it
-                        .get(Calendar.YEAR), myCalendar!![Calendar.MONTH],
-                    myCalendar[Calendar.DAY_OF_MONTH]
-                ).show()
+        else {
+            mAddTitleContainer.error = null
+        }
+        if (desc.length > 300){
+            errorFound = true
+            mAddDescContainer.error = context!!.getString(R.string.length_exceeds_error, 300)
+        }
+        else {
+            mAddDescContainer.error = null
+        }
+        if (checkDates(jDate, rDate) != ""){
+            errorFound = true
+            mJourneyDateContainer.error = checkDates(jDate, rDate)
+            mReturnDateContainer.error = checkDates(jDate, rDate)
+        }
+        else {
+            mJourneyDateContainer.error = null
+            mReturnDateContainer.error = null
+        }
+        if (from.length > 20){
+            errorFound = true
+            mWhereFromContainer.error = context!!.getString(R.string.length_exceeds_error, 20)
+        }
+        else {
+            mWhereFromContainer.error = null
+        }
+        if (to.length > 20){
+            errorFound = true
+            mWhereToContainer.error = context!!.getString(R.string.length_exceeds_error, 20)
+        }
+        else {
+            mWhereToContainer.error = null
+        }
+        if (pax.toInt() < 0){
+            errorFound = true
+            mNumberOfPersonContainer.error = context!!.getString(R.string.invalid_value_error, pax)
+        }
+        else {
+            mNumberOfPersonContainer.error = null
+        }
+        if (!journeyModeEntries.contains(jMode)){
+            Log.d("TAG", "addNewTrip: Error $jMode")
+            errorFound = true
+            mJourneyModeContainer.error = context!!.getString(R.string.invalid_value_error, jMode)
+        }
+        else {
+            mJourneyModeContainer.error = null
+        }
+        return errorFound
+    }
+    private fun checkDates(startDate: String, endDate: String): String? {
+        val sdf = SimpleDateFormat("dd/mm/yyyy", Locale.getDefault())
+        try {
+            when {
+                sdf.parse(endDate)!!.before(sdf.parse(startDate)) -> {
+                    return context!!.resources.getString(R.string.end_date_l_start_date)
+                }
+                sdf.parse(endDate)!!.after(sdf.parse(startDate)) -> {
+                    return ""
+                }
+                sdf.parse(endDate)!! == (sdf.parse(startDate)) -> {
+                    return context!!.resources.getString(R.string.end_date_e_start_date)
+                }
             }
         }
-        mReturnDate!!.setOnClickListener { view ->
-            clickedEditText = view as EditText
-            myCalendar?.let {
-                DatePickerDialog(
-                    context!!, date, it
-                        .get(Calendar.YEAR), myCalendar!![Calendar.MONTH],
-                    myCalendar[Calendar.DAY_OF_MONTH]
-                ).show()
-            }
+        catch (e: Exception){
+            e.printStackTrace()
+        }
+        return null
+    }
+    private fun setUpDateDialogs(view: TextInputEditText) {
+        val datePicker = MaterialDatePicker.Builder.datePicker().setTheme(R.style.ThemeOverlay_App_DatePicker).build()
+        datePicker.show(parentFragmentManager, "DatePicker")
+
+        datePicker.addOnPositiveButtonClickListener {
+            val dateFormatter = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+            val date = dateFormatter.format(Date(it))
+            view.setText(date)
+        }
+        datePicker.addOnNegativeButtonClickListener {
+            Toast.makeText(context, "${datePicker.headerText} is cancelled", Toast.LENGTH_LONG).show()
+        }
+        datePicker.addOnCancelListener {
+            Toast.makeText(context, "Date Picker Cancelled", Toast.LENGTH_LONG).show()
         }
     }
-    private fun updateLabel(view: EditText) {
-        val myFormat = "dd/MM/yyyy"
-        val dateFormat = SimpleDateFormat(myFormat, Locale.getDefault())
-        view.setText(dateFormat.format(myCalendar!!.time))
-    }
-
     private fun getDateDiff(CurrentDate: String, FinalDate: String): Long {
         return try {
-            val date1: Date
-            val date2: Date
+            val date1: Date?
+            val date2: Date?
             val myFormat = "dd/MM/yyyy"
             val dateFormat = SimpleDateFormat(myFormat, Locale.getDefault())
             date1 = dateFormat.parse(FinalDate)
             date2 = dateFormat.parse(CurrentDate)
-            val difference = Math.abs(date1.time - date2.time)
+            val difference = abs(date1.time - date2.time)
             difference / (24 * 60 * 60 * 1000)
         } catch (e: Exception) {
             0
         }
     }
-
-    private fun setUpWidgets() {
-        mAddTitle = view!!.findViewById(R.id.trip_title)
-        mAddDesc = view!!.findViewById(R.id.trip_desc)
-        mWhereFrom = view!!.findViewById(R.id.place_from)
-        mWhereTo = view!!.findViewById(R.id.place_to)
-        mNumberOfPerson = view!!.findViewById(R.id.total_person)
-        mJourneyDate = view!!.findViewById(R.id.journey_date)
-        mReturnDate = view!!.findViewById(R.id.return_date)
-        mUpdateTripBtn = view!!.findViewById(R.id.update_trip_btn)
-        mJourneyMode = view!!.findViewById(R.id.journey_mode)
-
-        val journeyModeAdapter = ArrayAdapter(context!!, android.R.layout.simple_list_item_1, journeyModeEntries)
-        mJourneyMode.setAdapter(journeyModeAdapter)
-        mJourneyMode.keyListener = null
-
+    private fun setValuesToFields(){
         mJourneyMode.setText(journeyModeBundle)
         mAddTitle.setText(titleBundle)
         mAddDesc.setText(descBundle)
@@ -244,5 +306,32 @@ class UpdateTripFragment : Fragment() {
         mNumberOfPerson.setText(totalHeadsBundle.toString())
         mJourneyDate.setText(jDateBundle)
         mReturnDate.setText(rDateBundle)
+    }
+    private fun setUpWidgets() {
+        if (view!=null){
+            mAddTitle = view!!.findViewById(R.id.trip_title)
+            mAddDesc = view!!.findViewById(R.id.trip_desc)
+            mWhereFrom = view!!.findViewById(R.id.place_from)
+            mWhereTo = view!!.findViewById(R.id.place_to)
+            mNumberOfPerson = view!!.findViewById(R.id.total_person)
+            mJourneyDate = view!!.findViewById(R.id.journey_date)
+            mReturnDate = view!!.findViewById(R.id.return_date)
+            mUpdateTripBtn = view!!.findViewById(R.id.update_trip_btn)
+            mJourneyMode = view!!.findViewById(R.id.journey_mode)
+
+            mAddTitleContainer = view!!.findViewById(R.id.trip_title_container)
+            mAddDescContainer = view!!.findViewById(R.id.trip_desc_container)
+            mWhereFromContainer = view!!.findViewById(R.id.place_from_container)
+            mWhereToContainer = view!!.findViewById(R.id.place_to_container)
+            mNumberOfPersonContainer = view!!.findViewById(R.id.total_person_container)
+            mJourneyDateContainer = view!!.findViewById(R.id.journey_date_container)
+            mReturnDateContainer = view!!.findViewById(R.id.return_date_container)
+            mJourneyModeContainer = view!!.findViewById(R.id.journey_mode_container)
+
+            snack_layout = view!!.findViewById(R.id.snackbar_layout)
+
+            val journeyModeAdapter = ArrayAdapter(context!!, android.R.layout.simple_list_item_1, journeyModeEntries)
+            mJourneyMode.setAdapter(journeyModeAdapter)
+        }
     }
 }

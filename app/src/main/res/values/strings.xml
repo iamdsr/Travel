@@ -121,5 +121,10 @@
     <string name="route_details">Route Details</string>
     <string name="set_app_theme">Set App Theme</string>
     <string name="simplify_group_debts">Simplify group debts</string>
+    <string name="length_exceeds_error">Length exceeds limit of %d</string>
+    <string name="invalid_value_error">%s is an invalid value</string>
+    <string name="end_date_e_start_date">Start date and return date are equal</string>
+    <string name="end_date_l_start_date">Start date greater return start date</string>
+    <string name="empty_fields_msg">Fields cannot be empty</string>
 
 </resources>

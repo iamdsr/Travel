@@ -31,9 +31,9 @@
         <!-- Status bar color. -->
         <item name="android:windowLightStatusBar">false</item>
         <item name="android:statusBarColor" tools:targetApi="l">@color/background</item>
-        <!-- Customize your theme here. -->
     </style>
 
+    <!-- Bottom navigation theme customization. -->
     <style name="Widget.Material3.BottomNavigationView.ActiveIndicator" parent="">
         <item name="android:width">@dimen/m3_bottom_nav_item_active_indicator_width</item>
         <item name="android:height">@dimen/m3_bottom_nav_item_active_indicator_height</item>
@@ -41,4 +41,21 @@
         <item name="shapeAppearance">@style/ShapeAppearance.Material3.NavigationBarView.ActiveIndicator</item>
         <item name="android:color">@color/inversePrimary</item>
     </style>
+
+    <!-- Material date picker theme customization. -->
+    <style name="ShapeAppearance.App.SmallComponent" parent="ShapeAppearance.Material3.SmallComponent">
+        <item name="cornerFamily">cut</item>
+    </style>
+    <style name="ShapeAppearance.App.MediumComponent" parent="ShapeAppearance.Material3.MediumComponent">
+        <item name="cornerSize">16dp</item>
+    </style>
+    <style name="ThemeOverlay.App.DatePicker" parent="@style/ThemeOverlay.MaterialComponents.MaterialCalendar">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorOnPrimary">@color/onPrimary</item>
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.App.SmallComponent</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.App.MediumComponent</item>
+        <!-- Customize text field of the text input mode. -->
+        <item name="textInputStyle">@style/Widget.Material3.TextInputLayout.OutlinedBox</item>
+    </style>
+
 </resources>
