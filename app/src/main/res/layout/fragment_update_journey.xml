@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        style="@style/TextAppearance.Material3.DisplaySmall"
+        style="@style/TextAppearance.Material3.HeadlineMedium"
         android:padding="8dp"
         android:text="@string/update_plan"
         app:layout_constraintEnd_toEndOf="parent"
@@ -33,13 +33,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/add_title"
+            app:startIconDrawable="@drawable/ic_round_title"
             app:boxCornerRadiusTopStart="16dp"
             app:boxCornerRadiusBottomEnd="16dp"
             app:boxCornerRadiusBottomStart="16dp"
             app:boxCornerRadiusTopEnd="16dp"
             app:errorEnabled="true"
             app:counterEnabled="true"
-            app:counterMaxLength="30"
+            app:counterMaxLength="50"
             app:endIconMode="clear_text"
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
 
@@ -47,7 +48,7 @@
                 android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:maxLines="1" />
+                android:maxLines="2" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -55,21 +56,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/provide_a_short_description_here"
+            app:startIconDrawable="@drawable/ic_outline_description"
             app:boxCornerRadiusTopStart="16dp"
             app:boxCornerRadiusBottomEnd="16dp"
             app:boxCornerRadiusBottomStart="16dp"
             app:boxCornerRadiusTopEnd="16dp"
             app:errorEnabled="true"
             app:counterEnabled="true"
-            app:counterMaxLength="100"
+            app:counterMaxLength="200"
             app:endIconMode="clear_text"
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/desc"
                 android:layout_width="match_parent"
-                android:layout_height="128dp"
-                android:maxHeight="256dp"/>
+                android:layout_height="wrap_content"
+                android:maxHeight="128dp"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -81,10 +83,12 @@
             android:weightSum="2">
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/start_date_container"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:hint="@string/start_date"
+                app:startIconDrawable="@drawable/ic_calendar"
                 app:boxCornerRadiusTopStart="16dp"
                 app:errorEnabled="true"
                 android:layout_marginEnd="4dp"
@@ -99,10 +103,12 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/start_time_container"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:hint="@string/start_time"
+                app:startIconDrawable="@drawable/ic_time_outlined"
                 app:errorEnabled="true"
                 app:boxCornerRadiusTopEnd="16dp"
                 android:layout_marginStart="4dp"
@@ -133,6 +139,7 @@
                 android:layout_marginEnd="4dp"
                 app:endIconMode="clear_text"
                 android:hint="@string/where_from"
+                app:startIconDrawable="@drawable/ic_outline_location"
                 app:errorEnabled="true"
                 app:counterEnabled="true"
                 app:boxCornerRadiusBottomStart="16dp"
@@ -143,8 +150,7 @@
                     android:id="@+id/place_from"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:maxLines="2"
-                    android:maxHeight="256dp"/>
+                    android:maxLines="2" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -156,6 +162,7 @@
                 app:endIconMode="clear_text"
                 android:layout_marginStart="4dp"
                 android:hint="@string/where_to"
+                app:startIconDrawable="@drawable/ic_outline_location"
                 app:boxCornerRadiusBottomEnd="16dp"
                 app:errorEnabled="true"
                 app:counterEnabled="true"
@@ -166,17 +173,18 @@
                     android:id="@+id/place_to"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:maxLines="2"
-                    android:maxHeight="256dp"/>
+                    android:maxLines="2"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/journey_mode_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/journey_mode"
+            app:startIconDrawable="@drawable/ic_journey"
             app:boxCornerRadiusTopStart="16dp"
             app:boxCornerRadiusBottomEnd="16dp"
             app:boxCornerRadiusBottomStart="16dp"
@@ -190,16 +198,16 @@
                 android:id="@+id/journey_mode"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:fontFamily="@font/roboto_regular"
-                android:maxHeight="256dp"
                 android:maxLines="1"
                 android:padding="8dp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/day_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/day_of_trip"
+            app:startIconDrawable="@drawable/ic_round_numbers"
             app:errorEnabled="true"
             app:boxCornerRadiusTopStart="16dp"
             app:boxCornerRadiusBottomEnd="16dp"
@@ -212,8 +220,7 @@
                 android:id="@+id/day"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number"
-                android:fontFamily="@font/roboto_regular"/>
+                android:inputType="number"/>
         </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
@@ -223,14 +230,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:fontFamily="@font/roboto_bold"
         android:text="@string/update_itinerary"
         android:textAllCaps="false"
-        app:cornerRadius="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/container1"
         app:layout_constraintVertical_bias="0.334" />
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/snackbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

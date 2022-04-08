@@ -218,39 +218,8 @@ class AddTripFragment : Fragment() {
             Toast.makeText(context, "Date Picker Cancelled", Toast.LENGTH_LONG).show()
         }
 
-        /*val date = OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-            myCalendar!![Calendar.YEAR] = year
-            myCalendar[Calendar.MONTH] = monthOfYear
-            myCalendar[Calendar.DAY_OF_MONTH] = dayOfMonth
-            clickedEditText?.let { updateLabel(it) }
-        }
 
-        mJourneyDate.setOnClickListener { view ->
-            clickedEditText = view as EditText
-            myCalendar?.let {
-                DatePickerDialog(
-                    context!!, date, it
-                        .get(Calendar.YEAR), myCalendar[Calendar.MONTH],
-                    myCalendar[Calendar.DAY_OF_MONTH]
-                ).show()
-            }
-        }
-        mReturnDate.setOnClickListener { view ->
-            clickedEditText = view as EditText
-            myCalendar?.let {
-                DatePickerDialog(
-                    context!!, date, it
-                        .get(Calendar.YEAR), myCalendar[Calendar.MONTH],
-                    myCalendar[Calendar.DAY_OF_MONTH]
-                ).show()
-            }
-        }*/
     }
-    /*private fun updateLabel(view: EditText) {
-        val myFormat = "dd/MM/yyyy"
-        val dateFormat = SimpleDateFormat(myFormat, Locale.getDefault())
-        view.setText(dateFormat.format(myCalendar!!.time))
-    }*/
 
     private fun getDateDiff(CurrentDate: String, FinalDate: String): Long {
         return try {

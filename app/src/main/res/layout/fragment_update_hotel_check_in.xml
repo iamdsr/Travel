@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        style="@style/TextAppearance.Material3.DisplaySmall"
+        style="@style/TextAppearance.Material3.HeadlineMedium"
         android:padding="8dp"
         android:text="@string/update_plan"
         app:layout_constraintEnd_toEndOf="parent"
@@ -33,20 +33,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/add_title"
+            app:startIconDrawable="@drawable/ic_round_title"
             app:errorEnabled="true"
             app:boxCornerRadiusTopStart="16dp"
             app:boxCornerRadiusBottomEnd="16dp"
             app:boxCornerRadiusBottomStart="16dp"
             app:boxCornerRadiusTopEnd="16dp"
             app:counterEnabled="true"
-            app:counterMaxLength="30"
+            app:counterMaxLength="50"
             app:endIconMode="clear_text"
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:maxLines="1"/>
+                android:maxLines="2"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -54,9 +55,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/provide_a_short_description_here"
+            app:startIconDrawable="@drawable/ic_outline_description"
             app:errorEnabled="true"
             app:counterEnabled="true"
-            app:counterMaxLength="100"
+            app:counterMaxLength="200"
             app:boxCornerRadiusTopStart="16dp"
             app:boxCornerRadiusBottomEnd="16dp"
             app:boxCornerRadiusBottomStart="16dp"
@@ -67,8 +69,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/desc"
                 android:layout_width="match_parent"
-                android:layout_height="128dp"
-                android:maxHeight="256dp"/>
+                android:layout_height="wrap_content"
+                android:maxHeight="128dp"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -80,6 +82,7 @@
             android:weightSum="2">
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/date_container"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -88,6 +91,7 @@
                 app:boxCornerRadiusBottomStart="16dp"
                 android:layout_marginEnd="4dp"
                 app:errorEnabled="true"
+                app:startIconDrawable="@drawable/ic_calendar"
                 style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/check_in_date"
@@ -100,6 +104,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/time_container"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -107,6 +112,7 @@
                 app:boxCornerRadiusBottomEnd="16dp"
                 app:boxCornerRadiusTopEnd="16dp"
                 android:layout_marginStart="4dp"
+                app:startIconDrawable="@drawable/ic_time_outlined"
                 app:errorEnabled="true"
                 style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
                 <com.google.android.material.textfield.TextInputEditText
@@ -122,12 +128,14 @@
         </LinearLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/hotel_name_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/hotel_name"
+            app:startIconDrawable="@drawable/ic_hotel_stay"
             app:errorEnabled="true"
             app:counterEnabled="true"
-            app:counterMaxLength="20"
+            app:counterMaxLength="30"
             app:boxCornerRadiusTopStart="16dp"
             app:boxCornerRadiusBottomEnd="16dp"
             app:boxCornerRadiusBottomStart="16dp"
@@ -138,33 +146,39 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/hotel_name"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:maxLines="2"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/hotel_location_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/hotel_address_location"
+            app:startIconDrawable="@drawable/ic_outline_location"
             app:errorEnabled="true"
             app:counterEnabled="true"
             app:boxCornerRadiusTopStart="16dp"
             app:boxCornerRadiusBottomEnd="16dp"
             app:boxCornerRadiusBottomStart="16dp"
             app:boxCornerRadiusTopEnd="16dp"
-            app:counterMaxLength="40"
+            app:counterMaxLength="50"
             app:endIconMode="clear_text"
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/hotel_address"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:maxLines="2"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/day_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/day_of_trip"
+            app:startIconDrawable="@drawable/ic_round_numbers"
             app:errorEnabled="true"
             app:boxCornerRadiusTopStart="16dp"
             app:boxCornerRadiusBottomEnd="16dp"
@@ -177,6 +191,7 @@
                 android:id="@+id/day"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:maxLines="1"
                 android:inputType="number"/>
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -188,7 +203,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:fontFamily="@font/roboto_bold"
         android:text="@string/update_itinerary"
         android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -196,5 +210,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/container1"
         app:layout_constraintVertical_bias="0.334" />
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/snackbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
