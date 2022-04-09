@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/storiesFragment"
-        android:name="com.iamdsr.travel.Stories.StoriesFragment"
+        android:name="com.iamdsr.travel.stories.StoriesFragment"
         android:label="fragment_stories"
         tools:layout="@layout/fragment_stories" />
 </navigation>

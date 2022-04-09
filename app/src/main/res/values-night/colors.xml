@@ -57,4 +57,14 @@
     <!--uCrop Activity-->
     <color name="ucrop_color_statusbar">#27272B</color>
 
+    <!-- Story item colors -->
+    <color name="like_bg">#1B1B1E</color>
+    <color name="like_color">#FF78A6</color>
+    <color name="liked_bg">#FFB3CD</color>
+    <color name="liked_color">#E9105A</color>
+    <color name="comment_bg">#7C91FF</color>
+    <color name="share_bg">#FFC571</color>
+    <color name="comment_color">#122276</color>
+    <color name="share_color">#744604</color>
+
 </resources>
