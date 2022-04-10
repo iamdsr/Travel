@@ -78,7 +78,7 @@ class UpdateProfileFragment : Fragment() {
         setupFirebaseStorage()
         prepareUserDataToDisplay()
         mChooseImage.setOnClickListener(View.OnClickListener {
-            checkPermissionsAndPrepareUpload(context!!)
+            checkPermissionsAndPrepareUpload(requireContext())
         })
     }
 
@@ -114,7 +114,6 @@ class UpdateProfileFragment : Fragment() {
     private fun checkPermissionsAndPrepareUpload(context: Context){
         when (PackageManager.PERMISSION_GRANTED) {
             checkSelfPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE) -> {
-                // You can use the API that requires the permission.
                 getContent.launch("image/*")
             }
             else -> {

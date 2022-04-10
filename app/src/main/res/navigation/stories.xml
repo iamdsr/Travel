@@ -9,5 +9,30 @@
         android:id="@+id/storiesFragment"
         android:name="com.iamdsr.travel.stories.StoriesFragment"
         android:label="fragment_stories"
-        tools:layout="@layout/fragment_stories" />
+        tools:layout="@layout/fragment_stories" >
+        <action
+            android:id="@+id/action_storiesFragment_to_addNewPostFragment"
+            app:destination="@id/addNewPostFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addNewPostFragment"
+        android:name="com.iamdsr.travel.stories.AddNewPostFragment"
+        android:label="fragment_add_new_post"
+        tools:layout="@layout/fragment_add_new_post" >
+        <action
+            android:id="@+id/action_addNewPostFragment_to_selectedImagesPreviewFragment"
+            app:destination="@id/selectedImagesPreviewFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/selectedImagesPreviewFragment"
+        android:name="com.iamdsr.travel.stories.SelectedImagesPreviewFragment"
+        android:label="fragment_selected_images_preview"
+        tools:layout="@layout/fragment_selected_images_preview" >
+        <action
+            android:id="@+id/action_selectedImagesPreviewFragment_to_addNewPostFragment"
+            app:destination="@id/addNewPostFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/addNewPostFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
 </navigation>

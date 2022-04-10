@@ -63,7 +63,7 @@ class MyItinerariesFragment : Fragment() {
                     }
                 }
             }
-        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
         setupWidgets()
         setUpViewPager()
         val mySharedPreferences = MySharedPreferences(context!!)

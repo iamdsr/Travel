@@ -18,7 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.iamdsr.travel.ActivityUtils.MainActivity;
+import com.iamdsr.travel.activityUtils.MainActivity;
 import com.iamdsr.travel.AppLaunchSetup.LoginActivity;
 import com.iamdsr.travel.models.UserModel;
 import com.iamdsr.travel.R;

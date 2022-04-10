@@ -8,12 +8,12 @@
     tools:context=".stories.StoriesFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/stories_recycler_view"
+        android:id="@+id/posts_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/add_new_trip"
+        android:id="@+id/add_new_post"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"

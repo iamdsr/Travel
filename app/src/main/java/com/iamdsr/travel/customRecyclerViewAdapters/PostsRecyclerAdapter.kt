@@ -9,9 +9,9 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.iamdsr.travel.R
 import com.iamdsr.travel.interfaces.RecyclerViewActionsInterface
-import com.iamdsr.travel.models.StoriesModel
+import com.iamdsr.travel.models.PostsModel
 
-class StoriesRecyclerAdapter(private val itemClickListener: RecyclerViewActionsInterface) : ListAdapter<StoriesModel, StoriesRecyclerAdapter.StoriesViewHolder>(MyDiffCallback()) {
+class PostsRecyclerAdapter(private val itemClickListener: RecyclerViewActionsInterface) : ListAdapter<PostsModel, PostsRecyclerAdapter.StoriesViewHolder>(MyDiffCallback()) {
 
     var context: Context? = null
 
@@ -22,14 +22,14 @@ class StoriesRecyclerAdapter(private val itemClickListener: RecyclerViewActionsI
     }
 
     override fun onBindViewHolder(holder: StoriesViewHolder, position: Int) {
-        val model: StoriesModel = getItem(position)
+        val model: PostsModel = getItem(position)
         holder.bindView(model, context, itemClickListener)
     }
 
     class StoriesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bindView(
-            model: StoriesModel,
+            model: PostsModel,
             context: Context?,
             itemClickListener: RecyclerViewActionsInterface
         ) {
@@ -42,11 +42,11 @@ class StoriesRecyclerAdapter(private val itemClickListener: RecyclerViewActionsI
 
 }
 
-class MyDiffCallback : DiffUtil.ItemCallback<StoriesModel>(){
-    override fun areItemsTheSame(oldItem: StoriesModel, newItem: StoriesModel): Boolean {
+class MyDiffCallback : DiffUtil.ItemCallback<PostsModel>(){
+    override fun areItemsTheSame(oldItem: PostsModel, newItem: PostsModel): Boolean {
         return oldItem.id == newItem.id
     }
-    override fun areContentsTheSame(oldItem: StoriesModel, newItem: StoriesModel): Boolean {
+    override fun areContentsTheSame(oldItem: PostsModel, newItem: PostsModel): Boolean {
         return oldItem == newItem
     }
 }

@@ -1,29 +1,28 @@
 package com.iamdsr.travel.stories;
 
-import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-
-import com.iamdsr.travel.R;
-import com.iamdsr.travel.customRecyclerViewAdapters.PlannedTripRecyclerAdapter
-import com.iamdsr.travel.customRecyclerViewAdapters.StoriesRecyclerAdapter
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+import com.iamdsr.travel.R
+import com.iamdsr.travel.customRecyclerViewAdapters.PostsRecyclerAdapter
 import com.iamdsr.travel.interfaces.RecyclerViewActionsInterface
-import com.iamdsr.travel.models.StoriesModel
+import com.iamdsr.travel.models.PostsModel
 
 class StoriesFragment: Fragment(), RecyclerViewActionsInterface {
 
     // Widgets
-    private var mStoriesRecyclerView: RecyclerView? = null
+    private lateinit var mPostsRecyclerView: RecyclerView
+    private lateinit var mAddPostButton: ExtendedFloatingActionButton
 
     // Utils
-    private lateinit var storiesRecyclerAdapter: StoriesRecyclerAdapter
-    private lateinit var storiesList: MutableList<StoriesModel>
+    private lateinit var postsRecyclerAdapter: PostsRecyclerAdapter
+    private lateinit var postsList: MutableList<PostsModel>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,24 +36,32 @@ class StoriesFragment: Fragment(), RecyclerViewActionsInterface {
         super.onViewCreated(view, savedInstanceState)
         setUpWidgets()
         initRecyclerView()
-        storiesList = arrayListOf()
-        storiesList.add(StoriesModel("1"))
-        storiesList.add(StoriesModel("2"))
-        storiesList.add(StoriesModel("3"))
-        storiesList.add(StoriesModel("4"))
-        storiesRecyclerAdapter.submitList(storiesList)
+        mAddPostButton.setOnClickListener(View.OnClickListener {
+            findNavController().navigate(R.id.action_storiesFragment_to_addNewPostFragment)
+        })
+        postsList = arrayListOf()
+        postsList.add(PostsModel("","","", arrayListOf(), "", "", "", "", arrayListOf()))
+        postsList.add(PostsModel("","","", arrayListOf(), "", "", "", "", arrayListOf()))
+        postsList.add(PostsModel("","","", arrayListOf(), "", "", "", "", arrayListOf()))
+        postsList.add(PostsModel("","","", arrayListOf(), "", "", "", "", arrayListOf()))
+        postsList.add(PostsModel("","","", arrayListOf(), "", "", "", "", arrayListOf()))
+        postsList.add(PostsModel("","","", arrayListOf(), "", "", "", "", arrayListOf()))
+        postsList.add(PostsModel("","","", arrayListOf(), "", "", "", "", arrayListOf()))
+        postsList.add(PostsModel("","","", arrayListOf(), "", "", "", "", arrayListOf()))
+        postsRecyclerAdapter.submitList(postsList)
     }
 
     private fun initRecyclerView() {
-        mStoriesRecyclerView?.layoutManager = LinearLayoutManager(context)
-        mStoriesRecyclerView?.setHasFixedSize(true)
-        storiesRecyclerAdapter = StoriesRecyclerAdapter(this)
-        mStoriesRecyclerView?.adapter = storiesRecyclerAdapter
+        mPostsRecyclerView.layoutManager = LinearLayoutManager(context)
+        mPostsRecyclerView.setHasFixedSize(true)
+        postsRecyclerAdapter = PostsRecyclerAdapter(this)
+        mPostsRecyclerView.adapter = postsRecyclerAdapter
     }
 
     private fun setUpWidgets() {
         if (view != null){
-            mStoriesRecyclerView = view!!.findViewById(R.id.stories_recycler_view)
+            mPostsRecyclerView = view!!.findViewById(R.id.posts_recycler_view)
+            mAddPostButton = view!!.findViewById(R.id.add_new_post)
         }
     }
 

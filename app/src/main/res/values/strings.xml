@@ -127,5 +127,9 @@
     <string name="end_date_l_start_date">Start date greater return start date</string>
     <string name="empty_fields_msg">Fields cannot be empty</string>
     <string name="dummy_hashtags">#foodie #food #foodporn #instafood #foodphotography #foodstagram #foodblogger #yummy #foodlover #delicious #foodgasm #instagood #foodies #homemade #healthyfood #tasty #foodpics #dinner #foodiesofinstagram #love #lunch #yum #dessert #cooking #breakfast #foodblog #chef #eat #restaurant #bhfyp</string>
+    <string name="post">Post content</string>
+    <string name="add_photos">Add Photos</string>
+    <string name="create_new_post">Create new post</string>
+    <string name="_2_more">+ %d more photos…</string>
 
 </resources>
