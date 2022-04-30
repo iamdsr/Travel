@@ -1,5 +1,7 @@
 package com.iamdsr.travel.models
 
+import java.io.Serializable
+
 data class TripModel (
     val trip_id: String,
     val trip_title: String,
@@ -13,7 +15,7 @@ data class TripModel (
     val journey_mode: String,
     val duration_in_days : Long,
     val total_heads : Long
-    ) {
+    ) : Serializable{
     constructor() : this("","","","","","","","","","",0,0)
 
     override fun toString(): String {

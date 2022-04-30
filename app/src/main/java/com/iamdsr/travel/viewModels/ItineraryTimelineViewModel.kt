@@ -5,18 +5,15 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.google.android.gms.tasks.Task
-import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
 import com.iamdsr.travel.models.ItineraryModel
-import com.iamdsr.travel.models.TripModel
-import com.iamdsr.travel.repositories.FirestoreRepository
+import com.iamdsr.travel.repositories.PlanTripsFirestoreRepository
 
 class ItineraryTimelineViewModel: ViewModel() {
 
-    var firebaseRepository = FirestoreRepository()
+    var firebaseRepository = PlanTripsFirestoreRepository()
     var savedItineraries : MutableLiveData<List<ItineraryModel>> = MutableLiveData()
 
     // Add new itinerary to Firebase Database

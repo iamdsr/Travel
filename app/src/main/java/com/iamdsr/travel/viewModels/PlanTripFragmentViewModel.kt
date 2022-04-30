@@ -9,11 +9,11 @@ import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
 import com.iamdsr.travel.models.TripModel
-import com.iamdsr.travel.repositories.FirestoreRepository
+import com.iamdsr.travel.repositories.PlanTripsFirestoreRepository
 
 class PlanTripFragmentViewModel : ViewModel() {
 
-    var firebaseRepository = FirestoreRepository()
+    var firebaseRepository = PlanTripsFirestoreRepository()
     var savedTrips : MutableLiveData<List<TripModel>> = MutableLiveData()
 
     // Add new trip to Firebase Database

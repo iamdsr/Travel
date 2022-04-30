@@ -1,7 +1,5 @@
 package com.iamdsr.travel.planTrip.itineraries.itineraryTypes
 
-import android.app.DatePickerDialog
-import android.os.Build
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
@@ -9,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
@@ -24,7 +21,7 @@ import com.google.android.material.timepicker.TimeFormat
 import com.google.firebase.auth.FirebaseAuth
 import com.iamdsr.travel.R
 import com.iamdsr.travel.models.ItineraryModel
-import com.iamdsr.travel.repositories.FirestoreRepository
+import com.iamdsr.travel.repositories.PlanTripsFirestoreRepository
 import com.iamdsr.travel.utils.MySharedPreferences
 import com.iamdsr.travel.viewModels.ItineraryTimelineViewModel
 import java.text.SimpleDateFormat
@@ -59,7 +56,7 @@ class AddHotelCheckInFragment : Fragment() {
     private val myCalendar: Calendar? = Calendar.getInstance()
     private var tripID: String=""
     private var tripTitle: String=""
-    private var firebaseRepository = FirestoreRepository()
+    private var firebaseRepository = PlanTripsFirestoreRepository()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_add_hotel_check_in, container, false)

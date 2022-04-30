@@ -1,268 +1,276 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".planTrip.AddTripFragment">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/add_Trip_label"
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:padding="8dp"
-        android:text="@string/start_planning_update_trip"
-        style="@style/TextAppearance.Material3.DisplaySmall"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent"
+        tools:context=".planTrip.AddTripFragment">
 
-    <LinearLayout
-        android:id="@+id/details"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_margin="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/add_Trip_label">
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/trip_title_container"
+        <TextView
+            android:id="@+id/add_Trip_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/add_title"
-            app:startIconDrawable="@drawable/ic_round_title"
-            app:endIconMode="clear_text"
-            app:boxCornerRadiusTopStart="16dp"
-            app:boxCornerRadiusBottomEnd="16dp"
-            app:boxCornerRadiusBottomStart="16dp"
-            app:boxCornerRadiusTopEnd="16dp"
-            app:counterEnabled="true"
-            app:counterMaxLength="75"
-            app:errorEnabled="true"
-            style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/trip_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:maxLines="2"/>
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/trip_desc_container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/provide_a_short_description_here"
-            app:startIconDrawable="@drawable/ic_outline_description"
-            app:boxCornerRadiusTopStart="16dp"
-            app:boxCornerRadiusBottomEnd="16dp"
-            app:boxCornerRadiusBottomStart="16dp"
-            app:boxCornerRadiusTopEnd="16dp"
-            app:errorEnabled="true"
-            app:counterEnabled="true"
-            app:counterMaxLength="300"
-            style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/trip_desc"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:maxHeight="128dp"/>
-
-        </com.google.android.material.textfield.TextInputLayout>
+            android:layout_margin="16dp"
+            android:padding="8dp"
+            android:text="@string/start_planning_update_trip"
+            style="@style/TextAppearance.Material3.DisplaySmall"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
-            android:id="@+id/dates"
+            android:id="@+id/details"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="2">
+            android:orientation="vertical"
+            android:layout_margin="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/add_Trip_label">
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/journey_date_container"
-                android:layout_width="0dp"
+                android:id="@+id/trip_title_container"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:hint="@string/journey_date"
+                android:hint="@string/add_title"
+                app:startIconDrawable="@drawable/ic_round_title"
+                app:endIconMode="clear_text"
                 app:boxCornerRadiusTopStart="16dp"
-                android:layout_marginEnd="4dp"
-                app:startIconDrawable="@drawable/ic_calendar"
-                app:endIconMode="clear_text"
-                app:errorEnabled="true"
-                style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/journey_date"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:maxLines="1"
-                    android:clickable="false"
-                    android:cursorVisible="false"
-                    android:focusable="false"
-                    android:focusableInTouchMode="false"/>
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/return_date_container"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginStart="4dp"
-                android:hint="@string/return_date"
-                app:boxCornerRadiusTopEnd="16dp"
-                app:startIconDrawable="@drawable/ic_calendar"
-                app:errorEnabled="true"
-                android:clickable="false"
-                android:cursorVisible="false"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
-                style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/return_date"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:maxLines="1"
-                    android:clickable="false"
-                    android:cursorVisible="false"
-                    android:focusable="false"
-                    android:focusableInTouchMode="false"/>
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/place"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="2">
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/place_from_container"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="4dp"
-                app:endIconMode="clear_text"
-                android:hint="@string/where_from"
-                app:startIconDrawable="@drawable/ic_outline_location"
-                app:errorEnabled="true"
-                app:counterEnabled="true"
-                app:counterMaxLength="20"
-                style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/place_from"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:maxLines="2"/>
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/place_to_container"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                app:endIconMode="clear_text"
-                android:layout_marginStart="4dp"
-                android:hint="@string/where_to"
-                app:startIconDrawable="@drawable/ic_outline_location"
-                app:errorEnabled="true"
-                app:counterEnabled="true"
-                app:counterMaxLength="20"
-                style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/place_to"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:maxLines="2"/>
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="2">
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/total_person_container"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:hint="@string/number_of_person"
-                app:boxCornerRadiusBottomStart="16dp"
-                app:startIconDrawable="@drawable/ic_group"
-                android:layout_marginEnd="4dp"
-                app:endIconMode="clear_text"
-                app:errorEnabled="true"
-                style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/total_person"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:maxLines="1"
-                    android:inputType="number"/>
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/journey_mode_container"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:hint="@string/journey_mode"
-                app:startIconDrawable="@drawable/ic_journey"
                 app:boxCornerRadiusBottomEnd="16dp"
-                app:endIconMode="dropdown_menu"
+                app:boxCornerRadiusBottomStart="16dp"
+                app:boxCornerRadiusTopEnd="16dp"
+                app:counterEnabled="true"
+                app:counterMaxLength="75"
                 app:errorEnabled="true"
-                android:layout_marginStart="4dp"
                 style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
-                <com.google.android.material.textfield.MaterialAutoCompleteTextView
-                    android:id="@+id/journey_mode"
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/trip_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="16dp"
-                    android:maxLines="1"/>
+                    android:maxLines="2" />
+
             </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/trip_desc_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/provide_a_short_description_here"
+                app:startIconDrawable="@drawable/ic_outline_description"
+                app:boxCornerRadiusTopStart="16dp"
+                app:boxCornerRadiusBottomEnd="16dp"
+                app:boxCornerRadiusBottomStart="16dp"
+                app:boxCornerRadiusTopEnd="16dp"
+                app:errorEnabled="true"
+                app:counterEnabled="true"
+                app:counterMaxLength="300"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/trip_desc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxHeight="128dp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:id="@+id/dates"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/journey_date_container"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="@string/journey_date"
+                    app:boxCornerRadiusTopStart="16dp"
+                    android:layout_marginEnd="4dp"
+                    app:startIconDrawable="@drawable/ic_calendar"
+                    app:endIconMode="clear_text"
+                    app:errorEnabled="true"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/journey_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:clickable="false"
+                        android:cursorVisible="false"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/return_date_container"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="4dp"
+                    android:hint="@string/return_date"
+                    app:boxCornerRadiusTopEnd="16dp"
+                    app:startIconDrawable="@drawable/ic_calendar"
+                    app:errorEnabled="true"
+                    android:clickable="false"
+                    android:cursorVisible="false"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/return_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:clickable="false"
+                        android:cursorVisible="false"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/place"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/place_from_container"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="4dp"
+                    app:endIconMode="clear_text"
+                    android:hint="@string/where_from"
+                    app:startIconDrawable="@drawable/ic_outline_location"
+                    app:errorEnabled="true"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="20"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/place_from"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxLines="2" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/place_to_container"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    app:endIconMode="clear_text"
+                    android:layout_marginStart="4dp"
+                    android:hint="@string/where_to"
+                    app:startIconDrawable="@drawable/ic_outline_location"
+                    app:errorEnabled="true"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="20"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/place_to"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxLines="2" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/total_person_container"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="@string/number_of_person"
+                    app:boxCornerRadiusBottomStart="16dp"
+                    app:startIconDrawable="@drawable/ic_group"
+                    android:layout_marginEnd="4dp"
+                    app:endIconMode="clear_text"
+                    app:errorEnabled="true"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/total_person"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:inputType="number" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/journey_mode_container"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:hint="@string/journey_mode"
+                    app:startIconDrawable="@drawable/ic_journey"
+                    app:boxCornerRadiusBottomEnd="16dp"
+                    app:endIconMode="dropdown_menu"
+                    app:errorEnabled="true"
+                    android:layout_marginStart="4dp"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
+
+                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                        android:id="@+id/journey_mode"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp"
+                        android:maxLines="1" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
 
         </LinearLayout>
 
-    </LinearLayout>
+        <Button
+            android:id="@+id/update_trip_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:text="@string/update_trip"
+            android:textAllCaps="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintVertical_bias="0.115"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/details" />
 
-    <Button
-        android:id="@+id/update_trip_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:text="@string/update_trip"
-        android:textAllCaps="false"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintVertical_bias="0.115"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/details" />
-
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:id="@+id/snackbar_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/snackbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

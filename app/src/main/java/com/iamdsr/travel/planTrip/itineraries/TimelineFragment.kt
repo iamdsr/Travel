@@ -59,10 +59,10 @@ class TimelineFragment : Fragment(), RecyclerViewActionsInterface {
             setupDialog()
         })
         val itineraryTimelineViewModel = ViewModelProvider(requireActivity())[ItineraryTimelineViewModel::class.java]
-        itineraryTimelineViewModel._getAllSavedItinerariesFromFirebaseFirestore(tripID).observe(this, Observer {
+        itineraryTimelineViewModel._getAllSavedItinerariesFromFirebaseFirestore(tripID).observe(requireActivity()) {
             itineraryList = it
             itineraryRecyclerAdapter.submitList(itineraryList)
-        })
+        }
     }
 
     private fun setupDialog() {

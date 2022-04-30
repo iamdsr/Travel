@@ -20,7 +20,7 @@ import com.google.android.material.timepicker.TimeFormat
 import com.google.firebase.auth.FirebaseAuth
 import com.iamdsr.travel.R
 import com.iamdsr.travel.models.ItineraryModel
-import com.iamdsr.travel.repositories.FirestoreRepository
+import com.iamdsr.travel.repositories.PlanTripsFirestoreRepository
 import com.iamdsr.travel.utils.AppConstants
 import com.iamdsr.travel.utils.MySharedPreferences
 import com.iamdsr.travel.viewModels.ItineraryTimelineViewModel
@@ -56,7 +56,7 @@ class AddSightseeingFragment : Fragment() {
     private val myCalendar: Calendar? = Calendar.getInstance()
     private var tripID: String=""
     private var tripTitle: String=""
-    private var firebaseRepository = FirestoreRepository()
+    private var firebaseRepository = PlanTripsFirestoreRepository()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment

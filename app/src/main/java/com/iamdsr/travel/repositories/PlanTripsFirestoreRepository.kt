@@ -11,7 +11,7 @@ import com.iamdsr.travel.models.ItineraryModel
 import com.iamdsr.travel.models.TripModel
 
 
-class FirestoreRepository {
+class PlanTripsFirestoreRepository {
     val TAG = "FIREBASE_REPOSITORY"
     var firebaseFirestore = FirebaseFirestore.getInstance()
     var user = FirebaseAuth.getInstance().currentUser

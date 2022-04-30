@@ -18,7 +18,7 @@ import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.iamdsr.travel.R
 import com.iamdsr.travel.models.TripModel
-import com.iamdsr.travel.repositories.FirestoreRepository
+import com.iamdsr.travel.repositories.PlanTripsFirestoreRepository
 import com.iamdsr.travel.viewModels.PlanTripFragmentViewModel
 import java.text.SimpleDateFormat
 import java.util.*
@@ -95,7 +95,7 @@ class AddTripFragment : Fragment() {
 
                 if (!error){
                     progressBar?.visibility = View.VISIBLE
-                    val firebaseRepository = FirestoreRepository()
+                    val firebaseRepository = PlanTripsFirestoreRepository()
                     val tripModel = TripModel(
                         firebaseRepository.getNewTripID(),
                         title,
